@@ -70,7 +70,6 @@
     .navbar-icons a:hover svg { transform: scale(1.3); filter: drop-shadow(0 0 8px var(--green)); }
     nav { display: flex; gap: 6px; }
 
-    /* ── NAV BUTTON con animación original "glitch scan" ── */
     .nav-btn {
       font-family: 'Share Tech Mono', monospace;
       color: var(--muted); text-decoration: none;
@@ -80,8 +79,6 @@
       position: relative; overflow: hidden; cursor: pointer;
       background: none;
     }
-
-    /* línea de scan que barre de izq a der */
     .nav-btn::before {
       content: '';
       position: absolute; top: 0; left: -100%;
@@ -90,8 +87,6 @@
       transition: none;
       pointer-events: none;
     }
-
-    /* borde inferior que crece desde el centro */
     .nav-btn::after {
       content: '';
       position: absolute; bottom: 0; left: 50%; right: 50%;
@@ -99,7 +94,6 @@
       box-shadow: 0 0 6px var(--green);
       transition: left 0.25s ease, right 0.25s ease;
     }
-
     .nav-btn:hover,
     .nav-btn.activo {
       color: var(--green);
@@ -107,52 +101,61 @@
       background: rgba(0,255,65,0.04);
       text-shadow: 0 0 8px rgba(0,255,65,0.6);
     }
-
     .nav-btn:hover::after,
-    .nav-btn.activo::after {
-      left: 0; right: 0;
-    }
-
-    /* scan sweep on hover */
-    .nav-btn:hover::before {
-      animation: navScan 0.4s ease forwards;
-    }
-
+    .nav-btn.activo::after { left: 0; right: 0; }
+    .nav-btn:hover::before { animation: navScan 0.4s ease forwards; }
     @keyframes navScan {
       0%   { left: -60%; opacity: 1; }
       100% { left: 110%; opacity: 0; }
     }
-
-    /* corner brackets que aparecen on hover/activo */
     .nav-btn .nb-tl,
     .nav-btn .nb-br {
-      position: absolute;
-      width: 6px; height: 6px;
-      opacity: 0;
-      transition: opacity 0.2s 0.1s;
+      position: absolute; width: 6px; height: 6px; opacity: 0; transition: opacity 0.2s 0.1s;
     }
-    .nav-btn .nb-tl {
-      top: 2px; left: 2px;
-      border-top: 1px solid var(--green);
-      border-left: 1px solid var(--green);
-    }
-    .nav-btn .nb-br {
-      bottom: 2px; right: 2px;
-      border-bottom: 1px solid var(--green);
-      border-right: 1px solid var(--green);
-    }
-    .nav-btn:hover .nb-tl,
-    .nav-btn:hover .nb-br,
-    .nav-btn.activo .nb-tl,
-    .nav-btn.activo .nb-br {
-      opacity: 1;
-    }
+    .nav-btn .nb-tl { top: 2px; left: 2px; border-top: 1px solid var(--green); border-left: 1px solid var(--green); }
+    .nav-btn .nb-br { bottom: 2px; right: 2px; border-bottom: 1px solid var(--green); border-right: 1px solid var(--green); }
+    .nav-btn:hover .nb-tl, .nav-btn:hover .nb-br,
+    .nav-btn.activo .nb-tl, .nav-btn.activo .nb-br { opacity: 1; }
 
     /* ════════════════════════════════════
        SECCIONES
     ════════════════════════════════════ */
     section { display: none; position: relative; z-index: 1; }
     section.activa { display: block; }
+
+    /* ════════════════════════════════════
+       ANIMACIONES DE ENTRADA PARA SECCIONES
+       Mismo sistema fadeUp del hero
+    ════════════════════════════════════ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Clase que activa la animación — se añade via JS al mostrar la sección */
+    .section-wrap.animating .anim-el {
+      opacity: 0;
+      animation: fadeUp 0.55s ease forwards;
+    }
+
+    /* Delays escalonados para cada elemento */
+    .section-wrap.animating .anim-el:nth-child(1) { animation-delay: 0.05s; }
+    .section-wrap.animating .anim-el:nth-child(2) { animation-delay: 0.18s; }
+    .section-wrap.animating .anim-el:nth-child(3) { animation-delay: 0.30s; }
+
+    /* Hijos de la grilla: cada tarjeta entra escalonada */
+    .section-wrap.animating .anim-grid > * {
+      opacity: 0;
+      animation: fadeUp 0.5s ease forwards;
+    }
+    .section-wrap.animating .anim-grid > *:nth-child(1)  { animation-delay: 0.32s; }
+    .section-wrap.animating .anim-grid > *:nth-child(2)  { animation-delay: 0.42s; }
+    .section-wrap.animating .anim-grid > *:nth-child(3)  { animation-delay: 0.52s; }
+    .section-wrap.animating .anim-grid > *:nth-child(4)  { animation-delay: 0.62s; }
+    .section-wrap.animating .anim-grid > *:nth-child(5)  { animation-delay: 0.72s; }
+    .section-wrap.animating .anim-grid > *:nth-child(6)  { animation-delay: 0.82s; }
+    .section-wrap.animating .anim-grid > *:nth-child(7)  { animation-delay: 0.90s; }
+    .section-wrap.animating .anim-grid > *:nth-child(8)  { animation-delay: 0.98s; }
 
     /* ════════════════════════════════════
        HERO
@@ -169,130 +172,63 @@
     .stat { text-align: center; }
     .stat-num { font-family: 'Share Tech Mono', monospace; font-size: 2rem; color: var(--green); text-shadow: 0 0 10px var(--green); display: block; }
     .stat-label { font-size: 0.85rem; color: var(--muted); letter-spacing: 1px; }
+    .hero-nav { display: flex; gap: 16px; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.6s 1.2s forwards; }
 
-    /* ════════════════════════════════════
-       HERO NAV BUTTONS
-    ════════════════════════════════════ */
-    .hero-nav {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      opacity: 0;
-      animation: fadeUp 0.6s 1.2s forwards;
-    }
-
-    /* Botón tipo tarjeta de terminal con animación distinta a cada uno */
     .hnav-btn {
-      position: relative;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 16px 22px;
-      background: rgba(0,255,65,0.03);
-      border: 1px solid rgba(0,255,65,0.18);
-      border-radius: 8px;
-      cursor: pointer;
-      overflow: hidden;
+      position: relative; display: flex; align-items: center; gap: 14px;
+      padding: 16px 22px; background: rgba(0,255,65,0.03);
+      border: 1px solid rgba(0,255,65,0.18); border-radius: 8px;
+      cursor: pointer; overflow: hidden;
       transition: border-color 0.3s, background 0.3s;
-      min-width: 180px;
-      text-decoration: none;
+      min-width: 180px; text-decoration: none;
     }
-
-    /* fondo tipo "boot" que escala verticalmente desde abajo */
     .hnav-btn::before {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 0%;
-      background: rgba(0,255,65,0.06);
-      transition: height 0.35s ease;
-      z-index: 0;
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 0%; background: rgba(0,255,65,0.06);
+      transition: height 0.35s ease; z-index: 0;
     }
-
     .hnav-btn:hover::before { height: 100%; }
-
-    .hnav-btn:hover {
-      border-color: rgba(0,255,65,0.55);
-      box-shadow: 0 0 20px rgba(0,255,65,0.08), inset 0 0 12px rgba(0,255,65,0.04);
-    }
-
-    /* icono del botón */
+    .hnav-btn:hover { border-color: rgba(0,255,65,0.55); box-shadow: 0 0 20px rgba(0,255,65,0.08), inset 0 0 12px rgba(0,255,65,0.04); }
     .hnav-icon {
-      position: relative; z-index: 1;
-      width: 40px; height: 40px;
-      border: 1px solid rgba(0,255,65,0.3);
-      border-radius: 6px;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-      background: rgba(0,255,65,0.05);
-      transition: border-color 0.3s, background 0.3s;
+      position: relative; z-index: 1; width: 40px; height: 40px;
+      border: 1px solid rgba(0,255,65,0.3); border-radius: 6px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+      background: rgba(0,255,65,0.05); transition: border-color 0.3s, background 0.3s;
     }
-    .hnav-btn:hover .hnav-icon {
-      border-color: var(--green);
-      background: rgba(0,255,65,0.12);
-    }
-    .hnav-icon svg {
-      width: 20px; height: 20px;
-      fill: none; stroke: var(--green); stroke-width: 1.5;
-      filter: drop-shadow(0 0 4px rgba(0,255,65,0.4));
-    }
-
-    /* texto del botón */
+    .hnav-btn:hover .hnav-icon { border-color: var(--green); background: rgba(0,255,65,0.12); }
+    .hnav-icon svg { width: 20px; height: 20px; fill: none; stroke: var(--green); stroke-width: 1.5; filter: drop-shadow(0 0 4px rgba(0,255,65,0.4)); }
     .hnav-text { position: relative; z-index: 1; }
-    .hnav-label {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 0.7rem; color: var(--muted);
-      letter-spacing: 2px; margin-bottom: 2px;
-    }
-    .hnav-title {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1rem; font-weight: 700;
-      color: #fff;
-      transition: color 0.2s, text-shadow 0.2s;
-    }
-    .hnav-btn:hover .hnav-title {
-      color: var(--green);
-      text-shadow: 0 0 8px rgba(0,255,65,0.5);
-    }
-
-    /* flecha que aparece al hover */
-    .hnav-arrow {
-      position: relative; z-index: 1;
-      margin-left: auto;
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 1rem; color: var(--green);
-      opacity: 0;
-      transform: translateX(-8px);
-      transition: opacity 0.25s, transform 0.25s;
-    }
+    .hnav-label { font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; color: var(--muted); letter-spacing: 2px; margin-bottom: 2px; }
+    .hnav-title { font-family: 'Rajdhani', sans-serif; font-size: 1rem; font-weight: 700; color: #fff; transition: color 0.2s, text-shadow 0.2s; }
+    .hnav-btn:hover .hnav-title { color: var(--green); text-shadow: 0 0 8px rgba(0,255,65,0.5); }
+    .hnav-arrow { position: relative; z-index: 1; margin-left: auto; font-family: 'Share Tech Mono', monospace; font-size: 1rem; color: var(--green); opacity: 0; transform: translateX(-8px); transition: opacity 0.25s, transform 0.25s; }
     .hnav-btn:hover .hnav-arrow { opacity: 1; transform: translateX(0); }
-
-    /* esquinas animadas - efecto "enmarcar" */
     .hnav-btn .hc { position: absolute; width: 8px; height: 8px; }
     .hnav-btn .hc-tl { top: 4px; left: 4px; border-top: 1px solid var(--green); border-left: 1px solid var(--green); opacity: 0; transform: translate(-3px,-3px); transition: opacity 0.2s, transform 0.2s; }
     .hnav-btn .hc-tr { top: 4px; right: 4px; border-top: 1px solid var(--green); border-right: 1px solid var(--green); opacity: 0; transform: translate(3px,-3px); transition: opacity 0.2s 0.04s, transform 0.2s 0.04s; }
     .hnav-btn .hc-bl { bottom: 4px; left: 4px; border-bottom: 1px solid var(--green); border-left: 1px solid var(--green); opacity: 0; transform: translate(-3px,3px); transition: opacity 0.2s 0.08s, transform 0.2s 0.08s; }
     .hnav-btn .hc-br { bottom: 4px; right: 4px; border-bottom: 1px solid var(--green); border-right: 1px solid var(--green); opacity: 0; transform: translate(3px,3px); transition: opacity 0.2s 0.12s, transform 0.2s 0.12s; }
     .hnav-btn:hover .hc { opacity: 1; transform: translate(0,0); }
-
-    /* pulso periódico en el icono del botón "Reparaciones" */
     @keyframes iconPulse {
       0%, 100% { box-shadow: 0 0 0 0 rgba(0,255,65,0); }
       50%       { box-shadow: 0 0 0 4px rgba(0,255,65,0.15); }
     }
     .hnav-btn.pulse-icon .hnav-icon { animation: iconPulse 2.4s 1.6s infinite; }
-
-    /* línea de scan única para proyectos */
     @keyframes hnavScanProj {
       0%   { transform: translateX(-110%); }
       100% { transform: translateX(210%); }
     }
     .hnav-btn.btn-proyectos .hnav-scan {
-      position: absolute; top: 0; left: 0; bottom: 0;
-      width: 35%; background: linear-gradient(90deg,transparent,rgba(0,255,65,0.07),transparent);
-      animation: hnavScanProj 3s 2s infinite;
+      position: absolute; top: 0; left: 0; bottom: 0; width: 35%;
+      background: linear-gradient(90deg,transparent,rgba(0,255,65,0.07),transparent);
       pointer-events: none; z-index: 0;
     }
+    /* Proyectos: escanea cada 3s, arranca al 2s */
+    .hnav-btn.btn-proyectos:nth-child(1) .hnav-scan { animation: hnavScanProj 3s 2s infinite; }
+    /* Reparaciones: escanea cada 3.4s, arranca al 0.8s */
+    .hnav-btn.btn-proyectos:nth-child(2) .hnav-scan { animation: hnavScanProj 3.4s 0.8s infinite; }
+    /* Contacto: escanea cada 2.8s, arranca al 1.5s */
+    .hnav-btn.btn-proyectos:nth-child(3) .hnav-scan { animation: hnavScanProj 2.8s 1.5s infinite; }
 
     /* ════════════════════════════════════
        SECTION WRAP
@@ -386,7 +322,6 @@
     .modal-tab.active { color: var(--green); border-bottom-color: var(--green); text-shadow: 0 0 6px rgba(0,255,65,0.4); }
     .modal-tab-content { display: none; }
     .modal-tab-content.active { display: block; }
-
     .fault-block { background: rgba(0,255,65,0.03); border: 1px solid rgba(0,255,65,0.15); border-left: 3px solid var(--green); border-radius: 6px; padding: 20px 24px; margin-bottom: 20px; }
     .fault-label { font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; color: var(--green); letter-spacing: 2px; margin-bottom: 8px; }
     .fault-text { color: var(--text); font-size: 1rem; line-height: 1.75; }
@@ -454,7 +389,6 @@
     .lightbox img { max-width: 92vw; max-height: 88vh; border-radius: 6px; border: 1px solid rgba(0,255,65,0.2); }
     .lightbox-close { position: absolute; top: 20px; right: 24px; background: none; border: 1px solid rgba(0,255,65,0.3); color: var(--green); font-size: 1.2rem; width: 38px; height: 38px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-family: monospace; }
     .lightbox-close:hover { background: rgba(0,255,65,0.1); }
-
     .tab-divider { border: none; border-top: 1px solid rgba(0,255,65,0.08); margin: 20px 0; }
 
     /* PDF TAB */
@@ -468,47 +402,15 @@
     /* ════════════════════════════════════
        PAGE TRANSITION OVERLAY
     ════════════════════════════════════ */
-    #page-flash {
-      position: fixed; inset: 0; z-index: 300;
-      pointer-events: none;
-      background: rgba(0,255,65,0.04);
-      opacity: 0;
-    }
-    #page-flash.flash-in  { animation: pageFlash 0.35s ease forwards; }
-
-    @keyframes pageFlash {
-      0%   { opacity: 0; }
-      30%  { opacity: 1; }
-      100% { opacity: 0; }
-    }
-
-    /* scan line wipe al cambiar sección */
-    #page-scan {
-      position: fixed; top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg,transparent,var(--green),transparent);
-      box-shadow: 0 0 10px var(--green);
-      z-index: 301;
-      transform: scaleX(0);
-      transform-origin: left;
-    }
+    #page-flash { position: fixed; inset: 0; z-index: 300; pointer-events: none; background: rgba(0,255,65,0.04); opacity: 0; }
+    #page-flash.flash-in { animation: pageFlash 0.35s ease forwards; }
+    @keyframes pageFlash { 0% { opacity: 0; } 30% { opacity: 1; } 100% { opacity: 0; } }
+    #page-scan { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg,transparent,var(--green),transparent); box-shadow: 0 0 10px var(--green); z-index: 301; transform: scaleX(0); transform-origin: left; }
     #page-scan.scanning { animation: scanWipe 0.38s ease forwards; }
+    @keyframes scanWipe { 0% { transform: scaleX(0); opacity: 1; top: 0; } 60% { transform: scaleX(1); opacity: 1; top: 0; } 100% { transform: scaleX(1); opacity: 0; top: 0; } }
 
-    @keyframes scanWipe {
-      0%   { transform: scaleX(0); opacity: 1; top: 0; }
-      60%  { transform: scaleX(1); opacity: 1; top: 0; }
-      100% { transform: scaleX(1); opacity: 0; top: 0; }
-    }
-
-    /* ════════════════════════════════════
-       ANIMATIONS
-    ════════════════════════════════════ */
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
 
-    /* ════════════════════════════════════
-       RESPONSIVE
-    ════════════════════════════════════ */
     @media (max-width: 600px) {
       .navbar { padding: 10px 16px; height: auto; flex-wrap: wrap; gap: 8px; }
       .nav-btn { font-size: 0.72rem; padding: 5px 10px; }
@@ -525,7 +427,6 @@
 </head>
 <body>
 
-  <!-- flash overlay & scan bar para transiciones -->
   <div id="page-flash"></div>
   <div id="page-scan"></div>
 
@@ -585,22 +486,13 @@
           <div class="stat"><span class="stat-num">100%</span><span class="stat-label">DEDICACIÓN</span></div>
           <div class="stat"><span class="stat-num">∞</span><span class="stat-label">APRENDIZAJE</span></div>
         </div>
-
-        <!-- ── HERO NAV BUTTONS ── -->
         <div class="hero-nav">
-
-          <!-- Proyectos -->
           <div class="hnav-btn btn-proyectos" onclick="mostrar('proyectos')">
             <div class="hnav-scan"></div>
             <span class="hc hc-tl"></span><span class="hc hc-tr"></span>
             <span class="hc hc-bl"></span><span class="hc hc-br"></span>
             <div class="hnav-icon">
-              <svg viewBox="0 0 24 24">
-                <rect x="3" y="3" width="8" height="8" rx="1"/>
-                <rect x="13" y="3" width="8" height="8" rx="1"/>
-                <rect x="3" y="13" width="8" height="8" rx="1"/>
-                <rect x="13" y="13" width="8" height="8" rx="1"/>
-              </svg>
+              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/></svg>
             </div>
             <div class="hnav-text">
               <p class="hnav-label">// EXPLORAR</p>
@@ -608,15 +500,12 @@
             </div>
             <span class="hnav-arrow">→</span>
           </div>
-
-          <!-- Reparaciones -->
-          <div class="hnav-btn pulse-icon" onclick="mostrar('reparaciones')">
+          <div class="hnav-btn btn-proyectos pulse-icon" onclick="mostrar('reparaciones')">
+            <div class="hnav-scan"></div>
             <span class="hc hc-tl"></span><span class="hc hc-tr"></span>
             <span class="hc hc-bl"></span><span class="hc hc-br"></span>
             <div class="hnav-icon">
-              <svg viewBox="0 0 24 24">
-                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
-              </svg>
+              <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
             </div>
             <div class="hnav-text">
               <p class="hnav-label">// TÉCNICO</p>
@@ -624,15 +513,12 @@
             </div>
             <span class="hnav-arrow">→</span>
           </div>
-
-          <!-- Contacto -->
-          <div class="hnav-btn" onclick="mostrar('contacto')">
+          <div class="hnav-btn btn-proyectos" onclick="mostrar('contacto')">
+            <div class="hnav-scan"></div>
             <span class="hc hc-tl"></span><span class="hc hc-tr"></span>
             <span class="hc hc-bl"></span><span class="hc hc-br"></span>
             <div class="hnav-icon">
-              <svg viewBox="0 0 24 24">
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-              </svg>
+              <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
             </div>
             <div class="hnav-text">
               <p class="hnav-label">// ESCRIBEME</p>
@@ -640,7 +526,6 @@
             </div>
             <span class="hnav-arrow">→</span>
           </div>
-
         </div>
       </div>
     </div>
@@ -651,22 +536,45 @@
   ════════════════════════════════════ -->
   <section id="proyectos">
     <div class="section-wrap">
-      <p class="section-title">// MIS TRABAJOS</p>
-      <h2 class="section-heading">Proyectos</h2>
-      <div class="projects-grid">
+      <p class="section-title anim-el">// MIS TRABAJOS</p>
+      <h2 class="section-heading anim-el">Proyectos</h2>
+      <div class="projects-grid anim-grid anim-el">
 
         <div class="project-card-full">
           <div class="project-card-thumb">
             <span class="project-status-badge live">✓ LIVE</span>
             <div class="project-icon">
               <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="40" cy="40" r="28"/>
-                <path d="M22 50 L18 58 L28 54" stroke-linejoin="round"/>
-                <circle cx="32" cy="38" r="3" fill="rgba(0,255,65,0.4)"/>
-                <circle cx="48" cy="38" r="3" fill="rgba(0,255,65,0.4)"/>
-                <path d="M32 46 Q40 51 48 46" stroke-linecap="round" fill="none"/>
-                <line x1="40" y1="12" x2="40" y2="20"/>
-                <circle cx="40" cy="11" r="2" fill="rgba(0,255,65,0.6)"/>
+                <!-- antena -->
+                <line x1="40" y1="10" x2="40" y2="18" stroke-width="1.5"/>
+                <circle cx="40" cy="9" r="3" fill="rgba(0,255,65,0.6)" stroke="none"/>
+                <!-- cabeza -->
+                <rect x="20" y="18" width="40" height="30" rx="5"/>
+                <!-- ojos — pantallas LED cuadradas -->
+                <rect x="27" y="26" width="10" height="10" rx="2" fill="rgba(0,255,65,0.15)"/>
+                <rect x="43" y="26" width="10" height="10" rx="2" fill="rgba(0,255,65,0.15)"/>
+                <rect x="29" y="28" width="6" height="6" rx="1" fill="rgba(0,255,65,0.7)" stroke="none"/>
+                <rect x="45" y="28" width="6" height="6" rx="1" fill="rgba(0,255,65,0.7)" stroke="none"/>
+                <!-- boca — segmentos tipo display -->
+                <line x1="30" y1="42" x2="50" y2="42" stroke-width="1.5"/>
+                <line x1="30" y1="42" x2="30" y2="46" stroke-width="1.2"/>
+                <line x1="40" y1="42" x2="40" y2="46" stroke-width="1.2"/>
+                <line x1="50" y1="42" x2="50" y2="46" stroke-width="1.2"/>
+                <line x1="30" y1="46" x2="50" y2="46" stroke-width="1.5"/>
+                <!-- cuello -->
+                <line x1="33" y1="48" x2="33" y2="54" stroke-width="1.5"/>
+                <line x1="47" y1="48" x2="47" y2="54" stroke-width="1.5"/>
+                <!-- cuerpo -->
+                <rect x="24" y="54" width="32" height="18" rx="4"/>
+                <!-- panel de pecho — círculo de poder -->
+                <circle cx="40" cy="63" r="5" fill="rgba(0,255,65,0.1)"/>
+                <circle cx="40" cy="63" r="3" fill="rgba(0,255,65,0.35)" stroke="none"/>
+                <!-- brazos -->
+                <rect x="10" y="55" width="13" height="8" rx="3"/>
+                <rect x="57" y="55" width="13" height="8" rx="3"/>
+                <!-- manos -->
+                <circle cx="10" cy="59" r="3" stroke-width="1.2"/>
+                <circle cx="70" cy="59" r="3" stroke-width="1.2"/>
               </svg>
             </div>
           </div>
@@ -797,9 +705,9 @@
   ════════════════════════════════════ -->
   <section id="reparaciones">
     <div class="section-wrap">
-      <p class="section-title">// HISTORIAL TÉCNICO</p>
-      <h2 class="section-heading">Reparaciones</h2>
-      <div class="repairs-grid">
+      <p class="section-title anim-el">// HISTORIAL TÉCNICO</p>
+      <h2 class="section-heading anim-el">Reparaciones</h2>
+      <div class="repairs-grid anim-grid anim-el">
 
         <div class="repair-card" onclick="abrirModal('lg32lf15r')">
           <div class="repair-card-thumb">
@@ -915,9 +823,9 @@
   ════════════════════════════════════ -->
   <section id="contacto">
     <div class="section-wrap">
-      <p class="section-title">// ENCUENTRAME EN</p>
-      <h2 class="section-heading">Contacto</h2>
-      <div class="contact-grid">
+      <p class="section-title anim-el">// ENCUENTRAME EN</p>
+      <h2 class="section-heading anim-el">Contacto</h2>
+      <div class="contact-grid anim-grid anim-el">
         <a class="contact-btn" href="https://www.linkedin.com/in/josue-david-106845345?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank">
           <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
           Josue David — LinkedIn
@@ -971,7 +879,7 @@
 
   <script>
     /* ══════════════════════════
-       NAVEGACIÓN con transición
+       NAVEGACIÓN con transición + animación de entrada
     ══════════════════════════ */
     function mostrar(id) {
       if (document.getElementById(id).classList.contains('activa')) return;
@@ -988,13 +896,28 @@
       void flash.offsetWidth;
       flash.classList.add('flash-in');
 
-      /* swap section con pequeño delay para que se vea el efecto */
       setTimeout(() => {
         document.querySelectorAll("section").forEach(s => s.classList.remove("activa"));
         document.querySelectorAll(".nav-btn").forEach(a => a.classList.remove("activo"));
         document.getElementById(id).classList.add("activa");
         document.getElementById("nav-" + id).classList.add("activo");
         window.scrollTo(0, 0);
+
+        /* ── ANIMACIÓN DE ENTRADA ──
+           Quitamos y re-añadimos la clase "animating" para reiniciar
+           las animaciones CSS cada vez que se navega a la sección
+        */
+        const wrap = document.querySelector(`#${id} .section-wrap`);
+        if (wrap) {
+          wrap.classList.remove('animating');
+          void wrap.offsetWidth; /* reflow para reiniciar */
+          wrap.classList.add('animating');
+
+          /* Limpieza: quitamos la clase al terminar para no bloquear
+             interacciones futuras (hover, etc.) */
+          const maxDelay = 1200;
+          setTimeout(() => wrap.classList.remove('animating'), maxDelay);
+        }
       }, 120);
     }
 
@@ -1052,7 +975,6 @@
       }
     };
 
-    /* render video */
     function mkVideo(v,tipo){
       const isBefore=tipo==='before';
       return `<div class="video-tab-card ${isBefore?'before-card':''}">
@@ -1071,7 +993,6 @@
     }
     function playVid(wrap){const v=wrap.querySelector('video');wrap.classList.add('playing');v.controls=true;v.play();}
 
-    /* render image */
     function mkImg(img,tipo){
       const isBefore=tipo==='before';
       const badge=isBefore?'● ANTES':'● DESPUÉS'; const cls=isBefore?'before':'after';
@@ -1079,11 +1000,9 @@
       return `<div class="img-card" style="cursor:default;"><div class="img-card-placeholder"><span class="ph-icon">📷</span><span class="ph-text">PRÓXIMAMENTE</span></div><div class="img-caption"><p class="img-badge ${cls}">${badge}</p><p class="img-title">${img.title||'Imagen pendiente'}</p></div></div>`;
     }
 
-    /* lightbox */
     function abrirLightbox(src){document.getElementById('lightbox-img').src=src;document.getElementById('lightbox').classList.add('open');document.body.style.overflow='hidden';}
     function cerrarLightbox(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';}
 
-    /* modal */
     function abrirModal(id){
       const d=reparaciones[id]; if(!d) return;
       document.getElementById("modal-title").textContent=d.title;
