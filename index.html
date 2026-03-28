@@ -43,7 +43,9 @@
       pointer-events: none; z-index: 0;
     }
 
-    /* NAVBAR */
+    /* ════════════════════════════════════
+       NAVBAR
+    ════════════════════════════════════ */
     .navbar {
       position: sticky; top: 0; z-index: 100;
       background: rgba(2,12,2,0.92);
@@ -53,19 +55,108 @@
       display: flex; align-items: center; justify-content: space-between;
       height: 64px;
     }
-    .navbar-brand { font-family: 'Share Tech Mono', monospace; font-size: 1.1rem; color: var(--green); text-shadow: 0 0 10px var(--green); letter-spacing: 2px; }
+    .navbar-brand {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 1.1rem; color: var(--green);
+      text-shadow: 0 0 10px var(--green); letter-spacing: 2px;
+    }
     .navbar-brand span { color: var(--muted); }
     .navbar-icons { display: flex; align-items: center; gap: 16px; }
-    .navbar-icons a svg { width: 20px; height: 20px; fill: var(--green); filter: drop-shadow(0 0 4px var(--green)); transition: transform 0.2s, filter 0.2s; }
+    .navbar-icons a svg {
+      width: 20px; height: 20px; fill: var(--green);
+      filter: drop-shadow(0 0 4px var(--green));
+      transition: transform 0.2s, filter 0.2s;
+    }
     .navbar-icons a:hover svg { transform: scale(1.3); filter: drop-shadow(0 0 8px var(--green)); }
-    nav { display: flex; gap: 4px; }
-    nav a { font-family: 'Share Tech Mono', monospace; color: var(--muted); text-decoration: none; font-size: 0.85rem; padding: 6px 14px; border: 1px solid transparent; border-radius: 4px; transition: all 0.2s; letter-spacing: 1px; }
-    nav a:hover, nav a.activo { color: var(--green); border-color: rgba(0,255,65,0.3); background: rgba(0,255,65,0.05); text-shadow: 0 0 6px var(--green); }
+    nav { display: flex; gap: 6px; }
 
+    /* ── NAV BUTTON con animación original "glitch scan" ── */
+    .nav-btn {
+      font-family: 'Share Tech Mono', monospace;
+      color: var(--muted); text-decoration: none;
+      font-size: 0.85rem; padding: 6px 16px;
+      border: 1px solid transparent; border-radius: 4px;
+      transition: color 0.15s; letter-spacing: 1px;
+      position: relative; overflow: hidden; cursor: pointer;
+      background: none;
+    }
+
+    /* línea de scan que barre de izq a der */
+    .nav-btn::before {
+      content: '';
+      position: absolute; top: 0; left: -100%;
+      width: 60%; height: 100%;
+      background: linear-gradient(90deg, transparent 0%, rgba(0,255,65,0.18) 50%, transparent 100%);
+      transition: none;
+      pointer-events: none;
+    }
+
+    /* borde inferior que crece desde el centro */
+    .nav-btn::after {
+      content: '';
+      position: absolute; bottom: 0; left: 50%; right: 50%;
+      height: 1px; background: var(--green);
+      box-shadow: 0 0 6px var(--green);
+      transition: left 0.25s ease, right 0.25s ease;
+    }
+
+    .nav-btn:hover,
+    .nav-btn.activo {
+      color: var(--green);
+      border-color: rgba(0,255,65,0.25);
+      background: rgba(0,255,65,0.04);
+      text-shadow: 0 0 8px rgba(0,255,65,0.6);
+    }
+
+    .nav-btn:hover::after,
+    .nav-btn.activo::after {
+      left: 0; right: 0;
+    }
+
+    /* scan sweep on hover */
+    .nav-btn:hover::before {
+      animation: navScan 0.4s ease forwards;
+    }
+
+    @keyframes navScan {
+      0%   { left: -60%; opacity: 1; }
+      100% { left: 110%; opacity: 0; }
+    }
+
+    /* corner brackets que aparecen on hover/activo */
+    .nav-btn .nb-tl,
+    .nav-btn .nb-br {
+      position: absolute;
+      width: 6px; height: 6px;
+      opacity: 0;
+      transition: opacity 0.2s 0.1s;
+    }
+    .nav-btn .nb-tl {
+      top: 2px; left: 2px;
+      border-top: 1px solid var(--green);
+      border-left: 1px solid var(--green);
+    }
+    .nav-btn .nb-br {
+      bottom: 2px; right: 2px;
+      border-bottom: 1px solid var(--green);
+      border-right: 1px solid var(--green);
+    }
+    .nav-btn:hover .nb-tl,
+    .nav-btn:hover .nb-br,
+    .nav-btn.activo .nb-tl,
+    .nav-btn.activo .nb-br {
+      opacity: 1;
+    }
+
+    /* ════════════════════════════════════
+       SECCIONES
+    ════════════════════════════════════ */
     section { display: none; position: relative; z-index: 1; }
     section.activa { display: block; }
 
-    /* HERO */
+    /* ════════════════════════════════════
+       HERO
+    ════════════════════════════════════ */
     .hero { min-height: calc(100vh - 64px); display: flex; align-items: center; padding: 60px 40px; }
     .hero-inner { max-width: 900px; margin: 0 auto; width: 100%; }
     .hero-tag { font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; color: var(--green); letter-spacing: 3px; margin-bottom: 16px; opacity: 0; animation: fadeUp 0.6s 0.2s forwards; }
@@ -74,17 +165,145 @@
     .hero-title { font-family: 'Share Tech Mono', monospace; font-size: clamp(1rem,3vw,1.4rem); color: var(--muted); margin-bottom: 28px; opacity: 0; animation: fadeUp 0.6s 0.6s forwards; }
     .hero-title .cursor { display: inline-block; width: 2px; height: 1.2em; background: var(--green); margin-left: 4px; vertical-align: middle; animation: blink 1s infinite; }
     .hero-desc { font-size: 1.1rem; color: var(--text); line-height: 1.8; max-width: 600px; margin-bottom: 40px; opacity: 0; animation: fadeUp 0.6s 0.8s forwards; }
-    .hero-stats { display: flex; gap: 40px; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.6s 1s forwards; }
+    .hero-stats { display: flex; gap: 40px; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.6s 1s forwards; margin-bottom: 52px; }
     .stat { text-align: center; }
     .stat-num { font-family: 'Share Tech Mono', monospace; font-size: 2rem; color: var(--green); text-shadow: 0 0 10px var(--green); display: block; }
     .stat-label { font-size: 0.85rem; color: var(--muted); letter-spacing: 1px; }
 
-    /* SECTION WRAP */
+    /* ════════════════════════════════════
+       HERO NAV BUTTONS
+    ════════════════════════════════════ */
+    .hero-nav {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.6s 1.2s forwards;
+    }
+
+    /* Botón tipo tarjeta de terminal con animación distinta a cada uno */
+    .hnav-btn {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 22px;
+      background: rgba(0,255,65,0.03);
+      border: 1px solid rgba(0,255,65,0.18);
+      border-radius: 8px;
+      cursor: pointer;
+      overflow: hidden;
+      transition: border-color 0.3s, background 0.3s;
+      min-width: 180px;
+      text-decoration: none;
+    }
+
+    /* fondo tipo "boot" que escala verticalmente desde abajo */
+    .hnav-btn::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 0%;
+      background: rgba(0,255,65,0.06);
+      transition: height 0.35s ease;
+      z-index: 0;
+    }
+
+    .hnav-btn:hover::before { height: 100%; }
+
+    .hnav-btn:hover {
+      border-color: rgba(0,255,65,0.55);
+      box-shadow: 0 0 20px rgba(0,255,65,0.08), inset 0 0 12px rgba(0,255,65,0.04);
+    }
+
+    /* icono del botón */
+    .hnav-icon {
+      position: relative; z-index: 1;
+      width: 40px; height: 40px;
+      border: 1px solid rgba(0,255,65,0.3);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      background: rgba(0,255,65,0.05);
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .hnav-btn:hover .hnav-icon {
+      border-color: var(--green);
+      background: rgba(0,255,65,0.12);
+    }
+    .hnav-icon svg {
+      width: 20px; height: 20px;
+      fill: none; stroke: var(--green); stroke-width: 1.5;
+      filter: drop-shadow(0 0 4px rgba(0,255,65,0.4));
+    }
+
+    /* texto del botón */
+    .hnav-text { position: relative; z-index: 1; }
+    .hnav-label {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.7rem; color: var(--muted);
+      letter-spacing: 2px; margin-bottom: 2px;
+    }
+    .hnav-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1rem; font-weight: 700;
+      color: #fff;
+      transition: color 0.2s, text-shadow 0.2s;
+    }
+    .hnav-btn:hover .hnav-title {
+      color: var(--green);
+      text-shadow: 0 0 8px rgba(0,255,65,0.5);
+    }
+
+    /* flecha que aparece al hover */
+    .hnav-arrow {
+      position: relative; z-index: 1;
+      margin-left: auto;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 1rem; color: var(--green);
+      opacity: 0;
+      transform: translateX(-8px);
+      transition: opacity 0.25s, transform 0.25s;
+    }
+    .hnav-btn:hover .hnav-arrow { opacity: 1; transform: translateX(0); }
+
+    /* esquinas animadas - efecto "enmarcar" */
+    .hnav-btn .hc { position: absolute; width: 8px; height: 8px; }
+    .hnav-btn .hc-tl { top: 4px; left: 4px; border-top: 1px solid var(--green); border-left: 1px solid var(--green); opacity: 0; transform: translate(-3px,-3px); transition: opacity 0.2s, transform 0.2s; }
+    .hnav-btn .hc-tr { top: 4px; right: 4px; border-top: 1px solid var(--green); border-right: 1px solid var(--green); opacity: 0; transform: translate(3px,-3px); transition: opacity 0.2s 0.04s, transform 0.2s 0.04s; }
+    .hnav-btn .hc-bl { bottom: 4px; left: 4px; border-bottom: 1px solid var(--green); border-left: 1px solid var(--green); opacity: 0; transform: translate(-3px,3px); transition: opacity 0.2s 0.08s, transform 0.2s 0.08s; }
+    .hnav-btn .hc-br { bottom: 4px; right: 4px; border-bottom: 1px solid var(--green); border-right: 1px solid var(--green); opacity: 0; transform: translate(3px,3px); transition: opacity 0.2s 0.12s, transform 0.2s 0.12s; }
+    .hnav-btn:hover .hc { opacity: 1; transform: translate(0,0); }
+
+    /* pulso periódico en el icono del botón "Reparaciones" */
+    @keyframes iconPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(0,255,65,0); }
+      50%       { box-shadow: 0 0 0 4px rgba(0,255,65,0.15); }
+    }
+    .hnav-btn.pulse-icon .hnav-icon { animation: iconPulse 2.4s 1.6s infinite; }
+
+    /* línea de scan única para proyectos */
+    @keyframes hnavScanProj {
+      0%   { transform: translateX(-110%); }
+      100% { transform: translateX(210%); }
+    }
+    .hnav-btn.btn-proyectos .hnav-scan {
+      position: absolute; top: 0; left: 0; bottom: 0;
+      width: 35%; background: linear-gradient(90deg,transparent,rgba(0,255,65,0.07),transparent);
+      animation: hnavScanProj 3s 2s infinite;
+      pointer-events: none; z-index: 0;
+    }
+
+    /* ════════════════════════════════════
+       SECTION WRAP
+    ════════════════════════════════════ */
     .section-wrap { padding: 60px 40px; max-width: 1100px; margin: 0 auto; }
     .section-title { font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; color: var(--green); letter-spacing: 4px; margin-bottom: 8px; }
     .section-heading { font-size: 2.5rem; font-weight: 700; color: #fff; margin-bottom: 40px; padding-bottom: 16px; border-bottom: 1px solid rgba(0,255,65,0.15); }
 
-    /* PROYECTOS */
+    /* ════════════════════════════════════
+       PROYECTOS
+    ════════════════════════════════════ */
     .projects-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(320px,1fr)); gap: 24px; }
     .project-card-full { background: rgba(0,255,65,0.03); border: 1px solid rgba(0,255,65,0.15); border-radius: 10px; overflow: hidden; transition: all 0.3s; display: flex; flex-direction: column; }
     .project-card-full:hover { border-color: rgba(0,255,65,0.5); background: rgba(0,255,65,0.07); transform: translateY(-5px); box-shadow: 0 12px 40px rgba(0,255,65,0.1); }
@@ -110,13 +329,17 @@
     .project-card-placeholder p:first-child { font-family: 'Share Tech Mono', monospace; color: var(--green); font-size: 2.5rem; opacity: 0.35; }
     .project-card-placeholder p:last-child { color: var(--muted); font-size: 0.85rem; }
 
-    /* CONTACTO */
+    /* ════════════════════════════════════
+       CONTACTO
+    ════════════════════════════════════ */
     .contact-grid { display: flex; flex-direction: column; gap: 14px; max-width: 420px; }
     .contact-btn { display: flex; align-items: center; gap: 16px; padding: 18px 24px; border-radius: 8px; text-decoration: none; font-family: 'Share Tech Mono', monospace; font-size: 1rem; color: #fff; border: 1px solid rgba(0,255,65,0.2); background: rgba(0,255,65,0.04); transition: all 0.25s; }
     .contact-btn:hover { background: rgba(0,255,65,0.1); border-color: var(--green); box-shadow: 0 0 16px rgba(0,255,65,0.15); transform: translateX(6px); }
     .contact-btn svg { width: 26px; height: 26px; fill: var(--green); flex-shrink: 0; }
 
-    /* REPARACIONES */
+    /* ════════════════════════════════════
+       REPARACIONES
+    ════════════════════════════════════ */
     .repairs-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(320px,1fr)); gap: 24px; }
     .repair-card { background: rgba(0,255,65,0.03); border: 1px solid rgba(0,255,65,0.15); border-radius: 10px; overflow: hidden; cursor: pointer; transition: all 0.3s; }
     .repair-card:hover { border-color: rgba(0,255,65,0.5); background: rgba(0,255,65,0.07); transform: translateY(-5px); box-shadow: 0 12px 40px rgba(0,255,65,0.1); }
@@ -141,7 +364,9 @@
     .repair-card-placeholder p:first-child { font-family: 'Share Tech Mono', monospace; color: var(--green); font-size: 2.5rem; opacity: 0.35; }
     .repair-card-placeholder p:last-child { color: var(--muted); font-size: 0.85rem; }
 
-    /* MODAL */
+    /* ════════════════════════════════════
+       MODAL
+    ════════════════════════════════════ */
     .modal-overlay { display: none; position: fixed; inset: 0; z-index: 500; background: rgba(0,0,0,0.88); backdrop-filter: blur(6px); padding: 20px; overflow-y: auto; }
     .modal-overlay.open { display: flex; align-items: flex-start; justify-content: center; animation: fadeOverlay 0.25s ease; }
     @keyframes fadeOverlay { from { opacity: 0; } to { opacity: 1; } }
@@ -240,15 +465,58 @@
     .pdf-placeholder-title { font-family: 'Share Tech Mono', monospace; color: var(--muted); font-size: 0.85rem; margin-bottom: 8px; }
     .pdf-placeholder-sub { color: rgba(74,122,82,0.55); font-size: 0.8rem; line-height: 1.6; }
 
+    /* ════════════════════════════════════
+       PAGE TRANSITION OVERLAY
+    ════════════════════════════════════ */
+    #page-flash {
+      position: fixed; inset: 0; z-index: 300;
+      pointer-events: none;
+      background: rgba(0,255,65,0.04);
+      opacity: 0;
+    }
+    #page-flash.flash-in  { animation: pageFlash 0.35s ease forwards; }
+
+    @keyframes pageFlash {
+      0%   { opacity: 0; }
+      30%  { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    /* scan line wipe al cambiar sección */
+    #page-scan {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg,transparent,var(--green),transparent);
+      box-shadow: 0 0 10px var(--green);
+      z-index: 301;
+      transform: scaleX(0);
+      transform-origin: left;
+    }
+    #page-scan.scanning { animation: scanWipe 0.38s ease forwards; }
+
+    @keyframes scanWipe {
+      0%   { transform: scaleX(0); opacity: 1; top: 0; }
+      60%  { transform: scaleX(1); opacity: 1; top: 0; }
+      100% { transform: scaleX(1); opacity: 0; top: 0; }
+    }
+
+    /* ════════════════════════════════════
+       ANIMATIONS
+    ════════════════════════════════════ */
     @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
 
+    /* ════════════════════════════════════
+       RESPONSIVE
+    ════════════════════════════════════ */
     @media (max-width: 600px) {
       .navbar { padding: 10px 16px; height: auto; flex-wrap: wrap; gap: 8px; }
-      nav a { font-size: 0.72rem; padding: 5px 10px; }
+      .nav-btn { font-size: 0.72rem; padding: 5px 10px; }
       .hero { padding: 40px 20px; }
       .section-wrap { padding: 40px 20px; }
       .hero-stats { gap: 24px; }
+      .hero-nav { flex-direction: column; }
+      .hnav-btn { min-width: unset; width: 100%; }
       .modal-body { padding: 16px; }
       .modal-header { padding: 16px 20px; }
       .modal-title { font-size: 1.35rem; }
@@ -256,6 +524,10 @@
   </style>
 </head>
 <body>
+
+  <!-- flash overlay & scan bar para transiciones -->
+  <div id="page-flash"></div>
+  <div id="page-scan"></div>
 
   <!-- LIGHTBOX -->
   <div class="lightbox" id="lightbox" onclick="cerrarLightbox()">
@@ -279,15 +551,25 @@
         </a>
       </div>
       <nav>
-        <a href="#" onclick="mostrar('sobre-mi');return false;" class="activo" id="nav-sobre-mi">Sobre mí</a>
-        <a href="#" onclick="mostrar('proyectos');return false;" id="nav-proyectos">Proyectos</a>
-        <a href="#" onclick="mostrar('reparaciones');return false;" id="nav-reparaciones">Reparaciones</a>
-        <a href="#" onclick="mostrar('contacto');return false;" id="nav-contacto">Contacto</a>
+        <button class="nav-btn activo" onclick="mostrar('sobre-mi')" id="nav-sobre-mi">
+          <span class="nb-tl"></span><span class="nb-br"></span>Sobre mí
+        </button>
+        <button class="nav-btn" onclick="mostrar('proyectos')" id="nav-proyectos">
+          <span class="nb-tl"></span><span class="nb-br"></span>Proyectos
+        </button>
+        <button class="nav-btn" onclick="mostrar('reparaciones')" id="nav-reparaciones">
+          <span class="nb-tl"></span><span class="nb-br"></span>Reparaciones
+        </button>
+        <button class="nav-btn" onclick="mostrar('contacto')" id="nav-contacto">
+          <span class="nb-tl"></span><span class="nb-br"></span>Contacto
+        </button>
       </nav>
     </div>
   </header>
 
-  <!-- SOBRE MI -->
+  <!-- ════════════════════════════════════
+       SOBRE MI
+  ════════════════════════════════════ -->
   <section id="sobre-mi" class="activa">
     <div class="hero">
       <div class="hero-inner">
@@ -303,18 +585,76 @@
           <div class="stat"><span class="stat-num">100%</span><span class="stat-label">DEDICACIÓN</span></div>
           <div class="stat"><span class="stat-num">∞</span><span class="stat-label">APRENDIZAJE</span></div>
         </div>
+
+        <!-- ── HERO NAV BUTTONS ── -->
+        <div class="hero-nav">
+
+          <!-- Proyectos -->
+          <div class="hnav-btn btn-proyectos" onclick="mostrar('proyectos')">
+            <div class="hnav-scan"></div>
+            <span class="hc hc-tl"></span><span class="hc hc-tr"></span>
+            <span class="hc hc-bl"></span><span class="hc hc-br"></span>
+            <div class="hnav-icon">
+              <svg viewBox="0 0 24 24">
+                <rect x="3" y="3" width="8" height="8" rx="1"/>
+                <rect x="13" y="3" width="8" height="8" rx="1"/>
+                <rect x="3" y="13" width="8" height="8" rx="1"/>
+                <rect x="13" y="13" width="8" height="8" rx="1"/>
+              </svg>
+            </div>
+            <div class="hnav-text">
+              <p class="hnav-label">// EXPLORAR</p>
+              <p class="hnav-title">Proyectos</p>
+            </div>
+            <span class="hnav-arrow">→</span>
+          </div>
+
+          <!-- Reparaciones -->
+          <div class="hnav-btn pulse-icon" onclick="mostrar('reparaciones')">
+            <span class="hc hc-tl"></span><span class="hc hc-tr"></span>
+            <span class="hc hc-bl"></span><span class="hc hc-br"></span>
+            <div class="hnav-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+              </svg>
+            </div>
+            <div class="hnav-text">
+              <p class="hnav-label">// TÉCNICO</p>
+              <p class="hnav-title">Reparaciones</p>
+            </div>
+            <span class="hnav-arrow">→</span>
+          </div>
+
+          <!-- Contacto -->
+          <div class="hnav-btn" onclick="mostrar('contacto')">
+            <span class="hc hc-tl"></span><span class="hc hc-tr"></span>
+            <span class="hc hc-bl"></span><span class="hc hc-br"></span>
+            <div class="hnav-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+            </div>
+            <div class="hnav-text">
+              <p class="hnav-label">// ESCRIBEME</p>
+              <p class="hnav-title">Contacto</p>
+            </div>
+            <span class="hnav-arrow">→</span>
+          </div>
+
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- PROYECTOS -->
+  <!-- ════════════════════════════════════
+       PROYECTOS
+  ════════════════════════════════════ -->
   <section id="proyectos">
     <div class="section-wrap">
       <p class="section-title">// MIS TRABAJOS</p>
       <h2 class="section-heading">Proyectos</h2>
       <div class="projects-grid">
 
-        <!-- BOT WHATSAPP -->
         <div class="project-card-full">
           <div class="project-card-thumb">
             <span class="project-status-badge live">✓ LIVE</span>
@@ -347,7 +687,6 @@
           </div>
         </div>
 
-        <!-- ASISTENTE VIRTUAL -->
         <div class="project-card-full">
           <div class="project-card-thumb">
             <span class="project-status-badge live">✓ LIVE</span>
@@ -381,7 +720,6 @@
           </div>
         </div>
 
-        <!-- SISTEMA BIOMÉTRICO -->
         <div class="project-card-full">
           <div class="project-card-thumb">
             <span class="project-status-badge live">✓ COMPLETO</span>
@@ -402,7 +740,7 @@
           <div class="project-card-body">
             <p class="project-tag-mono">PROYECTO_03 · FEB–MAY 2024</p>
             <h3 class="project-name">Sistema Biométrico con Microcontrolador</h3>
-            <p class="project-desc-full">Autenticación por huella dactilar con microcontrolador y Python. Comunicación serial hardware-software, gestión de usuarios y validación biométrica. Documentado en GitHub.</p>
+            <p class="project-desc-full">Autenticación por huella dactilar con microcontrolador y Python. Comunicación serial hardware-software, gestión de usuarios y validación biométrica.</p>
             <div class="project-chips">
               <span class="project-chip">Microcontrolador</span>
               <span class="project-chip">Python</span>
@@ -416,7 +754,6 @@
           </div>
         </div>
 
-        <!-- TV LG -->
         <div class="project-card-full">
           <div class="project-card-thumb">
             <span class="project-status-badge live">✓ COMPLETO</span>
@@ -455,26 +792,20 @@
     </div>
   </section>
 
-  <!-- REPARACIONES -->
+  <!-- ════════════════════════════════════
+       REPARACIONES
+  ════════════════════════════════════ -->
   <section id="reparaciones">
     <div class="section-wrap">
       <p class="section-title">// HISTORIAL TÉCNICO</p>
       <h2 class="section-heading">Reparaciones</h2>
       <div class="repairs-grid">
 
-        <!-- LG 32LF15R -->
         <div class="repair-card" onclick="abrirModal('lg32lf15r')">
           <div class="repair-card-thumb">
             <span class="repair-status-badge ok">✓ REPARADO</span>
             <div class="device-icon">
-              <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
-                <rect x="8" y="10" width="64" height="42" rx="3"/>
-                <rect x="14" y="16" width="52" height="30" rx="1" fill="rgba(0,255,65,0.08)"/>
-                <line x1="40" y1="52" x2="40" y2="62"/>
-                <rect x="26" y="62" width="28" height="4" rx="2"/>
-                <circle cx="62" cy="20" r="1.5" fill="rgba(0,255,65,0.5)"/>
-                <circle cx="62" cy="26" r="1.5" fill="rgba(0,255,65,0.3)"/>
-              </svg>
+              <svg viewBox="0 0 80 80"><rect x="8" y="10" width="64" height="42" rx="3"/><rect x="14" y="16" width="52" height="30" rx="1" fill="rgba(0,255,65,0.08)"/><line x1="40" y1="52" x2="40" y2="62"/><rect x="26" y="62" width="28" height="4" rx="2"/><circle cx="62" cy="20" r="1.5" fill="rgba(0,255,65,0.5)"/><circle cx="62" cy="26" r="1.5" fill="rgba(0,255,65,0.3)"/></svg>
             </div>
           </div>
           <div class="repair-card-body">
@@ -490,19 +821,11 @@
           </div>
         </div>
 
-        <!-- TV CHALLENGER -->
         <div class="repair-card" onclick="abrirModal('tv-challenger')">
           <div class="repair-card-thumb">
             <span class="repair-status-badge ok">✓ MANTENIDO</span>
             <div class="device-icon">
-              <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
-                <rect x="8" y="10" width="64" height="42" rx="3"/>
-                <rect x="14" y="16" width="52" height="30" rx="1" fill="rgba(0,255,65,0.08)"/>
-                <line x1="40" y1="52" x2="40" y2="62"/>
-                <rect x="26" y="62" width="28" height="4" rx="2"/>
-                <path d="M24 24 Q40 20 56 24" stroke-linecap="round" fill="none" stroke-width="1.2"/>
-                <path d="M26 30 Q40 26 54 30" stroke-linecap="round" fill="none" stroke-width="0.8" stroke-dasharray="2 2"/>
-              </svg>
+              <svg viewBox="0 0 80 80"><rect x="8" y="10" width="64" height="42" rx="3"/><rect x="14" y="16" width="52" height="30" rx="1" fill="rgba(0,255,65,0.08)"/><line x1="40" y1="52" x2="40" y2="62"/><rect x="26" y="62" width="28" height="4" rx="2"/><path d="M24 24 Q40 20 56 24" stroke-linecap="round" fill="none" stroke-width="1.2"/><path d="M26 30 Q40 26 54 30" stroke-linecap="round" fill="none" stroke-width="0.8" stroke-dasharray="2 2"/></svg>
             </div>
           </div>
           <div class="repair-card-body">
@@ -518,23 +841,11 @@
           </div>
         </div>
 
-        <!-- PORTÁTIL RAM -->
         <div class="repair-card" onclick="abrirModal('portatil-ram')">
           <div class="repair-card-thumb">
             <span class="repair-status-badge ok">✓ COMPLETADO</span>
             <div class="device-icon">
-              <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
-                <rect x="12" y="16" width="56" height="36" rx="3"/>
-                <rect x="18" y="22" width="44" height="24" rx="1" fill="rgba(0,255,65,0.08)"/>
-                <rect x="6" y="52" width="68" height="6" rx="2"/>
-                <rect x="26" y="28" width="28" height="10" rx="1" fill="rgba(0,255,65,0.06)"/>
-                <line x1="29" y1="28" x2="29" y2="26"/><line x1="33" y1="28" x2="33" y2="26"/>
-                <line x1="37" y1="28" x2="37" y2="26"/><line x1="41" y1="28" x2="41" y2="26"/>
-                <line x1="45" y1="28" x2="45" y2="26"/><line x1="49" y1="28" x2="49" y2="26"/>
-                <line x1="29" y1="38" x2="29" y2="40"/><line x1="33" y1="38" x2="33" y2="40"/>
-                <line x1="37" y1="38" x2="37" y2="40"/><line x1="41" y1="38" x2="41" y2="40"/>
-                <line x1="45" y1="38" x2="45" y2="40"/><line x1="49" y1="38" x2="49" y2="40"/>
-              </svg>
+              <svg viewBox="0 0 80 80"><rect x="12" y="16" width="56" height="36" rx="3"/><rect x="18" y="22" width="44" height="24" rx="1" fill="rgba(0,255,65,0.08)"/><rect x="6" y="52" width="68" height="6" rx="2"/><rect x="26" y="28" width="28" height="10" rx="1" fill="rgba(0,255,65,0.06)"/><line x1="29" y1="28" x2="29" y2="26"/><line x1="33" y1="28" x2="33" y2="26"/><line x1="37" y1="28" x2="37" y2="26"/><line x1="41" y1="28" x2="41" y2="26"/><line x1="45" y1="28" x2="45" y2="26"/><line x1="49" y1="28" x2="49" y2="26"/><line x1="29" y1="38" x2="29" y2="40"/><line x1="33" y1="38" x2="33" y2="40"/><line x1="37" y1="38" x2="37" y2="40"/><line x1="41" y1="38" x2="41" y2="40"/><line x1="45" y1="38" x2="45" y2="40"/><line x1="49" y1="38" x2="49" y2="40"/></svg>
             </div>
           </div>
           <div class="repair-card-body">
@@ -550,28 +861,11 @@
           </div>
         </div>
 
-        <!-- ★ NUEVA: GRABADORA PREMIER -->
         <div class="repair-card" onclick="abrirModal('grabadora-premier')">
           <div class="repair-card-thumb">
             <span class="repair-status-badge ok">✓ REPARADO</span>
             <div class="device-icon">
-              <!-- Icono de grabadora / cassette player -->
-              <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
-                <rect x="10" y="22" width="60" height="36" rx="4"/>
-                <rect x="16" y="28" width="22" height="16" rx="2" fill="rgba(0,255,65,0.06)"/>
-                <circle cx="27" cy="36" r="5"/>
-                <circle cx="27" cy="36" r="2" fill="rgba(0,255,65,0.3)"/>
-                <rect x="42" y="28" width="22" height="16" rx="2" fill="rgba(0,255,65,0.06)"/>
-                <circle cx="53" cy="36" r="5"/>
-                <circle cx="53" cy="36" r="2" fill="rgba(0,255,65,0.3)"/>
-                <line x1="32" y1="36" x2="48" y2="36" stroke-dasharray="2 2" stroke-width="0.8"/>
-                <rect x="18" y="50" width="6" height="4" rx="1"/>
-                <rect x="28" y="50" width="6" height="4" rx="1"/>
-                <rect x="38" y="50" width="6" height="4" rx="1"/>
-                <rect x="48" y="50" width="6" height="4" rx="1"/>
-                <rect x="58" y="50" width="6" height="4" rx="1"/>
-                <line x1="10" y1="48" x2="70" y2="48" stroke-width="0.5" stroke-dasharray="1 1"/>
-              </svg>
+              <svg viewBox="0 0 80 80"><rect x="10" y="22" width="60" height="36" rx="4"/><rect x="16" y="28" width="22" height="16" rx="2" fill="rgba(0,255,65,0.06)"/><circle cx="27" cy="36" r="5"/><circle cx="27" cy="36" r="2" fill="rgba(0,255,65,0.3)"/><rect x="42" y="28" width="22" height="16" rx="2" fill="rgba(0,255,65,0.06)"/><circle cx="53" cy="36" r="5"/><circle cx="53" cy="36" r="2" fill="rgba(0,255,65,0.3)"/><line x1="32" y1="36" x2="48" y2="36" stroke-dasharray="2 2" stroke-width="0.8"/><rect x="18" y="50" width="6" height="4" rx="1"/><rect x="28" y="50" width="6" height="4" rx="1"/><rect x="38" y="50" width="6" height="4" rx="1"/><rect x="48" y="50" width="6" height="4" rx="1"/><rect x="58" y="50" width="6" height="4" rx="1"/><line x1="10" y1="48" x2="70" y2="48" stroke-width="0.5" stroke-dasharray="1 1"/></svg>
             </div>
           </div>
           <div class="repair-card-body">
@@ -579,7 +873,7 @@
             <h3 class="repair-name">Grabadora Premier — Años 90</h3>
             <p class="repair-fault">Capacitor explotado en placa principal, corrosión en pistas críticas y parlante desconectado. El corto impedía el encendido. Sin esquema eléctrico disponible.</p>
             <div class="repair-meta">
-              <span class="repair-chip"><svg viewBox="0 0 12 12"><rect x="1" y="3" width="10" height="6" rx="1"/><circle cx="4" cy="6" r="1.5"/><circle cx="8" cy="6" r="1.5"/></svg>AUDIO / GRABADORA</span>
+              <span class="repair-chip"><svg viewBox="0 0 12 12"><rect x="1" y="3" width="10" height="6" rx="1"/><circle cx="4" cy="6" r="1.5"/><circle cx="8" cy="6" r="1.5"/></svg>AUDIO</span>
               <span class="repair-chip"><svg viewBox="0 0 12 12"><path d="M6 1v10M1 6h10"/></svg>CAPACITOR 22µF</span>
               <span class="repair-chip"><svg viewBox="0 0 12 12"><path d="M2 6 Q6 2 10 6"/><path d="M2 6 Q6 10 10 6"/></svg>PUENTE RECTIF.</span>
             </div>
@@ -587,33 +881,17 @@
           </div>
         </div>
 
-        <!-- ★ NUEVA: ADAPTACIÓN CARGADOR A RADIO -->
         <div class="repair-card" onclick="abrirModal('cargador-radio')">
           <div class="repair-card-thumb">
             <span class="repair-status-badge ok">✓ ADAPTADO</span>
             <div class="device-icon">
-              <!-- Icono de radio con rayo de carga -->
-              <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
-                <rect x="12" y="26" width="46" height="30" rx="3"/>
-                <rect x="18" y="32" width="20" height="12" rx="2" fill="rgba(0,255,65,0.06)"/>
-                <circle cx="28" cy="38" r="5"/>
-                <circle cx="28" cy="38" r="2" fill="rgba(0,255,65,0.3)"/>
-                <rect x="42" y="33" width="10" height="3" rx="1"/>
-                <rect x="42" y="39" width="10" height="3" rx="1"/>
-                <rect x="42" y="45" width="6" height="3" rx="1"/>
-                <line x1="18" y1="56" x2="58" y2="56" stroke-width="0.5" stroke-dasharray="1 1"/>
-                <!-- antena -->
-                <line x1="48" y1="26" x2="56" y2="14" stroke-linecap="round"/>
-                <circle cx="56" cy="13" r="2" fill="rgba(0,255,65,0.5)"/>
-                <!-- rayo cargador -->
-                <path d="M66 18 L60 30 L66 30 L58 46" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" fill="none"/>
-              </svg>
+              <svg viewBox="0 0 80 80"><rect x="12" y="26" width="46" height="30" rx="3"/><rect x="18" y="32" width="20" height="12" rx="2" fill="rgba(0,255,65,0.06)"/><circle cx="28" cy="38" r="5"/><circle cx="28" cy="38" r="2" fill="rgba(0,255,65,0.3)"/><rect x="42" y="33" width="10" height="3" rx="1"/><rect x="42" y="39" width="10" height="3" rx="1"/><rect x="42" y="45" width="6" height="3" rx="1"/><line x1="18" y1="56" x2="58" y2="56" stroke-width="0.5" stroke-dasharray="1 1"/><line x1="48" y1="26" x2="56" y2="14" stroke-linecap="round"/><circle cx="56" cy="13" r="2" fill="rgba(0,255,65,0.5)"/><path d="M66 18 L60 30 L66 30 L58 46" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" fill="none"/></svg>
             </div>
           </div>
           <div class="repair-card-body">
             <p class="repair-model">RADIO &nbsp;·&nbsp; REPORTE ST-0005 &nbsp;·&nbsp; 2026</p>
             <h3 class="repair-name">Adaptación de Cargador Móvil a Radio</h3>
-            <p class="repair-fault">Radio sin fuente de alimentación propia. Se analizó el circuito interno para identificar el punto de alimentación y adaptar un cargador de celular como fuente de poder permanente.</p>
+            <p class="repair-fault">Radio sin fuente de alimentación propia. Se analizó el circuito interno para identificar el punto de alimentación y adaptar un cargador de celular como fuente permanente.</p>
             <div class="repair-meta">
               <span class="repair-chip"><svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="5"/><line x1="6" y1="3" x2="6" y2="6"/><line x1="6" y1="6" x2="9" y2="6"/></svg>RADIO / AUDIO</span>
               <span class="repair-chip"><svg viewBox="0 0 12 12"><path d="M2 6h3l2-4 2 8 2-4h1"/></svg>ANÁLISIS CIRCUITO</span>
@@ -632,7 +910,9 @@
     </div>
   </section>
 
-  <!-- CONTACTO -->
+  <!-- ════════════════════════════════════
+       CONTACTO
+  ════════════════════════════════════ -->
   <section id="contacto">
     <div class="section-wrap">
       <p class="section-title">// ENCUENTRAME EN</p>
@@ -654,7 +934,9 @@
     </div>
   </section>
 
-  <!-- MODAL -->
+  <!-- ════════════════════════════════════
+       MODAL
+  ════════════════════════════════════ -->
   <div class="modal-overlay" id="modal-overlay" onclick="cerrarModalFuera(event)">
     <div class="modal" id="modal-box">
       <div class="modal-header">
@@ -667,7 +949,7 @@
       </div>
       <div class="modal-body">
         <div class="modal-tabs" id="modal-tabs-bar"></div>
-        <div id="modal-tab-falla"  class="modal-tab-content active">
+        <div id="modal-tab-falla" class="modal-tab-content active">
           <div class="fault-block">
             <p class="fault-label">// TRABAJO REALIZADO</p>
             <p class="fault-text" id="modal-fault">—</p>
@@ -680,7 +962,7 @@
           <ul class="components-list" id="modal-components"></ul>
         </div>
         <div id="modal-tab-media" class="modal-tab-content"></div>
-        <div id="modal-tab-pdf"   class="modal-tab-content">
+        <div id="modal-tab-pdf" class="modal-tab-content">
           <div class="pdf-area" id="modal-pdf-area"></div>
         </div>
       </div>
@@ -688,278 +970,174 @@
   </div>
 
   <script>
-    /* ===== NAV ===== */
+    /* ══════════════════════════
+       NAVEGACIÓN con transición
+    ══════════════════════════ */
     function mostrar(id) {
-      document.querySelectorAll("section").forEach(s => s.classList.remove("activa"));
-      document.querySelectorAll("nav a").forEach(a => a.classList.remove("activo"));
-      document.getElementById(id).classList.add("activa");
-      document.getElementById("nav-" + id).classList.add("activo");
-      window.scrollTo(0, 0);
+      if (document.getElementById(id).classList.contains('activa')) return;
+
+      /* scan bar */
+      const scan = document.getElementById('page-scan');
+      scan.classList.remove('scanning');
+      void scan.offsetWidth;
+      scan.classList.add('scanning');
+
+      /* flash */
+      const flash = document.getElementById('page-flash');
+      flash.classList.remove('flash-in');
+      void flash.offsetWidth;
+      flash.classList.add('flash-in');
+
+      /* swap section con pequeño delay para que se vea el efecto */
+      setTimeout(() => {
+        document.querySelectorAll("section").forEach(s => s.classList.remove("activa"));
+        document.querySelectorAll(".nav-btn").forEach(a => a.classList.remove("activo"));
+        document.getElementById(id).classList.add("activa");
+        document.getElementById("nav-" + id).classList.add("activo");
+        window.scrollTo(0, 0);
+      }, 120);
     }
 
-    /* ===== DATA ===== */
+    /* ══════════════════════════
+       DATA
+    ══════════════════════════ */
     const GH    = "https://raw.githubusercontent.com/JosueDavid777/Josue-Web/main";
     const MEDIA = `${GH}/2026-02-%20TV_LG32LF15R-REPARACION/07_Multimedia%2C%20videos%20e%20im%C3%A1genes`;
 
     const reparaciones = {
-
       "lg32lf15r": {
-        title: 'Televisor LG 32"',
-        model: "LG · 32LF15R  ·  Reporte ST-0001  ·  03 de enero de 2026",
-        mediaType: "videos",
+        title: 'Televisor LG 32"', model: "LG · 32LF15R  ·  Reporte ST-0001  ·  03 de enero de 2026", mediaType: "videos",
         fault: "El televisor presentaba fallas intermitentes: no se escuchaba el audio, la placa de botones no respondía y el equipo se apagaba de forma espontánea.",
         solution: "Se identificó el capacitor C1118 de la placa principal como componente defectuoso. Su deterioro generaba ripple en la señal de 1.25 V al SoC causando los apagados y fallos de audio. Tras el reemplazo por un equivalente de 100 µF y el mantenimiento integral, el equipo quedó 100% operativo.",
-        components: [
-          "Capacitor C1118 — 100 µF / placa principal (regulación 1.25 V → SoC)",
-          "Limpieza de polvo en circuitos y disipadores",
-          "Verificación de conectores internos",
-          "Revisión de soldaduras en placa principal y placa de potencia",
-          "Limpieza de carcasa exterior e interior"
-        ],
+        components: ["Capacitor C1118 — 100 µF / placa principal (regulación 1.25 V → SoC)","Limpieza de polvo en circuitos y disipadores","Verificación de conectores internos","Revisión de soldaduras en placa principal y placa de potencia","Limpieza de carcasa exterior e interior"],
         videosBefore: [
-          { src: `${MEDIA}/01_Imagenes%20y%20videos%20de%20fallas%20en%20el%20equipo/01_PRIMER_VIDEO_TV_LG_FALLA.mp4`,  title: "Falla 1 — apagado espontáneo" },
-          { src: `${MEDIA}/01_Imagenes%20y%20videos%20de%20fallas%20en%20el%20equipo/02_SEGUNDO_VIDEO_TV_LG_FALLA.mp4`, title: "Falla 2 — sin audio / botones" },
-          { src: `${MEDIA}/01_Imagenes%20y%20videos%20de%20fallas%20en%20el%20equipo/03_TERCER_VIDEO_TV_LG_FALLA.mp4`,  title: "Falla 3 — comportamiento intermitente" }
+          { src:`${MEDIA}/01_Imagenes%20y%20videos%20de%20fallas%20en%20el%20equipo/01_PRIMER_VIDEO_TV_LG_FALLA.mp4`, title:"Falla 1 — apagado espontáneo" },
+          { src:`${MEDIA}/01_Imagenes%20y%20videos%20de%20fallas%20en%20el%20equipo/02_SEGUNDO_VIDEO_TV_LG_FALLA.mp4`, title:"Falla 2 — sin audio / botones" },
+          { src:`${MEDIA}/01_Imagenes%20y%20videos%20de%20fallas%20en%20el%20equipo/03_TERCER_VIDEO_TV_LG_FALLA.mp4`, title:"Falla 3 — comportamiento intermitente" }
         ],
         videosAfter: [
-          { src: `${MEDIA}/02_Videos%20de%20equipo%20funcionando%20y%20reparado/01_PRIMER_VIDEO_REPARACION.mp4`,             title: "Proceso de intervención" },
-          { src: `${MEDIA}/02_Videos%20de%20equipo%20funcionando%20y%20reparado/02_SEGUNDO_VIDEO_TV_YA_FUNCIONANDO.mp4`,     title: "TV ya funcionando" },
-          { src: `${MEDIA}/02_Videos%20de%20equipo%20funcionando%20y%20reparado/03_TERCER_VIDEO_TV_FUNCIONANDO_AL_100.mp4`, title: "Verificación final — 100% operativo" }
+          { src:`${MEDIA}/02_Videos%20de%20equipo%20funcionando%20y%20reparado/01_PRIMER_VIDEO_REPARACION.mp4`, title:"Proceso de intervención" },
+          { src:`${MEDIA}/02_Videos%20de%20equipo%20funcionando%20y%20reparado/02_SEGUNDO_VIDEO_TV_YA_FUNCIONANDO.mp4`, title:"TV ya funcionando" },
+          { src:`${MEDIA}/02_Videos%20de%20equipo%20funcionando%20y%20reparado/03_TERCER_VIDEO_TV_FUNCIONANDO_AL_100.mp4`, title:"Verificación final — 100% operativo" }
         ],
-        pdf: `https://drive.google.com/file/d/1vO1wtC-THLGQUQsPzKwq1HE_L40Ql6hR/preview`
+        pdf:`https://drive.google.com/file/d/1vO1wtC-THLGQUQsPzKwq1HE_L40Ql6hR/preview`
       },
-
       "tv-challenger": {
-        title: "TV Challenger — Mantenimiento",
-        model: "CHALLENGER  ·  Reporte ST-0002  ·  Enero 2026",
-        mediaType: "images",
-        fault: "El cliente solicitó mantenimiento preventivo general: limpieza interna, diagnóstico de placas y verificación de funcionamiento para asegurar rendimiento óptimo.",
-        solution: "Se realizó limpieza profunda de polvo en placas de potencia, alimentación de pantalla y LEDs. Inspección visual de soldaduras, verificación de conectores y pruebas de funcionamiento. El equipo quedó en condiciones óptimas de operación.",
-        components: [
-          "Limpieza de placa de potencia y alimentación de pantalla",
-          "Limpieza e inspección de tiras de LEDs",
-          "Desconexión y limpieza de mainboard",
-          "Verificación de soldaduras y conectores",
-          "Pruebas básicas de funcionamiento post-mantenimiento",
-          "Limpieza de carcasa exterior e interior"
-        ],
-        imagesBefore: [],
-        imagesAfter:  [],
-        pdf: null
+        title:"TV Challenger — Mantenimiento", model:"CHALLENGER  ·  Reporte ST-0002  ·  Enero 2026", mediaType:"images",
+        fault:"El cliente solicitó mantenimiento preventivo general: limpieza interna, diagnóstico de placas y verificación de funcionamiento para asegurar rendimiento óptimo.",
+        solution:"Se realizó limpieza profunda de polvo en placas de potencia, alimentación de pantalla y LEDs. Inspección visual de soldaduras, verificación de conectores y pruebas de funcionamiento. El equipo quedó en condiciones óptimas.",
+        components:["Limpieza de placa de potencia y alimentación de pantalla","Limpieza e inspección de tiras de LEDs","Desconexión y limpieza de mainboard","Verificación de soldaduras y conectores","Pruebas básicas de funcionamiento post-mantenimiento","Limpieza de carcasa exterior e interior"],
+        imagesBefore:[], imagesAfter:[], pdf:null
       },
-
       "portatil-ram": {
-        title: "Portátil — Aumento de RAM y Mantenimiento",
-        model: "PORTÁTIL  ·  Reporte ST-0003  ·  2026",
-        mediaType: "images",
-        fault: "El equipo presentaba lentitud general y temperaturas elevadas. El cliente solicitó mejora de rendimiento mediante aumento de RAM y mantenimiento del sistema de refrigeración.",
-        solution: "Se instaló módulo adicional de RAM ampliando la capacidad total. Se retiró el disipador, se aplicó pasta térmica nueva en CPU y GPU, y se realizó limpieza general del interior. Las temperaturas bajaron significativamente y el rendimiento mejoró de forma notable.",
-        components: [
-          "Instalación de módulo de RAM adicional",
-          "Retiro y limpieza del disipador de CPU/GPU",
-          "Aplicación de pasta térmica nueva en CPU y GPU",
-          "Limpieza de ventiladores y ductos de aire",
-          "Limpieza general interior del chasis",
-          "Verificación y pruebas de temperatura post-mantenimiento"
-        ],
-        imagesBefore: [],
-        imagesAfter:  [],
-        pdf: null
+        title:"Portátil — Aumento de RAM y Mantenimiento", model:"PORTÁTIL  ·  Reporte ST-0003  ·  2026", mediaType:"images",
+        fault:"El equipo presentaba lentitud general y temperaturas elevadas. El cliente solicitó mejora de rendimiento mediante aumento de RAM y mantenimiento del sistema de refrigeración.",
+        solution:"Se instaló módulo adicional de RAM ampliando la capacidad total. Se retiró el disipador, se aplicó pasta térmica nueva en CPU y GPU, y se realizó limpieza general. Las temperaturas bajaron significativamente y el rendimiento mejoró de forma notable.",
+        components:["Instalación de módulo de RAM adicional","Retiro y limpieza del disipador de CPU/GPU","Aplicación de pasta térmica nueva en CPU y GPU","Limpieza de ventiladores y ductos de aire","Limpieza general interior del chasis","Verificación y pruebas de temperatura post-mantenimiento"],
+        imagesBefore:[], imagesAfter:[], pdf:null
       },
-
-      /* ★ NUEVA: GRABADORA PREMIER */
       "grabadora-premier": {
-        title: "Grabadora Premier — Años 90",
-        model: "PREMIER  ·  Reporte ST-0004  ·  2026",
-        mediaType: "images",
-        fault: "La grabadora presentaba un corto que impedía su encendido. Se detectaron tres problemas simultáneos: un capacitor explotado en la placa principal (sin información de capacitancia), corrosión severa en pistas críticas con decoloración marrón y sulfatación, y el parlante completamente desconectado. No se contaba con esquema eléctrico del equipo.",
-        solution: "Mediante análisis de los componentes circundantes se dedujo el valor del capacitor dañado (22 µF). Se reemplazó el diodo sulfatado del puente rectificador, se reconectaron las pistas corroídas para restablecer continuidad y se reconectó el parlante correctamente en paralelo. La grabadora recuperó su funcionamiento completo con sonido estable. La causa raíz fue la combinación de corrosión acumulada por años, la explosión del capacitor de acoplamiento de señal y la degradación del diodo rectificador.",
-        components: [
-          "Reemplazo de capacitor de acoplamiento — 22 µF (valor deducido por análisis comparativo)",
-          "Reemplazo de diodo sulfatado en el puente rectificador",
-          "Reconexión y restauración de pistas corroídas y levantadas",
-          "Reconexión del parlante en paralelo (cable suelto)",
-          "Verificación de fuente de alimentación y tensiones de salida",
-          "Prueba de audio y funcionamiento general post-reparación"
-        ],
-        imagesBefore: [],
-        imagesAfter:  [],
-        pdf: null
+        title:"Grabadora Premier — Años 90", model:"PREMIER  ·  Reporte ST-0004  ·  2026", mediaType:"images",
+        fault:"La grabadora presentaba un corto que impedía su encendido. Se detectaron tres problemas simultáneos: un capacitor explotado en la placa principal (sin información de capacitancia), corrosión severa en pistas críticas con decoloración marrón y sulfatación, y el parlante completamente desconectado. No se contaba con esquema eléctrico del equipo.",
+        solution:"Mediante análisis de los componentes circundantes se dedujo el valor del capacitor dañado (22 µF). Se reemplazó el diodo sulfatado del puente rectificador, se reconectaron las pistas corroídas para restablecer continuidad y se reconectó el parlante correctamente en paralelo. La grabadora recuperó su funcionamiento completo con sonido estable.",
+        components:["Reemplazo de capacitor de acoplamiento — 22 µF (valor deducido por análisis comparativo)","Reemplazo de diodo sulfatado en el puente rectificador","Reconexión y restauración de pistas corroídas y levantadas","Reconexión del parlante en paralelo (cable suelto)","Verificación de fuente de alimentación y tensiones de salida","Prueba de audio y funcionamiento general post-reparación"],
+        imagesBefore:[], imagesAfter:[], pdf:null
       },
-
-      /* ★ NUEVA: ADAPTACIÓN CARGADOR A RADIO */
       "cargador-radio": {
-        title: "Adaptación de Cargador Móvil a Radio",
-        model: "RADIO  ·  Reporte ST-0005  ·  2026",
-        fault: "El radio no contaba con fuente de alimentación propia y dependía de pilas para funcionar. El cliente necesitaba una solución permanente de energía sin modificar la experiencia de uso del equipo.",
-        solution: "Se analizó el circuito interno del radio para identificar el punto exacto de alimentación de voltaje. Una vez localizado el nodo de entrada de la fuente, se adaptó un cargador de celular como fuente de poder, conectándolo de forma limpia al circuito interno. El radio quedó operativo con alimentación continua, eliminando la dependencia de pilas y sin alterar su funcionamiento original.",
-        components: [
-          "Análisis del circuito interno para localizar punto de alimentación",
-          "Medición de voltaje de operación del radio",
-          "Adaptación de cargador de celular como fuente de alimentación permanente",
-          "Conexión al nodo de alimentación identificado en la placa",
-          "Verificación de polaridad y niveles de tensión",
-          "Prueba de funcionamiento completo post-adaptación"
-        ],
-        imagesBefore: [],
-        imagesAfter:  [],
-        pdf: null
+        title:"Adaptación de Cargador Móvil a Radio", model:"RADIO  ·  Reporte ST-0005  ·  2026", mediaType:"images",
+        fault:"El radio no contaba con fuente de alimentación propia y dependía de pilas para funcionar. El cliente necesitaba una solución permanente de energía sin modificar la experiencia de uso del equipo.",
+        solution:"Se analizó el circuito interno del radio para identificar el punto exacto de alimentación de voltaje. Una vez localizado el nodo de entrada, se adaptó un cargador de celular como fuente de poder, conectándolo de forma limpia al circuito interno. El radio quedó operativo con alimentación continua sin alterar su funcionamiento original.",
+        components:["Análisis del circuito interno para localizar punto de alimentación","Medición de voltaje de operación del radio","Adaptación de cargador de celular como fuente de alimentación permanente","Conexión al nodo de alimentación identificado en la placa","Verificación de polaridad y niveles de tensión","Prueba de funcionamiento completo post-adaptación"],
+        imagesBefore:[], imagesAfter:[], pdf:null
       }
     };
 
-    /* ===== RENDER: VIDEO CARD ===== */
-    function mkVideo(v, tipo) {
-      const isBefore = tipo === 'before';
-      return `
-        <div class="video-tab-card ${isBefore ? 'before-card' : ''}">
-          <div class="vid-thumb-wrap" onclick="playVid(this)">
-            <video preload="none"><source src="${v.src}" type="video/mp4"></video>
-            <div class="vid-overlay">
-              <div class="vid-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
-              <span class="vid-type-label">${isBefore ? '● VIDEO DE FALLA' : '● EQUIPO REPARADO'}</span>
-            </div>
+    /* render video */
+    function mkVideo(v,tipo){
+      const isBefore=tipo==='before';
+      return `<div class="video-tab-card ${isBefore?'before-card':''}">
+        <div class="vid-thumb-wrap" onclick="playVid(this)">
+          <video preload="none"><source src="${v.src}" type="video/mp4"></video>
+          <div class="vid-overlay">
+            <div class="vid-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+            <span class="vid-type-label">${isBefore?'● VIDEO DE FALLA':'● EQUIPO REPARADO'}</span>
           </div>
-          <div class="video-tab-info">
-            <p class="video-tab-badge ${tipo}">${isBefore ? '● FALLA' : '● REPARADO'}</p>
-            <p class="video-tab-title">${v.title}</p>
-          </div>
-        </div>`;
+        </div>
+        <div class="video-tab-info">
+          <p class="video-tab-badge ${tipo}">${isBefore?'● FALLA':'● REPARADO'}</p>
+          <p class="video-tab-title">${v.title}</p>
+        </div>
+      </div>`;
+    }
+    function playVid(wrap){const v=wrap.querySelector('video');wrap.classList.add('playing');v.controls=true;v.play();}
+
+    /* render image */
+    function mkImg(img,tipo){
+      const isBefore=tipo==='before';
+      const badge=isBefore?'● ANTES':'● DESPUÉS'; const cls=isBefore?'before':'after';
+      if(img.src) return `<div class="img-card" onclick="abrirLightbox('${img.src}')"><img src="${img.src}" alt="${img.title}" loading="lazy"><div class="img-caption"><p class="img-badge ${cls}">${badge}</p><p class="img-title">${img.title}</p></div></div>`;
+      return `<div class="img-card" style="cursor:default;"><div class="img-card-placeholder"><span class="ph-icon">📷</span><span class="ph-text">PRÓXIMAMENTE</span></div><div class="img-caption"><p class="img-badge ${cls}">${badge}</p><p class="img-title">${img.title||'Imagen pendiente'}</p></div></div>`;
     }
 
-    function playVid(wrap) {
-      const v = wrap.querySelector('video');
-      wrap.classList.add('playing');
-      v.controls = true;
-      v.play();
-    }
+    /* lightbox */
+    function abrirLightbox(src){document.getElementById('lightbox-img').src=src;document.getElementById('lightbox').classList.add('open');document.body.style.overflow='hidden';}
+    function cerrarLightbox(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';}
 
-    /* ===== RENDER: IMAGE CARD ===== */
-    function mkImg(img, tipo) {
-      const isBefore = tipo === 'before';
-      const badge = isBefore ? '● ANTES' : '● DESPUÉS';
-      const cls   = isBefore ? 'before' : 'after';
-      if (img.src) {
-        return `
-          <div class="img-card" onclick="abrirLightbox('${img.src}')">
-            <img src="${img.src}" alt="${img.title}" loading="lazy">
-            <div class="img-caption">
-              <p class="img-badge ${cls}">${badge}</p>
-              <p class="img-title">${img.title}</p>
-            </div>
-          </div>`;
-      }
-      return `
-        <div class="img-card" style="cursor:default;">
-          <div class="img-card-placeholder">
-            <span class="ph-icon">📷</span>
-            <span class="ph-text">PRÓXIMAMENTE</span>
-          </div>
-          <div class="img-caption">
-            <p class="img-badge ${cls}">${badge}</p>
-            <p class="img-title">${img.title || 'Imagen pendiente'}</p>
-          </div>
-        </div>`;
-    }
+    /* modal */
+    function abrirModal(id){
+      const d=reparaciones[id]; if(!d) return;
+      document.getElementById("modal-title").textContent=d.title;
+      document.getElementById("modal-model").textContent=d.model;
+      document.getElementById("modal-fault").textContent=d.fault;
+      document.getElementById("modal-solution").textContent=d.solution;
+      const ul=document.getElementById("modal-components"); ul.innerHTML="";
+      d.components.forEach(c=>{const li=document.createElement("li");li.textContent=c;ul.appendChild(li);});
 
-    /* ===== LIGHTBOX ===== */
-    function abrirLightbox(src) {
-      document.getElementById('lightbox-img').src = src;
-      document.getElementById('lightbox').classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-    function cerrarLightbox() {
-      document.getElementById('lightbox').classList.remove('open');
-      document.body.style.overflow = '';
-    }
+      const hasPdf=!!d.pdf;
+      const mediaLabel=d.mediaType==='videos'?'VIDEOS':'IMÁGENES';
+      document.getElementById("modal-tabs-bar").innerHTML=
+        `<button class="modal-tab active" onclick="cambiarTab(this,'modal-tab-falla')">TRABAJO REALIZADO</button>`+
+        `<button class="modal-tab" onclick="cambiarTab(this,'modal-tab-media')">${mediaLabel}</button>`+
+        (hasPdf?`<button class="modal-tab" onclick="cambiarTab(this,'modal-tab-pdf')">DOCUMENTACIÓN PDF</button>`:'');
 
-    /* ===== MODAL ===== */
-    function abrirModal(id) {
-      const d = reparaciones[id];
-      if (!d) return;
-
-      document.getElementById("modal-title").textContent    = d.title;
-      document.getElementById("modal-model").textContent    = d.model;
-      document.getElementById("modal-fault").textContent    = d.fault;
-      document.getElementById("modal-solution").textContent = d.solution;
-
-      const ul = document.getElementById("modal-components");
-      ul.innerHTML = "";
-      d.components.forEach(c => { const li = document.createElement("li"); li.textContent = c; ul.appendChild(li); });
-
-      // Dynamic tabs
-      const hasPdf = !!d.pdf;
-      const tabsBar = document.getElementById("modal-tabs-bar");
-      const mediaLabel = d.mediaType === 'videos' ? 'VIDEOS' : 'IMÁGENES';
-      tabsBar.innerHTML =
-        `<button class="modal-tab active" onclick="cambiarTab(this,'modal-tab-falla')">TRABAJO REALIZADO</button>` +
-        `<button class="modal-tab" onclick="cambiarTab(this,'modal-tab-media')">${mediaLabel}</button>` +
-        (hasPdf ? `<button class="modal-tab" onclick="cambiarTab(this,'modal-tab-pdf')">DOCUMENTACIÓN PDF</button>` : '');
-
-      // Media content
-      const mediaDiv = document.getElementById("modal-tab-media");
-      if (d.mediaType === 'videos') {
-        const bHTML = d.videosBefore.map(v => mkVideo(v,'before')).join("") ||
-          `<p style="color:var(--muted);font-family:'Share Tech Mono',monospace;font-size:0.8rem;">Sin videos disponibles aún.</p>`;
-        const aHTML = d.videosAfter.map(v => mkVideo(v,'after')).join("") ||
-          `<p style="color:var(--muted);font-family:'Share Tech Mono',monospace;font-size:0.8rem;">Sin videos disponibles aún.</p>`;
-        mediaDiv.innerHTML = `
-          <p class="vid-section-label before">● EQUIPO CON FALLA</p>
-          <div class="videos-tab-grid">${bHTML}</div>
-          <hr class="tab-divider">
-          <p class="vid-section-label after">● EQUIPO REPARADO Y FUNCIONANDO</p>
-          <div class="videos-tab-grid">${aHTML}</div>`;
+      const mediaDiv=document.getElementById("modal-tab-media");
+      if(d.mediaType==='videos'){
+        const bHTML=d.videosBefore.map(v=>mkVideo(v,'before')).join("")||`<p style="color:var(--muted);font-family:'Share Tech Mono',monospace;font-size:0.8rem;">Sin videos disponibles aún.</p>`;
+        const aHTML=d.videosAfter.map(v=>mkVideo(v,'after')).join("")||`<p style="color:var(--muted);font-family:'Share Tech Mono',monospace;font-size:0.8rem;">Sin videos disponibles aún.</p>`;
+        mediaDiv.innerHTML=`<p class="vid-section-label before">● EQUIPO CON FALLA</p><div class="videos-tab-grid">${bHTML}</div><hr class="tab-divider"><p class="vid-section-label after">● EQUIPO REPARADO Y FUNCIONANDO</p><div class="videos-tab-grid">${aHTML}</div>`;
       } else {
-        // Placeholders por defecto según el ID
-        const defaultsMap = {
-          'tv-challenger':   { b: [{src:null,title:'Placas antes de limpieza'},{src:null,title:'Interior con acumulación de polvo'}], a: [{src:null,title:'Placas limpias'},{src:null,title:'Equipo en funcionamiento'}] },
-          'portatil-ram':    { b: [{src:null,title:'Interior antes del mantenimiento'},{src:null,title:'Disipador con pasta vieja'}], a: [{src:null,title:'RAM instalada'},{src:null,title:'Pasta térmica aplicada'}] },
-          'grabadora-premier':{ b: [{src:null,title:'Placa con capacitor explotado'},{src:null,title:'Pistas corroídas y sulfatadas'}], a: [{src:null,title:'Reparación completada'},{src:null,title:'Grabadora funcionando'}] },
-          'cargador-radio':  { b: [{src:null,title:'Radio antes de la adaptación'},{src:null,title:'Circuito interno analizado'}], a: [{src:null,title:'Adaptación completada'},{src:null,title:'Radio con alimentación permanente'}] }
+        const defaultsMap={
+          'tv-challenger':{b:[{src:null,title:'Placas antes de limpieza'},{src:null,title:'Interior con polvo'}],a:[{src:null,title:'Placas limpias'},{src:null,title:'Equipo en funcionamiento'}]},
+          'portatil-ram':{b:[{src:null,title:'Interior antes del mantenimiento'},{src:null,title:'Disipador con pasta vieja'}],a:[{src:null,title:'RAM instalada'},{src:null,title:'Pasta térmica aplicada'}]},
+          'grabadora-premier':{b:[{src:null,title:'Placa con capacitor explotado'},{src:null,title:'Pistas corroídas y sulfatadas'}],a:[{src:null,title:'Reparación completada'},{src:null,title:'Grabadora funcionando'}]},
+          'cargador-radio':{b:[{src:null,title:'Radio antes de la adaptación'},{src:null,title:'Circuito interno analizado'}],a:[{src:null,title:'Adaptación completada'},{src:null,title:'Radio con alimentación permanente'}]}
         };
-        const defs = defaultsMap[id] || { b: [{src:null,title:'Imagen pendiente'}], a: [{src:null,title:'Imagen pendiente'}] };
-        const bFinal = d.imagesBefore.length ? d.imagesBefore : defs.b;
-        const aFinal = d.imagesAfter.length  ? d.imagesAfter  : defs.a;
-
-        mediaDiv.innerHTML = `
-          <p class="img-section-label before">● ANTES</p>
-          <div class="images-tab-grid">${bFinal.map(i => mkImg(i,'before')).join("")}</div>
-          <hr class="tab-divider">
-          <p class="img-section-label after">● DESPUÉS</p>
-          <div class="images-tab-grid">${aFinal.map(i => mkImg(i,'after')).join("")}</div>
-          <p class="img-pending-note">📷 Las imágenes de este trabajo estarán disponibles próximamente.<br>Cuando estén listas aparecerán aquí y podrás verlas en tamaño completo.</p>`;
+        const defs=defaultsMap[id]||{b:[{src:null,title:'Imagen pendiente'}],a:[{src:null,title:'Imagen pendiente'}]};
+        const bFinal=d.imagesBefore.length?d.imagesBefore:defs.b;
+        const aFinal=d.imagesAfter.length?d.imagesAfter:defs.a;
+        mediaDiv.innerHTML=`<p class="img-section-label before">● ANTES</p><div class="images-tab-grid">${bFinal.map(i=>mkImg(i,'before')).join("")}</div><hr class="tab-divider"><p class="img-section-label after">● DESPUÉS</p><div class="images-tab-grid">${aFinal.map(i=>mkImg(i,'after')).join("")}</div><p class="img-pending-note">📷 Las imágenes estarán disponibles próximamente.<br>Cuando estén listas aparecerán aquí y podrás verlas en tamaño completo.</p>`;
       }
 
-      // PDF
-      const pdfArea = document.getElementById("modal-pdf-area");
-      pdfArea.innerHTML = d.pdf
-        ? `<iframe src="${d.pdf}" title="Reporte PDF"></iframe>`
-        : `<div class="pdf-placeholder"><div class="pdf-placeholder-icon">📄</div><p class="pdf-placeholder-title">REPORTE PDF</p><p class="pdf-placeholder-sub">El reporte estará disponible próximamente.</p></div>`;
+      document.getElementById("modal-pdf-area").innerHTML=d.pdf
+        ?`<iframe src="${d.pdf}" title="Reporte PDF"></iframe>`
+        :`<div class="pdf-placeholder"><div class="pdf-placeholder-icon">📄</div><p class="pdf-placeholder-title">REPORTE PDF</p><p class="pdf-placeholder-sub">El reporte estará disponible próximamente.</p></div>`;
 
-      // Reset tabs
-      document.querySelectorAll(".modal-tab-content").forEach(c => c.classList.remove("active"));
+      document.querySelectorAll(".modal-tab-content").forEach(c=>c.classList.remove("active"));
       document.getElementById("modal-tab-falla").classList.add("active");
-
       document.getElementById("modal-overlay").classList.add("open");
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow="hidden";
     }
 
-    function cerrarModal() {
-      document.querySelectorAll(".modal video").forEach(v => { v.pause(); v.currentTime = 0; });
+    function cerrarModal(){
+      document.querySelectorAll(".modal video").forEach(v=>{v.pause();v.currentTime=0;});
       document.getElementById("modal-overlay").classList.remove("open");
-      document.body.style.overflow = "";
+      document.body.style.overflow="";
     }
-
-    function cerrarModalFuera(e) {
-      if (e.target === document.getElementById("modal-overlay")) cerrarModal();
-    }
-
-    document.addEventListener("keydown", e => {
-      if (e.key === "Escape") { cerrarModal(); cerrarLightbox(); }
-    });
-
-    function cambiarTab(btn, tabId) {
-      document.querySelectorAll(".modal-tab").forEach(t => t.classList.remove("active"));
-      document.querySelectorAll(".modal-tab-content").forEach(c => c.classList.remove("active"));
+    function cerrarModalFuera(e){if(e.target===document.getElementById("modal-overlay"))cerrarModal();}
+    document.addEventListener("keydown",e=>{if(e.key==="Escape"){cerrarModal();cerrarLightbox();}});
+    function cambiarTab(btn,tabId){
+      document.querySelectorAll(".modal-tab").forEach(t=>t.classList.remove("active"));
+      document.querySelectorAll(".modal-tab-content").forEach(c=>c.classList.remove("active"));
       btn.classList.add("active");
       document.getElementById(tabId).classList.add("active");
     }
