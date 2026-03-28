@@ -42,7 +42,29 @@
       background: repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.15) 2px,rgba(0,0,0,0.15) 4px);
       pointer-events: none; z-index: 0;
     }
-
+    #matrix {
+      position: fixed; /* Se queda fijo al mover la pantalla */
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1; /* Lo manda al fondo de todo */
+      display: block;
+    }
+    
+     .contenedor-principal {
+      position: relative;
+      z-index: 1; /* Lo pone por encima del canvas */
+      max-width: 1000px;
+      margin: 50px auto;
+      padding: 30px;
+      
+      /* Fondo negro semi-transparente para que la lluvia no moleste al leer */
+      background: rgba(0, 0, 0, 0.75); 
+      border: 1px solid #0f0; /* Borde verde Matrix */
+      box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+      border-radius: 5px;
+    }
     /* ════════════════════════════════════
        NAVBAR
     ════════════════════════════════════ */
@@ -426,14 +448,61 @@
   </style>
 </head>
 <body>
+  <canvas id="matrix"></canvas>
+  <script>
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
 
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const caracteres = "01"; 
+    const fontSize = 16;
+    const columnas = canvas.width / fontSize; 
+
+    const gotas = [];
+    for (let x = 0; x < columnas; x++) {
+      gotas[x] = 1;
+    }
+
+    function dibujar() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "#0F0"; 
+      ctx.font = fontSize + "px monospace";
+
+      for (let i = 0; i < gotas.length; i++) {
+        const texto = caracteres.charAt(Math.floor(Math.random() * caracteres.length));
+        ctx.fillText(texto, i * fontSize, gotas[i] * fontSize);
+
+        if (gotas[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          gotas[i] = 0;
+        }
+        gotas[i]++;
+      }
+    }
+
+    setInterval(dibujar, 33);
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      const nuevasColumnas = canvas.width / fontSize;
+      for (let x = gotas.length; x < nuevasColumnas; x++) {
+        gotas[x] = 1;
+      }
+    });
+  </script>
   <div id="page-flash"></div>
   <div id="page-scan"></div>
+  
 
   <!-- LIGHTBOX -->
   <div class="lightbox" id="lightbox" onclick="cerrarLightbox()">
     <button class="lightbox-close" onclick="cerrarLightbox()">✕</button>
     <img id="lightbox-img" src="" alt="">
+    
   </div>
 
   <!-- NAVBAR -->
@@ -472,6 +541,7 @@
        SOBRE MI
   ════════════════════════════════════ -->
   <section id="sobre-mi" class="activa">
+  <div class="contenedor-principal">
     <div class="hero">
       <div class="hero-inner">
         <p class="hero-tag">// BIENVENIDO A MI PORTAFOLIO</p>
@@ -535,6 +605,7 @@
        PROYECTOS
   ════════════════════════════════════ -->
   <section id="proyectos">
+  <div class="contenedor-principal">
     <div class="section-wrap">
       <p class="section-title anim-el">// MIS TRABAJOS</p>
       <h2 class="section-heading anim-el">Proyectos</h2>
@@ -704,6 +775,7 @@
        REPARACIONES
   ════════════════════════════════════ -->
   <section id="reparaciones">
+    <div class="contenedor-principal">
     <div class="section-wrap">
       <p class="section-title anim-el">// HISTORIAL TÉCNICO</p>
       <h2 class="section-heading anim-el">Reparaciones</h2>
@@ -718,7 +790,7 @@
           </div>
           <div class="repair-card-body">
             <p class="repair-model">LG · 32LF15R &nbsp;·&nbsp; REPORTE ST-0001 &nbsp;·&nbsp; ENE 2026</p>
-            <h3 class="repair-name">Televisor LG 32"</h3>
+            <h3 class="repair-name">Televisor LG 32LF15R</h3>
             <p class="repair-fault">Apagado espontáneo, ausencia de audio intermitente y fallo en placa de botones. Causa raíz: capacitor C1118 deteriorado generando ripple en la señal de 1.25 V al SoC.</p>
             <div class="repair-meta">
               <span class="repair-chip"><svg viewBox="0 0 12 12"><rect x="1" y="2" width="10" height="7" rx="1"/><line x1="6" y1="9" x2="6" y2="11"/><line x1="3" y1="11" x2="9" y2="11"/></svg>TV / DISPLAY</span>
@@ -731,7 +803,7 @@
 
         <div class="repair-card" onclick="abrirModal('tv-challenger')">
           <div class="repair-card-thumb">
-            <span class="repair-status-badge ok">✓ MANTENIDO</span>
+            <span class="repair-status-badge ok">✓ MANTENIMIENTO EXITOSO</span>
             <div class="device-icon">
               <svg viewBox="0 0 80 80"><rect x="8" y="10" width="64" height="42" rx="3"/><rect x="14" y="16" width="52" height="30" rx="1" fill="rgba(0,255,65,0.08)"/><line x1="40" y1="52" x2="40" y2="62"/><rect x="26" y="62" width="28" height="4" rx="2"/><path d="M24 24 Q40 20 56 24" stroke-linecap="round" fill="none" stroke-width="1.2"/><path d="M26 30 Q40 26 54 30" stroke-linecap="round" fill="none" stroke-width="0.8" stroke-dasharray="2 2"/></svg>
             </div>
@@ -822,6 +894,7 @@
        CONTACTO
   ════════════════════════════════════ -->
   <section id="contacto">
+    <div class="contenedor-principal">
     <div class="section-wrap">
       <p class="section-title anim-el">// ENCUENTRAME EN</p>
       <h2 class="section-heading anim-el">Contacto</h2>
