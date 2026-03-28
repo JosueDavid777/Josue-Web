@@ -137,23 +137,79 @@
       border-bottom: 1px solid rgba(0,255,65,0.15);
     }
 
-    /* PROYECTOS */
-    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(300px,1fr)); gap: 20px; }
-    .project-card {
+    /* =====================
+       PROYECTOS — estilo reparaciones
+    ===================== */
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(320px,1fr)); gap: 24px; }
+
+    .project-card-full {
       background: rgba(0,255,65,0.03); border: 1px solid rgba(0,255,65,0.15);
-      border-radius: 8px; padding: 24px; transition: all 0.3s;
+      border-radius: 10px; overflow: hidden;
+      transition: all 0.3s; position: relative;
+      display: flex; flex-direction: column;
+    }
+    .project-card-full:hover {
+      border-color: rgba(0,255,65,0.5); background: rgba(0,255,65,0.07);
+      transform: translateY(-5px); box-shadow: 0 12px 40px rgba(0,255,65,0.1);
+    }
+    .project-card-thumb {
+      width: 100%; height: 180px;
+      background: linear-gradient(135deg,#020c02 0%,#051a05 100%);
+      display: flex; align-items: center; justify-content: center;
       position: relative; overflow: hidden;
+      border-bottom: 1px solid rgba(0,255,65,0.1);
     }
-    .project-card::before {
-      content: ''; position: absolute; top: 0; left: 0;
-      width: 3px; height: 100%; background: var(--green);
-      box-shadow: 0 0 10px var(--green); opacity: 0; transition: opacity 0.3s;
+    .project-card-thumb::before {
+      content: ''; position: absolute; inset: 0;
+      background: repeating-linear-gradient(45deg,transparent,transparent 10px,rgba(0,255,65,0.02) 10px,rgba(0,255,65,0.02) 11px);
     }
-    .project-card:hover { border-color: rgba(0,255,65,0.4); background: rgba(0,255,65,0.06); transform: translateY(-4px); }
-    .project-card:hover::before { opacity: 1; }
-    .project-tag { font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; color: var(--green); letter-spacing: 2px; margin-bottom: 10px; }
-    .project-title { font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: 10px; }
-    .project-desc { font-size: 0.95rem; color: var(--muted); line-height: 1.6; }
+    .project-icon { position: relative; z-index: 1; }
+    .project-icon svg {
+      width: 80px; height: 80px; fill: none; stroke: var(--green); stroke-width: 1.2;
+      filter: drop-shadow(0 0 12px rgba(0,255,65,0.5)); opacity: 0.8;
+    }
+    .project-status-badge {
+      position: absolute; top: 12px; right: 12px;
+      font-family: 'Share Tech Mono', monospace; font-size: 0.65rem;
+      letter-spacing: 2px; padding: 4px 10px; border-radius: 20px; border: 1px solid;
+    }
+    .project-status-badge.live {
+      color: var(--green); border-color: rgba(0,255,65,0.4);
+      background: rgba(0,255,65,0.1); text-shadow: 0 0 6px var(--green);
+    }
+    .project-status-badge.soon {
+      color: var(--muted); border-color: rgba(74,122,82,0.3);
+      background: rgba(74,122,82,0.07);
+    }
+    .project-card-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+    .project-tag-mono { font-family: 'Share Tech Mono', monospace; font-size: 0.72rem; color: var(--green); letter-spacing: 2px; margin-bottom: 6px; }
+    .project-name { font-size: 1.3rem; font-weight: 700; color: #fff; margin-bottom: 8px; }
+    .project-desc-full { font-size: 0.9rem; color: var(--muted); line-height: 1.5; margin-bottom: 16px; flex: 1; }
+    .project-chips { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 18px; }
+    .project-chip {
+      display: flex; align-items: center; gap: 6px;
+      font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; color: var(--muted);
+      padding: 4px 10px; border: 1px solid rgba(0,255,65,0.12);
+      border-radius: 4px; background: rgba(0,255,65,0.03);
+    }
+    .project-cta {
+      display: flex; align-items: center; gap: 8px;
+      font-family: 'Share Tech Mono', monospace; font-size: 0.8rem;
+      color: var(--green); text-decoration: none;
+      transition: gap 0.2s;
+    }
+    .project-card-full:hover .project-cta { gap: 14px; }
+    .project-cta-arrow { transition: transform 0.2s; }
+    .project-card-full:hover .project-cta-arrow { transform: translateX(4px); }
+
+    .project-card-placeholder {
+      background: rgba(0,255,65,0.02); border: 1px dashed rgba(0,255,65,0.12);
+      border-radius: 10px; min-height: 320px;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 10px;
+    }
+    .project-card-placeholder p:first-child { font-family: 'Share Tech Mono', monospace; color: var(--green); font-size: 2.5rem; opacity: 0.35; }
+    .project-card-placeholder p:last-child { color: var(--muted); font-size: 0.85rem; }
 
     /* CONTACTO */
     .contact-grid { display: flex; flex-direction: column; gap: 14px; max-width: 420px; }
@@ -420,21 +476,110 @@
       <p class="section-title">// MIS TRABAJOS</p>
       <h2 class="section-heading">Proyectos</h2>
       <div class="projects-grid">
-        <div class="project-card">
-          <p class="project-tag">REPARACIÓN_01</p>
-          <h3 class="project-title">TV al 100%</h3>
-          <p class="project-desc">Reparación completa de televisor. Diagnóstico, reemplazo de componentes y prueba final funcionando al 100%.</p>
+
+        <!-- CARD BOT WHATSAPP -->
+        <div class="project-card-full">
+          <div class="project-card-thumb">
+            <span class="project-status-badge live">✓ LIVE</span>
+            <div class="project-icon">
+              <!-- WhatsApp / Bot icon -->
+              <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="40" cy="40" r="28"/>
+                <!-- Chat bubble left -->
+                <path d="M22 50 L18 58 L28 54" stroke-linejoin="round"/>
+                <!-- Bot face -->
+                <circle cx="32" cy="38" r="3" fill="rgba(0,255,65,0.4)"/>
+                <circle cx="48" cy="38" r="3" fill="rgba(0,255,65,0.4)"/>
+                <path d="M32 46 Q40 51 48 46" stroke-linecap="round" fill="none"/>
+                <!-- Antenna -->
+                <line x1="40" y1="12" x2="40" y2="20"/>
+                <circle cx="40" cy="11" r="2" fill="rgba(0,255,65,0.6)"/>
+              </svg>
+            </div>
+          </div>
+          <div class="project-card-body">
+            <p class="project-tag-mono">PROYECTO_01 · 2025</p>
+            <h3 class="project-name">Bot de WhatsApp con IA</h3>
+            <p class="project-desc-full">Bot inteligente desplegado en WhatsApp capaz de reconocer mensajes de voz, responder en dos idiomas y mantener conversaciones fluidas. Construido con Railway, Baileys y Groq como motor de lenguaje.</p>
+            <div class="project-chips">
+              <span class="project-chip">Railway</span>
+              <span class="project-chip">Baileys</span>
+              <span class="project-chip">Groq</span>
+              <span class="project-chip">Voz → Texto</span>
+            </div>
+            <a class="project-cta" href="https://wa.me/573204353941?text=Hola%20bot%20de%20Josue" target="_blank">
+              PROBAR BOT AHORA <span class="project-cta-arrow">→</span>
+            </a>
+          </div>
         </div>
-        <div class="project-card">
-          <p class="project-tag">PROYECTO_02</p>
-          <h3 class="project-title">Cerprobiot L.V.</h3>
-          <p class="project-desc">Desarrollo del sitio web oficial de Cerprobiot Microbiota. Diseño responsive con HTML y CSS puro.</p>
+
+        <!-- CARD CERPROBIOT -->
+        <div class="project-card-full">
+          <div class="project-card-thumb">
+            <span class="project-status-badge live">✓ LIVE</span>
+            <div class="project-icon">
+              <!-- Browser / Web icon -->
+              <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                <rect x="10" y="16" width="60" height="48" rx="4"/>
+                <line x1="10" y1="28" x2="70" y2="28"/>
+                <circle cx="20" cy="22" r="2.5" fill="rgba(0,255,65,0.5)"/>
+                <circle cx="29" cy="22" r="2.5" fill="rgba(0,255,65,0.3)"/>
+                <circle cx="38" cy="22" r="2.5" fill="rgba(0,255,65,0.15)"/>
+                <rect x="18" y="35" width="44" height="6" rx="1" fill="rgba(0,255,65,0.08)"/>
+                <rect x="18" y="46" width="30" height="6" rx="1" fill="rgba(0,255,65,0.05)"/>
+              </svg>
+            </div>
+          </div>
+          <div class="project-card-body">
+            <p class="project-tag-mono">PROYECTO_02 · 2024</p>
+            <h3 class="project-name">Cerprobiot L.V.</h3>
+            <p class="project-desc-full">Desarrollo del sitio web oficial de Cerprobiot Microbiota. Diseño responsive con HTML y CSS puro, enfocado en comunicación clara y presencia profesional en línea.</p>
+            <div class="project-chips">
+              <span class="project-chip">HTML</span>
+              <span class="project-chip">CSS</span>
+              <span class="project-chip">Responsive</span>
+            </div>
+            <span class="project-cta" style="opacity:0.4;cursor:default;">
+              VER SITIO <span class="project-cta-arrow">→</span>
+            </span>
+          </div>
         </div>
-        <div class="project-card">
-          <p class="project-tag">PRÓXIMAMENTE</p>
-          <h3 class="project-title">Más proyectos...</h3>
-          <p class="project-desc">Continuamente trabajando en nuevos proyectos de electrónica y tecnología. ¡Vuelve pronto!</p>
+
+        <!-- CARD TV REPARACION -->
+        <div class="project-card-full">
+          <div class="project-card-thumb">
+            <span class="project-status-badge live">✓ COMPLETO</span>
+            <div class="project-icon">
+              <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                <rect x="8" y="10" width="64" height="42" rx="3"/>
+                <rect x="14" y="16" width="52" height="30" rx="1" fill="rgba(0,255,65,0.08)"/>
+                <line x1="40" y1="52" x2="40" y2="62"/>
+                <rect x="26" y="62" width="28" height="4" rx="2"/>
+                <circle cx="62" cy="20" r="1.5" fill="rgba(0,255,65,0.5)"/>
+                <circle cx="62" cy="26" r="1.5" fill="rgba(0,255,65,0.3)"/>
+              </svg>
+            </div>
+          </div>
+          <div class="project-card-body">
+            <p class="project-tag-mono">REPARACIÓN_01 · ENE 2026</p>
+            <h3 class="project-name">TV LG 32" al 100%</h3>
+            <p class="project-desc-full">Diagnóstico y reparación completa de televisor LG 32LF15R. Identificación de capacitor defectuoso en placa principal, reemplazo y verificación de voltajes. Equipo restaurado al 100%.</p>
+            <div class="project-chips">
+              <span class="project-chip">Electrónica</span>
+              <span class="project-chip">LG 32LF15R</span>
+              <span class="project-chip">Placa Principal</span>
+            </div>
+            <span class="project-cta" onclick="mostrar('reparaciones')" style="cursor:pointer;">
+              VER REPORTE TÉCNICO <span class="project-cta-arrow">→</span>
+            </span>
+          </div>
         </div>
+
+        <div class="project-card-placeholder">
+          <p>+</p>
+          <p>Más proyectos próximamente</p>
+        </div>
+
       </div>
     </div>
   </section>
@@ -508,9 +653,10 @@
           <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
           JosueDavid777 — GitHub
         </a>
-        <a class="contact-btn disabled">
+        <!-- WHATSAPP — activo con número real -->
+        <a class="contact-btn" href="https://wa.me/573204353941" target="_blank">
           <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          WhatsApp — Próximamente
+          Inge Josue — WhatsApp
         </a>
       </div>
     </div>
@@ -583,10 +729,6 @@
 
     /* ==============================================
        BASE DE DATOS DE REPARACIONES
-       Para agregar un nuevo dispositivo:
-         1. Añade un objeto con su id aquí abajo
-         2. Crea la card HTML correspondiente
-         3. Llama abrirModal('nuevo-id') en onclick
     ============================================== */
 
     const GH = "https://raw.githubusercontent.com/JosueDavid777/Josue-Web/main";
@@ -622,10 +764,7 @@
           { src: `${MEDIA}/02_Videos%20de%20equipo%20funcionando%20y%20reparado/03_TERCER_VIDEO_TV_FUNCIONANDO_AL_100.mp4`,   title: "Verificación final — 100% operativo" }
         ],
 
-        /* PDF: sube el archivo al repo y pon aquí la URL raw, por ejemplo:
-           pdf: `${GH}/2026-02-TV_LG32LF15R-REPARACION/02_Reporte_Reparacion.pdf`
-        */
-        pdf: null
+        pdf: `${GH}/2026-02-%20TV_LG32LF15R-REPARACION/02_Reporte_Reparaci%C3%B3n.pdf`
       }
 
     };
@@ -649,9 +788,9 @@
       const d = reparaciones[id];
       if (!d) return;
 
-      document.getElementById("modal-title").textContent   = d.title;
-      document.getElementById("modal-model").textContent   = d.model;
-      document.getElementById("modal-fault").textContent   = d.fault;
+      document.getElementById("modal-title").textContent    = d.title;
+      document.getElementById("modal-model").textContent    = d.model;
+      document.getElementById("modal-fault").textContent    = d.fault;
       document.getElementById("modal-solution").textContent = d.solution;
 
       const ul = document.getElementById("modal-components");
