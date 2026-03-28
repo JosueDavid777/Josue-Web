@@ -550,6 +550,79 @@
           </div>
         </div>
 
+        <!-- ★ NUEVA: GRABADORA PREMIER -->
+        <div class="repair-card" onclick="abrirModal('grabadora-premier')">
+          <div class="repair-card-thumb">
+            <span class="repair-status-badge ok">✓ REPARADO</span>
+            <div class="device-icon">
+              <!-- Icono de grabadora / cassette player -->
+              <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                <rect x="10" y="22" width="60" height="36" rx="4"/>
+                <rect x="16" y="28" width="22" height="16" rx="2" fill="rgba(0,255,65,0.06)"/>
+                <circle cx="27" cy="36" r="5"/>
+                <circle cx="27" cy="36" r="2" fill="rgba(0,255,65,0.3)"/>
+                <rect x="42" y="28" width="22" height="16" rx="2" fill="rgba(0,255,65,0.06)"/>
+                <circle cx="53" cy="36" r="5"/>
+                <circle cx="53" cy="36" r="2" fill="rgba(0,255,65,0.3)"/>
+                <line x1="32" y1="36" x2="48" y2="36" stroke-dasharray="2 2" stroke-width="0.8"/>
+                <rect x="18" y="50" width="6" height="4" rx="1"/>
+                <rect x="28" y="50" width="6" height="4" rx="1"/>
+                <rect x="38" y="50" width="6" height="4" rx="1"/>
+                <rect x="48" y="50" width="6" height="4" rx="1"/>
+                <rect x="58" y="50" width="6" height="4" rx="1"/>
+                <line x1="10" y1="48" x2="70" y2="48" stroke-width="0.5" stroke-dasharray="1 1"/>
+              </svg>
+            </div>
+          </div>
+          <div class="repair-card-body">
+            <p class="repair-model">PREMIER &nbsp;·&nbsp; REPORTE ST-0004 &nbsp;·&nbsp; 2026</p>
+            <h3 class="repair-name">Grabadora Premier — Años 90</h3>
+            <p class="repair-fault">Capacitor explotado en placa principal, corrosión en pistas críticas y parlante desconectado. El corto impedía el encendido. Sin esquema eléctrico disponible.</p>
+            <div class="repair-meta">
+              <span class="repair-chip"><svg viewBox="0 0 12 12"><rect x="1" y="3" width="10" height="6" rx="1"/><circle cx="4" cy="6" r="1.5"/><circle cx="8" cy="6" r="1.5"/></svg>AUDIO / GRABADORA</span>
+              <span class="repair-chip"><svg viewBox="0 0 12 12"><path d="M6 1v10M1 6h10"/></svg>CAPACITOR 22µF</span>
+              <span class="repair-chip"><svg viewBox="0 0 12 12"><path d="M2 6 Q6 2 10 6"/><path d="M2 6 Q6 10 10 6"/></svg>PUENTE RECTIF.</span>
+            </div>
+            <div class="repair-cta">VER DOCUMENTACIÓN COMPLETA <span class="repair-cta-arrow">→</span></div>
+          </div>
+        </div>
+
+        <!-- ★ NUEVA: ADAPTACIÓN CARGADOR A RADIO -->
+        <div class="repair-card" onclick="abrirModal('cargador-radio')">
+          <div class="repair-card-thumb">
+            <span class="repair-status-badge ok">✓ ADAPTADO</span>
+            <div class="device-icon">
+              <!-- Icono de radio con rayo de carga -->
+              <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                <rect x="12" y="26" width="46" height="30" rx="3"/>
+                <rect x="18" y="32" width="20" height="12" rx="2" fill="rgba(0,255,65,0.06)"/>
+                <circle cx="28" cy="38" r="5"/>
+                <circle cx="28" cy="38" r="2" fill="rgba(0,255,65,0.3)"/>
+                <rect x="42" y="33" width="10" height="3" rx="1"/>
+                <rect x="42" y="39" width="10" height="3" rx="1"/>
+                <rect x="42" y="45" width="6" height="3" rx="1"/>
+                <line x1="18" y1="56" x2="58" y2="56" stroke-width="0.5" stroke-dasharray="1 1"/>
+                <!-- antena -->
+                <line x1="48" y1="26" x2="56" y2="14" stroke-linecap="round"/>
+                <circle cx="56" cy="13" r="2" fill="rgba(0,255,65,0.5)"/>
+                <!-- rayo cargador -->
+                <path d="M66 18 L60 30 L66 30 L58 46" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" fill="none"/>
+              </svg>
+            </div>
+          </div>
+          <div class="repair-card-body">
+            <p class="repair-model">RADIO &nbsp;·&nbsp; REPORTE ST-0005 &nbsp;·&nbsp; 2026</p>
+            <h3 class="repair-name">Adaptación de Cargador Móvil a Radio</h3>
+            <p class="repair-fault">Radio sin fuente de alimentación propia. Se analizó el circuito interno para identificar el punto de alimentación y adaptar un cargador de celular como fuente de poder permanente.</p>
+            <div class="repair-meta">
+              <span class="repair-chip"><svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="5"/><line x1="6" y1="3" x2="6" y2="6"/><line x1="6" y1="6" x2="9" y2="6"/></svg>RADIO / AUDIO</span>
+              <span class="repair-chip"><svg viewBox="0 0 12 12"><path d="M2 6h3l2-4 2 8 2-4h1"/></svg>ANÁLISIS CIRCUITO</span>
+              <span class="repair-chip"><svg viewBox="0 0 12 12"><path d="M6 1v10M1 6h10"/></svg>ADAPTACIÓN USB</span>
+            </div>
+            <div class="repair-cta">VER DOCUMENTACIÓN COMPLETA <span class="repair-cta-arrow">→</span></div>
+          </div>
+        </div>
+
         <div class="repair-card-placeholder">
           <p>+</p>
           <p>Más reparaciones próximamente</p>
@@ -670,9 +743,6 @@
           "Pruebas básicas de funcionamiento post-mantenimiento",
           "Limpieza de carcasa exterior e interior"
         ],
-        // Cuando tengas las imágenes, agrega las URLs así:
-        // imagesBefore: [ { src: "URL_RAW_GITHUB_O_DRIVE", title: "Descripción" } ],
-        // imagesAfter:  [ { src: "URL_RAW_GITHUB_O_DRIVE", title: "Descripción" } ],
         imagesBefore: [],
         imagesAfter:  [],
         pdf: null
@@ -692,9 +762,45 @@
           "Limpieza general interior del chasis",
           "Verificación y pruebas de temperatura post-mantenimiento"
         ],
-        // Cuando tengas las imágenes, agrega las URLs aquí:
-        // imagesBefore: [ { src: "URL", title: "Antes — interior con polvo" } ],
-        // imagesAfter:  [ { src: "URL", title: "RAM instalada y pasta aplicada" } ],
+        imagesBefore: [],
+        imagesAfter:  [],
+        pdf: null
+      },
+
+      /* ★ NUEVA: GRABADORA PREMIER */
+      "grabadora-premier": {
+        title: "Grabadora Premier — Años 90",
+        model: "PREMIER  ·  Reporte ST-0004  ·  2026",
+        mediaType: "images",
+        fault: "La grabadora presentaba un corto que impedía su encendido. Se detectaron tres problemas simultáneos: un capacitor explotado en la placa principal (sin información de capacitancia), corrosión severa en pistas críticas con decoloración marrón y sulfatación, y el parlante completamente desconectado. No se contaba con esquema eléctrico del equipo.",
+        solution: "Mediante análisis de los componentes circundantes se dedujo el valor del capacitor dañado (22 µF). Se reemplazó el diodo sulfatado del puente rectificador, se reconectaron las pistas corroídas para restablecer continuidad y se reconectó el parlante correctamente en paralelo. La grabadora recuperó su funcionamiento completo con sonido estable. La causa raíz fue la combinación de corrosión acumulada por años, la explosión del capacitor de acoplamiento de señal y la degradación del diodo rectificador.",
+        components: [
+          "Reemplazo de capacitor de acoplamiento — 22 µF (valor deducido por análisis comparativo)",
+          "Reemplazo de diodo sulfatado en el puente rectificador",
+          "Reconexión y restauración de pistas corroídas y levantadas",
+          "Reconexión del parlante en paralelo (cable suelto)",
+          "Verificación de fuente de alimentación y tensiones de salida",
+          "Prueba de audio y funcionamiento general post-reparación"
+        ],
+        imagesBefore: [],
+        imagesAfter:  [],
+        pdf: null
+      },
+
+      /* ★ NUEVA: ADAPTACIÓN CARGADOR A RADIO */
+      "cargador-radio": {
+        title: "Adaptación de Cargador Móvil a Radio",
+        model: "RADIO  ·  Reporte ST-0005  ·  2026",
+        fault: "El radio no contaba con fuente de alimentación propia y dependía de pilas para funcionar. El cliente necesitaba una solución permanente de energía sin modificar la experiencia de uso del equipo.",
+        solution: "Se analizó el circuito interno del radio para identificar el punto exacto de alimentación de voltaje. Una vez localizado el nodo de entrada de la fuente, se adaptó un cargador de celular como fuente de poder, conectándolo de forma limpia al circuito interno. El radio quedó operativo con alimentación continua, eliminando la dependencia de pilas y sin alterar su funcionamiento original.",
+        components: [
+          "Análisis del circuito interno para localizar punto de alimentación",
+          "Medición de voltaje de operación del radio",
+          "Adaptación de cargador de celular como fuente de alimentación permanente",
+          "Conexión al nodo de alimentación identificado en la placa",
+          "Verificación de polaridad y niveles de tensión",
+          "Prueba de funcionamiento completo post-adaptación"
+        ],
         imagesBefore: [],
         imagesAfter:  [],
         pdf: null
@@ -803,20 +909,22 @@
           <p class="vid-section-label after">● EQUIPO REPARADO Y FUNCIONANDO</p>
           <div class="videos-tab-grid">${aHTML}</div>`;
       } else {
-        // placeholders while images are pending
-        const bList = d.imagesBefore.length ? d.imagesBefore : [{src:null,title:'TV en funcionamiento tras mantenimiento'},{src:null,title:'Placas antes de limpieza'}];
-        const aList = d.imagesAfter.length  ? d.imagesAfter  : [{src:null,title:'Equipo limpio y funcionando'},{src:null,title:'Componentes revisados'}];
-        // override for portátil
-        const bListP = d.imagesBefore.length ? d.imagesBefore : [{src:null,title:'Interior antes del mantenimiento'},{src:null,title:'Disipador con pasta vieja'}];
-        const aListP = d.imagesAfter.length  ? d.imagesAfter  : [{src:null,title:'RAM instalada'},{src:null,title:'Pasta térmica aplicada'}];
-        const bFinal = id === 'portatil-ram' ? bListP : bList;
-        const aFinal = id === 'portatil-ram' ? aListP : aList;
+        // Placeholders por defecto según el ID
+        const defaultsMap = {
+          'tv-challenger':   { b: [{src:null,title:'Placas antes de limpieza'},{src:null,title:'Interior con acumulación de polvo'}], a: [{src:null,title:'Placas limpias'},{src:null,title:'Equipo en funcionamiento'}] },
+          'portatil-ram':    { b: [{src:null,title:'Interior antes del mantenimiento'},{src:null,title:'Disipador con pasta vieja'}], a: [{src:null,title:'RAM instalada'},{src:null,title:'Pasta térmica aplicada'}] },
+          'grabadora-premier':{ b: [{src:null,title:'Placa con capacitor explotado'},{src:null,title:'Pistas corroídas y sulfatadas'}], a: [{src:null,title:'Reparación completada'},{src:null,title:'Grabadora funcionando'}] },
+          'cargador-radio':  { b: [{src:null,title:'Radio antes de la adaptación'},{src:null,title:'Circuito interno analizado'}], a: [{src:null,title:'Adaptación completada'},{src:null,title:'Radio con alimentación permanente'}] }
+        };
+        const defs = defaultsMap[id] || { b: [{src:null,title:'Imagen pendiente'}], a: [{src:null,title:'Imagen pendiente'}] };
+        const bFinal = d.imagesBefore.length ? d.imagesBefore : defs.b;
+        const aFinal = d.imagesAfter.length  ? d.imagesAfter  : defs.a;
 
         mediaDiv.innerHTML = `
-          <p class="img-section-label before">● ANTES DEL MANTENIMIENTO</p>
+          <p class="img-section-label before">● ANTES</p>
           <div class="images-tab-grid">${bFinal.map(i => mkImg(i,'before')).join("")}</div>
           <hr class="tab-divider">
-          <p class="img-section-label after">● DESPUÉS DEL MANTENIMIENTO</p>
+          <p class="img-section-label after">● DESPUÉS</p>
           <div class="images-tab-grid">${aFinal.map(i => mkImg(i,'after')).join("")}</div>
           <p class="img-pending-note">📷 Las imágenes de este trabajo estarán disponibles próximamente.<br>Cuando estén listas aparecerán aquí y podrás verlas en tamaño completo.</p>`;
       }
