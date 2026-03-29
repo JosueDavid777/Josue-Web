@@ -636,7 +636,7 @@
     function dibujar() {
       ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = "#0F0";
+      ctx.fillStyle = "rgba(0, 255, 0, 0.4)";
       ctx.font = fontSize + "px monospace";
       for (let i = 0; i < gotas.length; i++) {
         const texto = caracteres.charAt(Math.floor(Math.random() * caracteres.length));
