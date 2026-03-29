@@ -229,7 +229,7 @@
     .section-heading { font-size: 2.5rem; font-weight: 700; color: #fff; margin-bottom: 40px; padding-bottom: 16px; border-bottom: 1px solid rgba(0,255,65,0.15); }
 
     /* ════════════════════════════════════
-       SKILLS SECTION (nueva)
+       SKILLS SECTION
     ════════════════════════════════════ */
     .skills-block {
       margin-top: 60px;
@@ -382,7 +382,7 @@
     .contact-btn:hover { background: rgba(0,255,65,0.1); border-color: var(--green); box-shadow: 0 0 16px rgba(0,255,65,0.15); transform: translateX(6px); }
     .contact-btn svg { width: 26px; height: 26px; fill: var(--green); flex-shrink: 0; }
 
-    /* ════ FORMULARIO DE CONTACTO (nuevo) ════ */
+    /* ════ FORMULARIO DE CONTACTO ════ */
     .contact-form-wrap {
       border: 1px solid rgba(0,255,65,0.2);
       border-radius: 8px;
@@ -457,7 +457,6 @@
     .form-btn:active { transform: translateY(0); }
     .form-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
-    /* Estado de envío */
     .form-status {
       display: none;
       margin-top: 14px;
@@ -664,7 +663,7 @@
     <img id="lightbox-img" src="" alt="">
   </div>
 
-  <!-- NAVBAR -->
+  <!-- NAVBAR — Upwork icon kept as requested -->
   <header class="navbar">
     <div class="navbar-brand">&gt; JOSUE<span>_</span>DAVID</div>
     <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
@@ -806,18 +805,39 @@
                 </ul>
               </div>
 
-              <!-- Secundarias -->
-              <div class="exp-cards">
-                <div class="exp-card">
-                  <p class="exp-card-place">// FREELANCE</p>
-                  <p class="exp-card-role">Upwork</p>
-                  <p class="exp-card-detail">Design · Surveys · Technical Support</p>
+            </div>
+
+            <!-- ══ EDUCACIÓN ══ -->
+            <div class="skills-cat">
+              <div class="skills-cat-header">
+                <span class="skills-cat-label">◎ EDUCACIÓN</span>
+              </div>
+              <div class="exp-cards" style="grid-template-columns: 1fr; gap: 10px;">
+
+                <!-- UNAD -->
+                <div class="exp-card" style="border-color:rgba(0,255,65,0.3); position:relative; padding-top:22px;">
+                  <span style="position:absolute;top:-1px;right:-1px;background:var(--green);color:#000;font-family:'Share Tech Mono',monospace;font-size:0.6rem;font-weight:bold;letter-spacing:2px;padding:2px 8px;border-radius:0 4px 0 0;">● EN CURSO</span>
+                  <p class="exp-card-place">// UNIVERSIDAD NACIONAL ABIERTA Y A DISTANCIA · UNAD</p>
+                  <p class="exp-card-role">Ingeniería Electrónica</p>
+                  <p class="exp-card-detail">Aug 2025 – Presente &nbsp;·&nbsp; En curso</p>
                 </div>
-                <div class="exp-card">
-                  <p class="exp-card-place">// INSTITUCIÓN</p>
-                  <p class="exp-card-role">Academia Empresarial Acem</p>
-                  <p class="exp-card-detail">Technical Support · Web Design</p>
+
+                <!-- ACEM -->
+                <div class="exp-card" style="border-color:rgba(0,255,65,0.3); position:relative; padding-top:22px;">
+                  <span style="position:absolute;top:-1px;right:-1px;background:var(--green);color:#000;font-family:'Share Tech Mono',monospace;font-size:0.6rem;font-weight:bold;letter-spacing:2px;padding:2px 8px;border-radius:0 4px 0 0;">● EN CURSO</span>
+                  <p class="exp-card-place">// ACADEMIA EMPRESARIAL ACEM</p>
+                  <p class="exp-card-role">Técnico en Sistemas e Informática</p>
+                  <p class="exp-card-detail">Feb 2026 – Presente &nbsp;·&nbsp; Sistemas, Informática y Electrónica</p>
+                  <p class="exp-card-detail" style="margin-top:6px;color:var(--green-dim);line-height:1.5;">Institución avalada por la Secretaría de Educación de Boyacá &nbsp;·&nbsp; MEN SIET 3989</p>
                 </div>
+
+                <!-- UIS -->
+                <div class="exp-card">
+                  <p class="exp-card-place">// UNIVERSIDAD INDUSTRIAL DE SANTANDER · UIS</p>
+                  <p class="exp-card-role">Ingeniería Electrónica</p>
+                  <p class="exp-card-detail">Sep 2022 – Jul 2025 &nbsp;·&nbsp; 5 semestres completados</p>
+                </div>
+
               </div>
             </div>
 
@@ -1117,8 +1137,6 @@
         <h2 class="section-heading anim-el">Contacto</h2>
 
         <div class="contact-layout anim-el">
-
-          <!-- Links directos -->
           <div class="contact-grid">
             <a class="contact-btn" href="https://www.linkedin.com/in/josue-david-106845345?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank">
               <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
@@ -1134,10 +1152,8 @@
             </a>
           </div>
 
-          <!-- Formulario de contacto -->
           <div class="contact-form-wrap">
             <p class="contact-form-title">// ENVÍAME UN MENSAJE</p>
-
             <div class="form-row">
               <div class="form-group">
                 <label class="form-label" for="f-nombre">// NOMBRE</label>
@@ -1148,7 +1164,6 @@
                 <input class="form-input" type="email" id="f-email" placeholder="tu@email.com" autocomplete="off">
               </div>
             </div>
-
             <div class="form-group">
               <label class="form-label" for="f-servicio">// TIPO DE SERVICIO</label>
               <select class="form-select" id="f-servicio">
@@ -1160,19 +1175,13 @@
                 <option value="otro">Otro</option>
               </select>
             </div>
-
             <div class="form-group">
               <label class="form-label" for="f-mensaje">// MENSAJE</label>
               <textarea class="form-textarea" id="f-mensaje" placeholder="Describe tu equipo, el problema que presenta, o en qué te puedo ayudar..."></textarea>
             </div>
-
-            <button class="form-btn" id="form-btn" onclick="enviarFormulario()">
-              &gt; ENVIAR MENSAJE →
-            </button>
-
+            <button class="form-btn" id="form-btn" onclick="enviarFormulario()">&gt; ENVIAR MENSAJE →</button>
             <div class="form-status" id="form-status"></div>
           </div>
-
         </div>
       </div>
     </div>
@@ -1212,7 +1221,6 @@
   </div>
 
   <script>
-    /* ══ NAVEGACIÓN ══ */
     function mostrar(id) {
       if (document.getElementById(id).classList.contains('activa')) return;
       const scan = document.getElementById('page-scan');
@@ -1233,7 +1241,6 @@
       }, 120);
     }
 
-    /* ══ FORMULARIO ══ */
     function enviarFormulario() {
       const nombre   = document.getElementById('f-nombre').value.trim();
       const email    = document.getElementById('f-email').value.trim();
@@ -1241,36 +1248,24 @@
       const mensaje  = document.getElementById('f-mensaje').value.trim();
       const status   = document.getElementById('form-status');
       const btn      = document.getElementById('form-btn');
-
       status.className = 'form-status';
       status.style.display = 'none';
-
       if (!nombre) { mostrarError('// ERROR: El nombre es requerido.'); return; }
       if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { mostrarError('// ERROR: Email inválido.'); return; }
       if (!servicio) { mostrarError('// ERROR: Selecciona un tipo de servicio.'); return; }
       if (!mensaje || mensaje.length < 10) { mostrarError('// ERROR: El mensaje debe tener al menos 10 caracteres.'); return; }
-
       btn.disabled = true;
       btn.textContent = '> ENVIANDO...';
-
-      /* Construye el link de WhatsApp con el mensaje formateado */
       const textoWA = encodeURIComponent(
-        `*Hola Josue!* Mensaje desde tu portafolio:\n\n` +
-        `*Nombre:* ${nombre}\n` +
-        `*Email:* ${email}\n` +
-        `*Servicio:* ${servicio}\n\n` +
-        `*Mensaje:*\n${mensaje}`
+        `*Hola Josue!* Mensaje desde tu portafolio:\n\n*Nombre:* ${nombre}\n*Email:* ${email}\n*Servicio:* ${servicio}\n\n*Mensaje:*\n${mensaje}`
       );
-      const urlWA = `https://wa.me/573204353941?text=${textoWA}`;
-
       setTimeout(() => {
-        window.open(urlWA, '_blank');
+        window.open(`https://wa.me/573204353941?text=${textoWA}`, '_blank');
         status.className = 'form-status success';
         status.textContent = '✓ MENSAJE PREPARADO — Abriendo WhatsApp para enviarlo...';
         status.style.display = 'block';
         btn.disabled = false;
         btn.textContent = '> ENVIAR MENSAJE →';
-        /* Limpiar */
         document.getElementById('f-nombre').value = '';
         document.getElementById('f-email').value = '';
         document.getElementById('f-servicio').value = '';
@@ -1285,7 +1280,6 @@
       status.style.display = 'block';
     }
 
-    /* ══ DATA REPARACIONES ══ */
     const GH    = "https://raw.githubusercontent.com/JosueDavid777/Josue-Web/main";
     const MEDIA = `${GH}/2026-02-%20TV_LG32LF15R-REPARACION/07_Multimedia%2C%20videos%20e%20im%C3%A1genes`;
 
