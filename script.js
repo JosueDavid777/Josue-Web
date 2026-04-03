@@ -216,7 +216,6 @@ const reparaciones = {
     ],
     pdf: null
   },
-
   "cargador-radio": {
     title: "Adaptación de Cargador Móvil a Radio",
     model: "RADIO  ·  Reporte ST-0005  ·  2026",
