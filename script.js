@@ -214,7 +214,7 @@ const reparaciones = {
     videosAfter: [
       { src: `${MEDIA_PREMIER}/02_Videos%20de%20equipo%20funcionando%20y%20reparado/Video_equipo_funcionando.mp4`, title: "Grabadora Funcionando" }
     ],
-    pdf: `https://drive.google.com/file/d/1vO1wtC-THLGQUQsPzKwq1HE_L40Ql6hR/preview`
+    pdf:null
   },
   "cargador-radio": {
     title: "Adaptación de Cargador Móvil a Radio",
@@ -259,7 +259,7 @@ const reparaciones = {
     videosAfter: [
       { src: `${MEDIA_PREMIER}/02_Videos%20de%20equipo%20funcionando%20y%20reparado/Video_equipo_funcionando.mp4`, title: "Grabadora Funcionando" }
     ],
-    pdf: null
+    pdf: `https://drive.google.com/file/d/1vO1wtC-THLGQUQsPzKwq1HE_L40Ql6hR/preview`
 }
 };
 
