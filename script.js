@@ -236,25 +236,25 @@ const reparaciones = {
     pdf: null
   },
   "lg32cs410": {
-  title: "Diagnostico TV LG32CS410",
-  model: "TV  ·  Reporte ST-0006  ·  2026",
-  mediaType: "mixed",
-  fault: "El televisor no enciende. El cliente reporta que la falla se presentó después de una descarga eléctrica (rayo). Durante la inspección inicial se detecta ausencia de voltajes principales en la mainboard, especialmente en la línea de 3.3V, lo que impide el arranque del sistema. Se sospecha daño en el circuito de alimentación o en el SoC principal.",
-  solution: "Se realizó un análisis detallado de la mainboard con el objetivo de restablecer la línea de alimentación principal de 3.3V, la cual no presentaba el voltaje requerido. A partir de las mediciones y pruebas realizadas, se identificó una falla crítica asociada al SoC (chip principal), posiblemente ocasionada por una sobretensión derivada de una descarga eléctrica (rayo), según lo reportado por el cliente.Se intentó la recuperación de la línea de 3.3V mediante la intervención sobre los componentes asociados, incluyendo el reemplazo del transistor Q710 y la sustitución de los capacitores de filtrado en la etapa. Sin embargo, tras múltiples pruebas, el voltaje máximo alcanzado fue de aproximadamente 2.2V, valor insuficiente para el correcto funcionamiento del sistema.Debido a la incapacidad de restablecer los niveles de tensión adecuados y considerando que el SoC no responde, se concluye que la mainboard presenta un daño severo no recuperable a nivel práctico, recomendando su reemplazo completo como solución definitiva.",
-  components: [
-    "Inspección inicial y verificación de ausencia de encendido",
-    "Medición de líneas de alimentación en la mainboard (énfasis en 3.3V)",
-    "Diagnóstico de posible daño por sobretensión (descarga eléctrica)",
-    "Identificación de la etapa reguladora de 3.3V",
-    "Reemplazo del transistor Q710 en la línea de regulación",
-    "Sustitución de capacitores de filtrado asociados",
-    "Monitoreo de voltaje tras intervención (máximo ~2.2V)",
-    "Evaluación del estado del SoC (sin respuesta)",
-    "Determinación de falla crítica en mainboard no reparable"
-  ],
-  imagesBefore: [],
-  imagesAfter: [],
-  pdf: null
+     title: "Diagnostico TV LG32CS410",
+     model: "TV  ·  Reporte ST-0006  ·  2026",
+     mediaType: "mixed",
+     fault: "El televisor no enciende. El cliente reporta que la falla se presentó después de una descarga eléctrica (rayo). Durante la inspección inicial se detecta ausencia de voltajes principales en la mainboard, especialmente en la línea de 3.3V, lo que impide el arranque del sistema. Se sospecha daño en el circuito de alimentación o en el SoC principal.",
+     solution: "Se realizó un análisis detallado de la mainboard con el objetivo de restablecer la línea de alimentación principal de 3.3V, la cual no presentaba el voltaje requerido. A partir de las mediciones y pruebas realizadas, se identificó una falla crítica asociada al SoC (chip principal), posiblemente ocasionada por una sobretensión derivada de una descarga eléctrica (rayo), según lo reportado por el cliente.Se intentó la recuperación de la línea de 3.3V mediante la intervención sobre los componentes asociados, incluyendo el reemplazo del transistor Q710 y la sustitución de los capacitores de filtrado en la etapa. Sin embargo, tras múltiples pruebas, el voltaje máximo alcanzado fue de aproximadamente 2.2V, valor insuficiente para el correcto funcionamiento del sistema.Debido a la incapacidad de restablecer los niveles de tensión adecuados y considerando que el SoC no responde, se concluye que la mainboard presenta un daño severo no recuperable a nivel práctico, recomendando su reemplazo completo como solución definitiva.",
+     components: [
+       "Inspección inicial y verificación de ausencia de encendido",
+       "Medición de líneas de alimentación en la mainboard (énfasis en 3.3V)",
+       "Diagnóstico de posible daño por sobretensión (descarga eléctrica)",
+       "Identificación de la etapa reguladora de 3.3V",
+       "Reemplazo del transistor Q710 en la línea de regulación",
+       "Sustitución de capacitores de filtrado asociados",
+       "Monitoreo de voltaje tras intervención (máximo ~2.2V)",
+       "Evaluación del estado del SoC (sin respuesta)",
+       "Determinación de falla crítica en mainboard no reparable"
+     ],
+     imagesBefore: [],
+     imagesAfter: [],
+     pdf: null
 }
 };
 
