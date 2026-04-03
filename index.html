@@ -1368,6 +1368,13 @@
       </div>`;
     }
     function playVid(wrap){const v=wrap.querySelector('video');wrap.classList.add('playing');v.controls=true;v.play();}
+    function mkImg(img, tipo) {
+      const isBefore = tipo === 'before';
+      const badge = isBefore ? '● ANTES' : '● DESPUÉS';
+      const cls = isBefore ? 'before' : 'after';
+      if (img.src) return `<div class="img-card" onclick="abrirLightbox('${img.src}')"><img src="${img.src}" alt="${img.title}" loading="lazy"><div class="img-caption"><p class="img-badge ${cls}">${badge}</p><p class="img-title">${img.title}</p></div></div>`;
+      return `<div class="img-card" style="cursor:default;"><div class="img-card-placeholder"><span class="ph-icon">📷</span><span class="ph-text">PRÓXIMAMENTE</span></div><div class="img-caption"><p class="img-badge ${cls}">${badge}</p><p class="img-title">${img.title||'Imagen pendiente'}</p></div></div>`;
+    }
     function abrirLightbox(src){document.getElementById('lightbox-img').src=src;document.getElementById('lightbox').classList.add('open');document.body.style.overflow='hidden';}
     function cerrarLightbox(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';}
 
