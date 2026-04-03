@@ -273,7 +273,7 @@
 
     /* ════ PROYECTOS ════ */
     .projects-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(320px,1fr)); gap: 24px; }
-    .project-card-full { background: rgba(0,255,65,0.03); border: 1px solid rgba(0,255,65,0.15); border-radius: 10px; overflow: hidden; transition: all 0.3s; display: flex; flex-direction: column; }
+    .project-card-full { background: rgba(0,255,65,0.03); border: 1px solid rgba(0,255,65,0.15); border-radius: 10px; overflow: hidden; transition: all 0.3s; display: flex; flex-direction: column; cursor: pointer; }
     .project-card-full:hover { border-color: rgba(0,255,65,0.5); background: rgba(0,255,65,0.07); transform: translateY(-5px); box-shadow: 0 12px 40px rgba(0,255,65,0.1); }
     .project-card-thumb { width: 100%; height: 180px; background: linear-gradient(135deg,#020c02 0%,#051a05 100%); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; border-bottom: 1px solid rgba(0,255,65,0.1); }
     .project-card-thumb::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(45deg,transparent,transparent 10px,rgba(0,255,65,0.02) 10px,rgba(0,255,65,0.02) 11px); }
@@ -288,12 +288,12 @@
     .project-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
     .project-chip { font-family: 'Share Tech Mono', monospace; font-size: 0.68rem; color: var(--muted); padding: 3px 9px; border: 1px solid rgba(0,255,65,0.12); border-radius: 4px; background: rgba(0,255,65,0.03); }
     .project-cta-row { display: flex; gap: 14px; flex-wrap: wrap; }
-    .project-cta { display: flex; align-items: center; gap: 7px; font-family: 'Share Tech Mono', monospace; font-size: 0.78rem; color: var(--green); text-decoration: none; transition: gap 0.2s; cursor: pointer; }
+    .project-cta { display: flex; align-items: center; gap: 7px; font-family: 'Share Tech Mono', monospace; font-size: 0.78rem; color: var(--green); text-decoration: none; transition: gap 0.2s; cursor: pointer; background: none; border: none; padding: 0; }
     .project-cta.muted { color: var(--muted); opacity: 0.4; pointer-events: none; }
     .project-card-full:hover .project-cta:not(.muted) { gap: 11px; }
     .project-cta-arrow { transition: transform 0.2s; }
     .project-card-full:hover .project-cta:not(.muted) .project-cta-arrow { transform: translateX(3px); }
-    .project-card-placeholder { background: rgba(0,255,65,0.02); border: 1px dashed rgba(0,255,65,0.12); border-radius: 10px; min-height: 260px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 10px; }
+    .project-card-placeholder { background: rgba(0,255,65,0.02); border: 1px dashed rgba(0,255,65,0.12); border-radius: 10px; min-height: 260px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 10px; cursor: default; }
     .project-card-placeholder p:first-child { font-family: 'Share Tech Mono', monospace; color: var(--green); font-size: 2.5rem; opacity: 0.35; }
     .project-card-placeholder p:last-child { color: var(--muted); font-size: 0.85rem; }
 
@@ -348,11 +348,11 @@
     .repair-card:hover .repair-cta { gap: 14px; }
     .repair-cta-arrow { transition: transform 0.2s; }
     .repair-card:hover .repair-cta-arrow { transform: translateX(4px); }
-    .repair-card-placeholder { background: rgba(0,255,65,0.02); border: 1px dashed rgba(0,255,65,0.12); border-radius: 10px; min-height: 320px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 10px; }
+    .repair-card-placeholder { background: rgba(0,255,65,0.02); border: 1px dashed rgba(0,255,65,0.12); border-radius: 10px; min-height: 320px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 10px; cursor: default; }
     .repair-card-placeholder p:first-child { font-family: 'Share Tech Mono', monospace; color: var(--green); font-size: 2.5rem; opacity: 0.35; }
     .repair-card-placeholder p:last-child { color: var(--muted); font-size: 0.85rem; }
 
-    /* ════ MODAL ════ */
+    /* ════ MODAL REPARACIONES ════ */
     .modal-overlay { display: none; position: fixed; inset: 0; z-index: 500; background: rgba(0,0,0,0.88); backdrop-filter: blur(6px); padding: 20px; overflow-y: auto; }
     .modal-overlay.open { display: flex; align-items: flex-start; justify-content: center; animation: fadeOverlay 0.25s ease; }
     @keyframes fadeOverlay { from { opacity: 0; } to { opacity: 1; } }
@@ -445,6 +445,48 @@
     .pdf-placeholder-title { font-family: 'Share Tech Mono', monospace; color: var(--muted); font-size: 0.85rem; margin-bottom: 8px; }
     .pdf-placeholder-sub { color: rgba(74,122,82,0.55); font-size: 0.8rem; line-height: 1.6; }
 
+    /* ════ MODAL PROYECTOS ════ */
+    .pmodal-overlay { display: none; position: fixed; inset: 0; z-index: 500; background: rgba(0,0,0,0.88); backdrop-filter: blur(6px); padding: 20px; overflow-y: auto; }
+    .pmodal-overlay.open { display: flex; align-items: flex-start; justify-content: center; animation: fadeOverlay 0.25s ease; }
+    .pmodal { background: #040e04; border: 1px solid rgba(0,255,65,0.25); border-radius: 12px; width: 100%; max-width: 960px; margin: auto; animation: slideUp 0.3s ease; overflow: hidden; }
+    .pmodal-header { padding: 24px 32px; border-bottom: 1px solid rgba(0,255,65,0.12); display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; background: rgba(0,255,65,0.03); }
+    .pmodal-header-left { flex: 1; }
+    .pmodal-breadcrumb { font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; color: var(--muted); letter-spacing: 2px; margin-bottom: 8px; }
+    .pmodal-title { font-size: 1.8rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
+    .pmodal-tag { font-family: 'Share Tech Mono', monospace; font-size: 0.82rem; color: var(--green); opacity: 0.85; }
+    .pmodal-close { background: none; border: 1px solid rgba(0,255,65,0.2); color: var(--muted); font-size: 1.1rem; width: 36px; height: 36px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; flex-shrink: 0; font-family: monospace; }
+    .pmodal-close:hover { color: var(--green); border-color: var(--green); background: rgba(0,255,65,0.08); }
+    .pmodal-body { padding: 32px; }
+    .pmodal-tabs { display: flex; gap: 4px; margin-bottom: 28px; border-bottom: 1px solid rgba(0,255,65,0.1); overflow-x: auto; }
+    .pmodal-tab { font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; color: var(--muted); padding: 10px 18px; cursor: pointer; border: none; background: none; letter-spacing: 1px; white-space: nowrap; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all 0.2s; }
+    .pmodal-tab:hover { color: var(--text); }
+    .pmodal-tab.active { color: var(--green); border-bottom-color: var(--green); text-shadow: 0 0 6px rgba(0,255,65,0.4); }
+    .pmodal-tab-content { display: none; }
+    .pmodal-tab-content.active { display: block; }
+
+    /* Bloques de contenido del modal proyecto */
+    .pblock { background: rgba(0,255,65,0.03); border: 1px solid rgba(0,255,65,0.15); border-left: 3px solid var(--green); border-radius: 6px; padding: 20px 24px; margin-bottom: 20px; }
+    .pblock-muted { border-left-color: var(--muted); }
+    .pblock-label { font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; color: var(--green); letter-spacing: 2px; margin-bottom: 8px; }
+    .pblock-label-muted { color: var(--muted); }
+    .pblock-text { color: var(--text); font-size: 1rem; line-height: 1.75; }
+
+    /* Lista de materiales */
+    .pmat-label { font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; color: var(--green); letter-spacing: 2px; margin-bottom: 12px; }
+    .pmat-list { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 28px; }
+    .pmat-list li { display: flex; align-items: flex-start; gap: 10px; font-family: 'Share Tech Mono', monospace; font-size: 0.82rem; color: var(--text); padding: 10px 16px; background: rgba(0,255,65,0.03); border: 1px solid rgba(0,255,65,0.1); border-radius: 6px; line-height: 1.4; }
+    .pmat-list li::before { content: '▸'; color: var(--green); font-size: 0.8rem; flex-shrink: 0; margin-top: 1px; }
+
+    /* Lista de pasos */
+    .ppaso-label { font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; color: var(--green); letter-spacing: 2px; margin-bottom: 12px; }
+    .ppaso-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+    .ppaso-list li { display: flex; align-items: flex-start; gap: 14px; color: var(--text); padding: 12px 16px; background: rgba(0,255,65,0.02); border: 1px solid rgba(0,255,65,0.08); border-radius: 6px; line-height: 1.5; font-size: 0.95rem; }
+    .paso-num { font-family: 'Share Tech Mono', monospace; font-size: 0.75rem; color: var(--green); opacity: 0.7; flex-shrink: 0; margin-top: 2px; min-width: 24px; }
+
+    /* Botón link del proyecto */
+    .pmodal-link-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; background: rgba(0,255,65,0.08); border: 1px solid var(--green); border-radius: 4px; color: var(--green); font-family: 'Share Tech Mono', monospace; font-size: 0.82rem; letter-spacing: 2px; text-decoration: none; transition: background 0.25s, box-shadow 0.25s, transform 0.15s; margin-top: 4px; }
+    .pmodal-link-btn:hover { background: rgba(0,255,65,0.14); box-shadow: 0 0 18px rgba(0,255,65,0.2); transform: translateY(-1px); }
+
     #page-flash { position: fixed; inset: 0; z-index: 300; pointer-events: none; background: rgba(0,255,65,0.04); opacity: 0; }
     #page-flash.flash-in { animation: pageFlash 0.35s ease forwards; }
     @keyframes pageFlash { 0% { opacity: 0; } 30% { opacity: 1; } 100% { opacity: 0; } }
@@ -465,6 +507,9 @@
       .modal-body { padding: 16px; }
       .modal-header { padding: 16px 20px; }
       .modal-title { font-size: 1.35rem; }
+      .pmodal-body { padding: 16px; }
+      .pmodal-header { padding: 16px 20px; }
+      .pmodal-title { font-size: 1.35rem; }
       .skills-block { margin-top: 40px; padding-top: 30px; }
     }
   </style>
@@ -656,7 +701,8 @@
         <h2 class="section-heading anim-el">Proyectos</h2>
         <div class="projects-grid anim-grid anim-el">
 
-          <div class="project-card-full">
+          <!-- PROYECTO 1: Bot WhatsApp -->
+          <div class="project-card-full" onclick="abrirModalProyecto('bot-whatsapp')">
             <div class="project-card-thumb">
               <span class="project-status-badge live">✓ LIVE</span>
               <div class="project-icon">
@@ -695,12 +741,13 @@
                 <span class="project-chip">Voz → Texto</span>
               </div>
               <div class="project-cta-row">
-                <a class="project-cta" href="https://wa.me/573204353941?text=Hola%20bot%20de%20Josue" target="_blank">PROBAR BOT <span class="project-cta-arrow">→</span></a>
+                <span class="project-cta">VER DETALLES <span class="project-cta-arrow">→</span></span>
               </div>
             </div>
           </div>
 
-          <div class="project-card-full">
+          <!-- PROYECTO 2: Asistente Python -->
+          <div class="project-card-full" onclick="abrirModalProyecto('asistente-python')">
             <div class="project-card-thumb">
               <span class="project-status-badge live">✓ LIVE</span>
               <div class="project-icon">
@@ -725,13 +772,13 @@
                 <span class="project-chip">Reconocimiento de voz</span><span class="project-chip">Automatización</span>
               </div>
               <div class="project-cta-row">
-                <a class="project-cta" href="https://github.com/JosueDavid777" target="_blank">VER GITHUB <span class="project-cta-arrow">→</span></a>
-                <a class="project-cta" href="https://www.linkedin.com/in/josue-david-106845345" target="_blank">VER DEMO <span class="project-cta-arrow">→</span></a>
+                <span class="project-cta">VER DETALLES <span class="project-cta-arrow">→</span></span>
               </div>
             </div>
           </div>
 
-          <div class="project-card-full">
+          <!-- PROYECTO 3: Biométrico -->
+          <div class="project-card-full" onclick="abrirModalProyecto('biometrico')">
             <div class="project-card-thumb">
               <span class="project-status-badge live">✓ COMPLETO</span>
               <div class="project-icon">
@@ -757,8 +804,7 @@
                 <span class="project-chip">Arduino (C)</span><span class="project-chip">Huella dactilar</span>
               </div>
               <div class="project-cta-row">
-                <a class="project-cta" href="https://github.com/JosueDavid777/Sistema-de-autenticaci-n-biom-trica-con-microcontrolador-y-Python" target="_blank">VER GITHUB <span class="project-cta-arrow">→</span></a>
-                <a class="project-cta" href="https://www.linkedin.com/in/josue-david-106845345" target="_blank">VER EN LINKEDIN <span class="project-cta-arrow">→</span></a>
+                <span class="project-cta">VER DETALLES <span class="project-cta-arrow">→</span></span>
               </div>
             </div>
           </div>
@@ -938,7 +984,7 @@
     </div>
   </section>
 
-  <!-- ════ MODAL ════ -->
+  <!-- ════ MODAL REPARACIONES ════ -->
   <div class="modal-overlay" id="modal-overlay" onclick="cerrarModalFuera(event)">
     <div class="modal" id="modal-box">
       <div class="modal-header">
@@ -971,7 +1017,49 @@
     </div>
   </div>
 
-  <!-- Script externo — debe ir al final del body -->
+  <!-- ════ MODAL PROYECTOS ════ -->
+  <div class="pmodal-overlay" id="pmodal-overlay" onclick="cerrarModalProyectoFuera(event)">
+    <div class="pmodal">
+      <div class="pmodal-header">
+        <div class="pmodal-header-left">
+          <p class="pmodal-breadcrumb">PROYECTOS // DETALLE TÉCNICO</p>
+          <h2 class="pmodal-title" id="pmodal-title">—</h2>
+          <p class="pmodal-tag" id="pmodal-tag">—</p>
+        </div>
+        <button class="pmodal-close" onclick="cerrarModalProyecto()">✕</button>
+      </div>
+      <div class="pmodal-body">
+        <div class="pmodal-tabs">
+          <button class="pmodal-tab active" data-tab="pmodal-tab-desc" onclick="cambiarTabProyecto(this,'pmodal-tab-desc')">DESCRIPCIÓN DEL PROYECTO</button>
+          <button class="pmodal-tab" data-tab="pmodal-tab-media" onclick="cambiarTabProyecto(this,'pmodal-tab-media')">IMÁGENES & VIDEO</button>
+        </div>
+
+        <!-- Tab: Descripción -->
+        <div id="pmodal-tab-desc" class="pmodal-tab-content active">
+          <div class="pblock">
+            <p class="pblock-label">// OBJETIVO</p>
+            <p class="pblock-text" id="pmodal-objetivo">—</p>
+          </div>
+          <div class="pblock pblock-muted">
+            <p class="pblock-label pblock-label-muted">// DESCRIPCIÓN GENERAL</p>
+            <p class="pblock-text" id="pmodal-descripcion">—</p>
+          </div>
+
+          <p class="pmat-label">// MATERIALES Y TECNOLOGÍAS UTILIZADAS</p>
+          <ul class="pmat-list" id="pmodal-materiales"></ul>
+
+          <p class="ppaso-label">// ¿QUÉ HACE ESTE PROYECTO? — PASO A PASO</p>
+          <ul class="ppaso-list" id="pmodal-pasos"></ul>
+
+          <a class="pmodal-link-btn" id="pmodal-link" href="#" target="_blank">&gt; VER PROYECTO →</a>
+        </div>
+
+        <!-- Tab: Media -->
+        <div id="pmodal-tab-media" class="pmodal-tab-content"></div>
+      </div>
+    </div>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
