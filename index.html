@@ -1387,7 +1387,9 @@
       const ul=document.getElementById("modal-components"); ul.innerHTML="";
       d.components.forEach(c=>{const li=document.createElement("li");li.textContent=c;ul.appendChild(li);});
       const hasPdf=!!d.pdf;
-      const mediaLabel=d.mediaType==='videos'?'VIDEOS':'IMÁGENES Y VIDEOS';
+      const mediaLabel = d.mediaType === 'videos' ? 'VIDEOS' 
+                 : d.mediaType === 'mixed'  ? 'IMÁGENES Y VIDEOS' 
+                 : 'IMÁGENES';
       document.getElementById("modal-tabs-bar").innerHTML=
         `<button class="modal-tab active" onclick="cambiarTab(this,'modal-tab-falla')">TRABAJO REALIZADO</button>`+
         `<button class="modal-tab" onclick="cambiarTab(this,'modal-tab-media')">${mediaLabel}</button>`+
