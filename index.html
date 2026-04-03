@@ -655,7 +655,8 @@
         <p class="section-title anim-el">// MIS TRABAJOS</p>
         <h2 class="section-heading anim-el">Proyectos</h2>
         <div class="projects-grid anim-grid anim-el">
-           <div class="project-card-full">
+
+          <div class="project-card-full">
             <div class="project-card-thumb">
               <span class="project-status-badge live">✓ LIVE</span>
               <div class="project-icon">
@@ -684,7 +685,6 @@
                 </svg>
               </div>
             </div>
-            
             <div class="project-card-body">
               <p class="project-tag-mono">PROYECTO_01 · 2026</p>
               <h3 class="project-name">Bot de WhatsApp con IA</h3>
@@ -699,7 +699,7 @@
               </div>
             </div>
           </div>
-        </div>
+
           <div class="project-card-full">
             <div class="project-card-thumb">
               <span class="project-status-badge live">✓ LIVE</span>
@@ -729,23 +729,25 @@
                 <a class="project-cta" href="https://www.linkedin.com/in/josue-david-106845345" target="_blank">VER DEMO <span class="project-cta-arrow">→</span></a>
               </div>
             </div>
+          </div>
+
           <div class="project-card-full">
-             <div class="project-card-thumb">
-                <span class="project-status-badge live">✓ COMPLETO</span>
-                 <div class="project-icon">
-                  <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M40 16 C27 16 18 27 18 40" stroke-linecap="round" fill="none"/>
-                      <path d="M40 22 C30 22 24 30 24 40" stroke-linecap="round" fill="none"/>
-                      <path d="M40 28 C33 28 30 33 30 40 C30 47 33 52 40 52" stroke-linecap="round" fill="none"/>
-                      <path d="M40 34 C37 34 35 36.8 35 40 C35 43 37 45 40 45" stroke-linecap="round" fill="none"/>
-                      <path d="M40 16 C53 16 62 27 62 40 C62 53 53 64 40 64" stroke-linecap="round" fill="none"/>
-                      <path d="M40 22 C50 22 56 30 56 40 C56 50 50 58 40 58" stroke-linecap="round" fill="none"/>
-                      <rect x="30" y="66" width="20" height="6" rx="2"/>
-                      <line x1="33" y1="66" x2="33" y2="64"/><line x1="37" y1="66" x2="37" y2="64"/>
-                      <line x1="43" y1="66" x2="43" y2="64"/><line x1="47" y1="66" x2="47" y2="64"/>
-                   </svg>
-                </div>
+            <div class="project-card-thumb">
+              <span class="project-status-badge live">✓ COMPLETO</span>
+              <div class="project-icon">
+                <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M40 16 C27 16 18 27 18 40" stroke-linecap="round" fill="none"/>
+                  <path d="M40 22 C30 22 24 30 24 40" stroke-linecap="round" fill="none"/>
+                  <path d="M40 28 C33 28 30 33 30 40 C30 47 33 52 40 52" stroke-linecap="round" fill="none"/>
+                  <path d="M40 34 C37 34 35 36.8 35 40 C35 43 37 45 40 45" stroke-linecap="round" fill="none"/>
+                  <path d="M40 16 C53 16 62 27 62 40 C62 53 53 64 40 64" stroke-linecap="round" fill="none"/>
+                  <path d="M40 22 C50 22 56 30 56 40 C56 50 50 58 40 58" stroke-linecap="round" fill="none"/>
+                  <rect x="30" y="66" width="20" height="6" rx="2"/>
+                  <line x1="33" y1="66" x2="33" y2="64"/><line x1="37" y1="66" x2="37" y2="64"/>
+                  <line x1="43" y1="66" x2="43" y2="64"/><line x1="47" y1="66" x2="47" y2="64"/>
+                </svg>
               </div>
+            </div>
             <div class="project-card-body">
               <p class="project-tag-mono">PROYECTO_03 · FEB–MAY 2024</p>
               <h3 class="project-name">Sistema Biométrico con Microcontrolador</h3>
@@ -936,7 +938,7 @@
     </div>
   </section>
 
-  <!-- ════ MODAL REPARACIONES ════ -->
+  <!-- ════ MODAL ════ -->
   <div class="modal-overlay" id="modal-overlay" onclick="cerrarModalFuera(event)">
     <div class="modal" id="modal-box">
       <div class="modal-header">
@@ -952,39 +954,6 @@
         <div id="modal-tab-falla" class="modal-tab-content active">
           <div class="fault-block">
             <p class="fault-label">// TRABAJO REALIZADO</p>
-            <p class="fault-text" id="modal-fault">—</p>
-          </div>
-          <div class="solution-block">
-            <p class="solution-label">// DIAGNÓSTICO Y RESULTADO</p>
-            <p class="solution-text" id="modal-solution">—</p>
-          </div>
-          <p class="comp-label">// COMPONENTES Y ACTIVIDADES</p>
-          <ul class="components-list" id="modal-components"></ul>
-        </div>
-        <div id="modal-tab-media" class="modal-tab-content"></div>
-        <div id="modal-tab-pdf" class="modal-tab-content">
-          <div class="pdf-area" id="modal-pdf-area"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-   <!-- ════ MODAL PROYECTOS ════ -->
-  <div class="modal-overlay" id="modal-overlay" onclick="cerrarModalFueraP(event)">
-    <div class="modal" id="modal-box">
-      <div class="modal-header">
-        <div class="modal-header-left">
-          <p class="modal-breadcrumb">PROYECTOS // DETALLE TÉCNICO</p>
-          <h2 class="modal-title" id="modal-title">—</h2>
-          <p class="modal-model" id="modal-model">—</p>
-        </div>
-        <button class="modal-close" onclick="cerrarModalP()">✕</button>
-      </div>
-      <div class="modal-body">
-        <div class="modal-tabs" id="modal-tabs-bar"></div>
-        <div id="modal-tab-falla" class="modal-tab-content active">
-          <div class="fault-block">
-            <p class="fault-label">// FUNCION DEL PROYECTO</p>
             <p class="fault-text" id="modal-fault">—</p>
           </div>
           <div class="solution-block">
