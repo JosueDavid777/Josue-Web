@@ -365,8 +365,7 @@ function abrirModal(id) {
       'tv-challenger':   { b: [{ src: null, title: 'Placas antes de limpieza' }, { src: null, title: 'Interior con polvo' }],                a: [{ src: null, title: 'Placas limpias' }, { src: null, title: 'Equipo en funcionamiento' }] },
       'portatil-ram':    { b: [{ src: null, title: 'Interior antes del mantenimiento' }, { src: null, title: 'Disipador con pasta vieja' }],  a: [{ src: null, title: 'RAM instalada' }, { src: null, title: 'Pasta térmica aplicada' }] },
       'grabadora-premier':{ b: [{ src: null, title: 'Placa con capacitor explotado' }, { src: null, title: 'Pistas corroídas y sulfatadas' }],a: [{ src: null, title: 'Reparación completada' }, { src: null, title: 'Grabadora funcionando' }] },
-      'cargador-radio':  { b: [{ src: null, title: 'Radio antes de la adaptación' }, { src: null, title: 'Circuito interno analizado' }],    a: [{ src: null, title: 'Adaptación completada' }, { src: null, title: 'Radio con alimentación permanente' }] },
-      'bot-whatsapp':   { b: [{ src: null, title: 'Video Bot Funcionando' }, { src: null, title: 'Imagen codigo del bot' }],  
+      'cargador-radio':  { b: [{ src: null, title: 'Radio antes de la adaptación' }, { src: null, title: 'Circuito interno analizado' }],    a: [{ src: null, title: 'Adaptación completada' }, { src: null, title: 'Radio con alimentación permanente' }] }, 
     };
     const defs = defaultsMap[id] || { b: [{ src: null, title: 'Imagen pendiente' }], a: [{ src: null, title: 'Imagen pendiente' }] };
     const bFinal = d.imagesBefore.length ? d.imagesBefore : defs.b;
