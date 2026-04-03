@@ -239,7 +239,114 @@ const reparaciones = {
 
 
 /* ═══════════════════════════════════════════
-   HELPERS DE MEDIA
+   DATOS DE PROYECTOS
+═══════════════════════════════════════════ */
+const proyectos = {
+  "bot-whatsapp": {
+    title: "Bot de WhatsApp con IA",
+    tag: "PROYECTO_01 · 2026",
+    objetivo: "Crear un bot inteligente desplegado en WhatsApp capaz de mantener conversaciones fluidas, entender mensajes de voz y responder de forma natural en español e inglés, sin requerir intervención humana.",
+    descripcion: "Bot inteligente desplegado en WhatsApp que reconoce mensajes de voz, los transcribe y responde en dos idiomas. Utiliza la API de Groq para procesamiento de lenguaje natural, Baileys como librería de conexión a WhatsApp Web, y está desplegado 24/7 en Railway. El sistema mantiene contexto conversacional y puede adaptarse a diferentes tipos de consultas.",
+    materiales: [
+      "Python — lenguaje principal del backend",
+      "Baileys — librería Node.js para conexión a WhatsApp Web",
+      "Groq API — modelo de lenguaje (LLaMA 3) para respuestas IA",
+      "Railway — plataforma de despliegue en la nube (hosting 24/7)",
+      "Node.js — entorno de ejecución del servidor",
+      "Web Services API — integración y comunicación entre servicios",
+      "Reconocimiento de voz (Whisper) — transcripción de audio a texto"
+    ],
+    pasos: [
+      "Configurar entorno Node.js y conectar Baileys a WhatsApp Web mediante QR",
+      "Implementar listener de mensajes de texto y audio entrantes",
+      "Integrar la API de Groq con prompt system para comportamiento del bot",
+      "Agregar pipeline de transcripción de voz con Whisper para mensajes de audio",
+      "Manejar contexto conversacional almacenando historial por chat",
+      "Configurar variables de entorno y desplegar en Railway con auto-restart",
+      "Pruebas de respuesta, latencia y manejo de errores en producción"
+    ],
+    // ── MEDIA: 2 imágenes + 1 video ──
+    // Reemplaza estas URLs con tus archivos reales
+    images: [
+      { src: null, title: "Interfaz del bot en WhatsApp" },
+      { src: null, title: "Código del servidor en Railway" }
+    ],
+    video: { src: null, title: "Demo — Bot respondiendo en tiempo real" },
+    link: "https://wa.me/573204353941?text=Hola%20bot%20de%20Josue",
+    linkLabel: "PROBAR BOT"
+  },
+
+  "asistente-python": {
+    title: "Asistente Virtual en Python",
+    tag: "PROYECTO_02 · NOV 2025",
+    objetivo: "Desarrollar un asistente virtual de escritorio con reconocimiento de voz que ejecute comandos del sistema operativo y automatice tareas cotidianas mediante instrucciones habladas.",
+    descripcion: "Asistente virtual con reconocimiento y ejecución de comandos de voz. El sistema escucha en tiempo real, interpreta la instrucción, y ejecuta acciones como abrir aplicaciones, buscar en internet, reproducir música o consultar información. Implementado íntegramente en Python con librerías de automatización e inteligencia artificial. Código publicado en GitHub.",
+    materiales: [
+      "Python — lenguaje principal",
+      "SpeechRecognition — captura y conversión de voz a texto",
+      "pyttsx3 — síntesis de voz (text-to-speech) offline",
+      "OpenAI / Groq API — procesamiento de lenguaje natural",
+      "PyAutoGUI — automatización de interfaz gráfica",
+      "subprocess — ejecución de comandos del sistema operativo",
+      "Wikipedia API — consulta de información enciclopédica",
+      "webbrowser — control del navegador web"
+    ],
+    pasos: [
+      "Configurar micrófono y calibrar umbral de ruido ambiental",
+      "Implementar loop de escucha continua con detección de palabra clave",
+      "Parsear el texto reconocido e identificar el comando solicitado",
+      "Mapear comandos a funciones: abrir apps, buscar, reproducir, etc.",
+      "Integrar respuesta de voz para confirmar acciones al usuario",
+      "Agregar módulo de IA para comandos no estructurados o preguntas",
+      "Empaquetar y documentar el proyecto para publicación en GitHub"
+    ],
+    // ── MEDIA: 1 imagen + 1 video ──
+    images: [
+      { src: null, title: "Código del asistente virtual" }
+    ],
+    video: { src: null, title: "Demo — Asistente ejecutando comandos de voz" },
+    link: "https://github.com/JosueDavid777",
+    linkLabel: "VER EN GITHUB"
+  },
+
+  "biometrico": {
+    title: "Sistema Biométrico con Microcontrolador",
+    tag: "PROYECTO_03 · FEB–MAY 2024",
+    objetivo: "Diseñar e implementar un sistema de autenticación por huella dactilar que integre hardware (microcontrolador + sensor biométrico) con software (Python), permitiendo registro, validación y gestión de usuarios.",
+    descripcion: "Sistema de autenticación biométrica que combina un microcontrolador (Arduino) con un sensor de huella dactilar y una interfaz de gestión en Python. La comunicación hardware-software se realiza por puerto serial. El sistema permite registrar huellas, validar usuarios y gestionar una base de datos local de accesos. Proyecto universitario completo con documentación técnica.",
+    materiales: [
+      "Arduino UNO / Nano — microcontrolador principal",
+      "Sensor de huella dactilar FPM10A / R307 — captura biométrica",
+      "Python — interfaz de gestión y comunicación serial",
+      "pyserial — comunicación serial Python ↔ Arduino",
+      "Arduino IDE (C/C++) — programación del microcontrolador",
+      "SQLite — base de datos local de usuarios y registros",
+      "Tkinter — interfaz gráfica de usuario en Python",
+      "Cable USB — comunicación y alimentación del Arduino"
+    ],
+    pasos: [
+      "Conectar sensor FPM10A al Arduino y verificar comunicación por serial",
+      "Programar el firmware en Arduino (C) para captura y almacenamiento de huellas",
+      "Establecer protocolo de comunicación serial entre Arduino y Python",
+      "Desarrollar módulo Python para envío de comandos y recepción de respuestas",
+      "Implementar base de datos SQLite para almacenar IDs de usuarios y huellas",
+      "Crear interfaz gráfica con Tkinter: registro, validación y administración",
+      "Pruebas de precisión, tiempo de respuesta y manejo de errores biométricos",
+      "Documentar el proyecto y publicar en GitHub con guía de instalación"
+    ],
+    // ── MEDIA: 1 imagen + 1 video ──
+    images: [
+      { src: null, title: "Hardware — Arduino y sensor de huella" }
+    ],
+    video: { src: null, title: "Demo — Autenticación biométrica en funcionamiento" },
+    link: "https://github.com/JosueDavid777/Sistema-de-autenticaci-n-biom-trica-con-microcontrolador-y-Python",
+    linkLabel: "VER EN GITHUB"
+  }
+};
+
+
+/* ═══════════════════════════════════════════
+   HELPERS DE MEDIA (REPARACIONES)
 ═══════════════════════════════════════════ */
 function mkVideo(v, tipo) {
   const isBefore = tipo === 'before';
@@ -286,6 +393,64 @@ function mkImg(img, tipo) {
     <div class="img-caption">
       <p class="img-badge ${cls}">${badge}</p>
       <p class="img-title">${img.title || 'Imagen pendiente'}</p>
+    </div>
+  </div>`;
+}
+
+
+/* ═══════════════════════════════════════════
+   HELPERS DE MEDIA (PROYECTOS)
+═══════════════════════════════════════════ */
+function mkProyImg(img) {
+  if (img.src) {
+    return `<div class="img-card" onclick="abrirLightbox('${img.src}')">
+      <img src="${img.src}" alt="${img.title}" loading="lazy">
+      <div class="img-caption">
+        <p class="img-badge after">● CAPTURA</p>
+        <p class="img-title">${img.title}</p>
+      </div>
+    </div>`;
+  }
+  return `<div class="img-card" style="cursor:default;">
+    <div class="img-card-placeholder">
+      <span class="ph-icon">📷</span>
+      <span class="ph-text">PRÓXIMAMENTE</span>
+    </div>
+    <div class="img-caption">
+      <p class="img-badge after">● CAPTURA</p>
+      <p class="img-title">${img.title || 'Imagen pendiente'}</p>
+    </div>
+  </div>`;
+}
+
+function mkProyVideo(v) {
+  if (v && v.src) {
+    return `<div class="video-tab-card">
+      <div class="vid-thumb-wrap" onclick="playVid(this)">
+        <video preload="none"><source src="${v.src}" type="video/mp4"></video>
+        <div class="vid-overlay">
+          <div class="vid-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+          <span class="vid-type-label">● VIDEO DEL PROYECTO</span>
+        </div>
+      </div>
+      <div class="video-tab-info">
+        <p class="video-tab-badge after">● DEMO</p>
+        <p class="video-tab-title">${v.title}</p>
+      </div>
+    </div>`;
+  }
+  return `<div class="video-tab-card" style="cursor:default;">
+    <div class="vid-thumb-wrap" style="cursor:default;">
+      <div class="vid-overlay" style="cursor:default;">
+        <div class="vid-play-btn" style="opacity:0.35;border-color:rgba(0,255,65,0.3);background:rgba(0,255,65,0.04);">
+          <svg viewBox="0 0 24 24" style="fill:rgba(0,255,65,0.4)"><polygon points="5,3 19,12 5,21"/></svg>
+        </div>
+        <span class="vid-type-label" style="opacity:0.4;">● PRÓXIMAMENTE</span>
+      </div>
+    </div>
+    <div class="video-tab-info">
+      <p class="video-tab-badge after" style="opacity:0.4;">● DEMO</p>
+      <p class="video-tab-title" style="opacity:0.5;">${v ? v.title : 'Video pendiente'}</p>
     </div>
   </div>`;
 }
@@ -365,7 +530,7 @@ function abrirModal(id) {
       'tv-challenger':   { b: [{ src: null, title: 'Placas antes de limpieza' }, { src: null, title: 'Interior con polvo' }],                a: [{ src: null, title: 'Placas limpias' }, { src: null, title: 'Equipo en funcionamiento' }] },
       'portatil-ram':    { b: [{ src: null, title: 'Interior antes del mantenimiento' }, { src: null, title: 'Disipador con pasta vieja' }],  a: [{ src: null, title: 'RAM instalada' }, { src: null, title: 'Pasta térmica aplicada' }] },
       'grabadora-premier':{ b: [{ src: null, title: 'Placa con capacitor explotado' }, { src: null, title: 'Pistas corroídas y sulfatadas' }],a: [{ src: null, title: 'Reparación completada' }, { src: null, title: 'Grabadora funcionando' }] },
-      'cargador-radio':  { b: [{ src: null, title: 'Radio antes de la adaptación' }, { src: null, title: 'Circuito interno analizado' }],    a: [{ src: null, title: 'Adaptación completada' }, { src: null, title: 'Radio con alimentación permanente' }] }, 
+      'cargador-radio':  { b: [{ src: null, title: 'Radio antes de la adaptación' }, { src: null, title: 'Circuito interno analizado' }],    a: [{ src: null, title: 'Adaptación completada' }, { src: null, title: 'Radio con alimentación permanente' }] },
     };
     const defs = defaultsMap[id] || { b: [{ src: null, title: 'Imagen pendiente' }], a: [{ src: null, title: 'Imagen pendiente' }] };
     const bFinal = d.imagesBefore.length ? d.imagesBefore : defs.b;
@@ -412,11 +577,104 @@ function cambiarTab(btn, tabId) {
 
 
 /* ═══════════════════════════════════════════
+   MODAL DE PROYECTOS
+═══════════════════════════════════════════ */
+function abrirModalProyecto(id) {
+  const d = proyectos[id];
+  if (!d) return;
+
+  document.getElementById("pmodal-title").textContent = d.title;
+  document.getElementById("pmodal-tag").textContent = d.tag;
+
+  // Tab: Descripción
+  document.getElementById("pmodal-objetivo").textContent = d.objetivo;
+  document.getElementById("pmodal-descripcion").textContent = d.descripcion;
+
+  const ulMat = document.getElementById("pmodal-materiales");
+  ulMat.innerHTML = "";
+  d.materiales.forEach(m => {
+    const li = document.createElement("li");
+    li.textContent = m;
+    ulMat.appendChild(li);
+  });
+
+  const ulPasos = document.getElementById("pmodal-pasos");
+  ulPasos.innerHTML = "";
+  d.pasos.forEach((p, i) => {
+    const li = document.createElement("li");
+    li.innerHTML = `<span class="paso-num">${String(i + 1).padStart(2, '0')}</span><span>${p}</span>`;
+    ulPasos.appendChild(li);
+  });
+
+  // Botón link
+  const linkBtn = document.getElementById("pmodal-link");
+  if (d.link) {
+    linkBtn.href = d.link;
+    linkBtn.textContent = `> ${d.linkLabel} →`;
+    linkBtn.style.display = 'inline-flex';
+  } else {
+    linkBtn.style.display = 'none';
+  }
+
+  // Tab: Media
+  const mediaDiv = document.getElementById("pmodal-tab-media");
+  let mediaHTML = '';
+
+  if (d.images && d.images.length > 0) {
+    mediaHTML += `<p class="img-section-label after">● CAPTURAS DEL PROYECTO</p>
+      <div class="images-tab-grid">${d.images.map(img => mkProyImg(img)).join('')}</div>`;
+  }
+
+  if (d.images && d.images.length > 0 && d.video) {
+    mediaHTML += `<hr class="tab-divider">`;
+  }
+
+  if (d.video) {
+    mediaHTML += `<p class="vid-section-label after" style="margin-top:${d.images && d.images.length > 0 ? '0' : '0'};">● VIDEO DEL PROYECTO</p>
+      <div class="videos-tab-grid">${mkProyVideo(d.video)}</div>`;
+  }
+
+  if (!mediaHTML) {
+    mediaHTML = `<p style="color:var(--muted);font-family:'Share Tech Mono',monospace;font-size:0.8rem;padding:20px 0;">Sin multimedia disponible aún.</p>`;
+  }
+
+  mediaDiv.innerHTML = mediaHTML;
+
+  // Activar primera tab
+  document.querySelectorAll(".pmodal-tab-content").forEach(c => c.classList.remove("active"));
+  document.querySelectorAll(".pmodal-tab").forEach(t => t.classList.remove("active"));
+  document.getElementById("pmodal-tab-desc").classList.add("active");
+  document.querySelector(".pmodal-tab[data-tab='pmodal-tab-desc']").classList.add("active");
+
+  document.getElementById("pmodal-overlay").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function cerrarModalProyecto() {
+  document.querySelectorAll("#pmodal-overlay video").forEach(v => { v.pause(); v.currentTime = 0; });
+  document.getElementById("pmodal-overlay").classList.remove("open");
+  document.body.style.overflow = "";
+}
+
+function cerrarModalProyectoFuera(e) {
+  if (e.target === document.getElementById("pmodal-overlay")) cerrarModalProyecto();
+}
+
+function cambiarTabProyecto(btn, tabId) {
+  document.querySelectorAll(".pmodal-tab").forEach(t => t.classList.remove("active"));
+  document.querySelectorAll(".pmodal-tab-content").forEach(c => c.classList.remove("active"));
+  btn.classList.add("active");
+  document.getElementById(tabId).classList.add("active");
+}
+
+
+/* ═══════════════════════════════════════════
    KEYBOARD EVENTS
 ═══════════════════════════════════════════ */
 document.addEventListener("keydown", e => {
   if (e.key === "Escape") {
     cerrarModal();
+    cerrarModalProyecto();
     cerrarLightbox();
   }
 });
