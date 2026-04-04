@@ -39,8 +39,10 @@
 
 
 /* ═══════════════════════════════════════════
-   NAVEGACIÓN ENTRE SECCIONES
+   NAVEGACIÓN ENTRE SECCIONES + HISTORIAL
 ═══════════════════════════════════════════ */
+let _navStack = ['sobre-mi'];
+
 function mostrar(id) {
   if (document.getElementById(id).classList.contains('activa')) return;
 
@@ -61,6 +63,10 @@ function mostrar(id) {
     document.getElementById("nav-" + id).classList.add("activo");
     window.scrollTo(0, 0);
 
+    // Empujar al historial del navegador
+    history.pushState({ seccion: id }, '', '#' + id);
+    _navStack.push(id);
+
     const wrap = document.querySelector(`#${id} .section-wrap`);
     if (wrap) {
       wrap.classList.remove('animating');
@@ -70,6 +76,32 @@ function mostrar(id) {
     }
   }, 120);
 }
+
+// Al cargar, leer el hash de la URL y navegar a esa sección
+(function initHash() {
+  const hash = window.location.hash.replace('#', '');
+  const validas = ['sobre-mi', 'proyectos', 'reparaciones', 'certificaciones', 'contacto'];
+  if (hash && validas.includes(hash)) {
+    // Sin animación inicial
+    document.querySelectorAll("section").forEach(s => s.classList.remove("activa"));
+    document.querySelectorAll(".nav-btn").forEach(a => a.classList.remove("activo"));
+    document.getElementById(hash).classList.add("activa");
+    document.getElementById("nav-" + hash).classList.add("activo");
+    _navStack = ['sobre-mi', hash];
+  }
+  history.replaceState({ seccion: document.querySelector('section.activa')?.id || 'sobre-mi' }, '', window.location.href);
+})();
+
+// Botón atrás del navegador
+window.addEventListener('popstate', (e) => {
+  const seccion = e.state?.seccion || 'sobre-mi';
+  document.querySelectorAll("section").forEach(s => s.classList.remove("activa"));
+  document.querySelectorAll(".nav-btn").forEach(a => a.classList.remove("activo"));
+  document.getElementById(seccion).classList.add("activa");
+  const navBtn = document.getElementById("nav-" + seccion);
+  if (navBtn) navBtn.classList.add("activo");
+  window.scrollTo(0, 0);
+});
 
 
 /* ═══════════════════════════════════════════
@@ -142,7 +174,7 @@ const certificaciones = {
       "Diagnóstico y resolución de fallas en sistemas PLC",
       "Aplicaciones prácticas de control industrial"
     ],
-    pdfDrive: "https://drive.google.com/file/d/1A6Sbjcgmp-ukS-uhOify15dyynPn6K4F/view?usp=sharing"
+    pdfEmbed: "https://drive.google.com/file/d/1A6Sbjcgmp-ukS-uhOify15dyynPn6K4F/preview"
   },
   "python-eda": {
     codigo: "9533003353340CC1053324547C",
@@ -162,7 +194,7 @@ const certificaciones = {
       "Detección de valores atípicos (outliers)",
       "Interpretación de resultados y generación de insights"
     ],
-    pdfDrive: "https://drive.google.com/file/d/1FmVGe1TztEkMKOcVW8Ff0i4-p51emYdy/view?usp=sharing"
+    pdfEmbed: "https://drive.google.com/file/d/1FmVGe1TztEkMKOcVW8Ff0i4-p51emYdy/preview"
   }
 };
 
@@ -198,26 +230,32 @@ function abrirModalCert(id) {
   btnConsultar.href = SENA_CONSULTA_URL;
   btnConsultar.target = "_blank";
 
-  // Botón ver PDF
-  const btnPdf = document.getElementById("cmodal-btn-pdf");
-  if (d.pdfDrive) {
-    btnPdf.href = d.pdfDrive;
-    btnPdf.style.display = "inline-flex";
-  } else {
-    btnPdf.style.display = "none";
-  }
-
   // Resetear tabs
   document.querySelectorAll(".cmodal-tab-content").forEach(c => c.classList.remove("active"));
   document.querySelectorAll(".cmodal-tab").forEach(t => t.classList.remove("active"));
   document.getElementById("cmodal-tab-info").classList.add("active");
   document.querySelector(".cmodal-tab[data-tab='cmodal-tab-info']").classList.add("active");
 
+  // Configurar PDF embebido en tab PDF
+  const pdfArea = document.getElementById("cmodal-pdf-area");
+  if (d.pdfEmbed) {
+    pdfArea.innerHTML = `<iframe src="${d.pdfEmbed}" title="Certificado PDF" style="width:100%;height:560px;border:none;display:block;border-radius:6px;"></iframe>`;
+  } else {
+    pdfArea.innerHTML = `<div class="pdf-placeholder">
+      <div class="pdf-placeholder-icon">📄</div>
+      <p class="pdf-placeholder-title">CERTIFICADO PDF</p>
+      <p class="pdf-placeholder-sub">El certificado estará disponible próximamente.</p>
+    </div>`;
+  }
+
   document.getElementById("cmodal-overlay").classList.add("open");
   document.body.style.overflow = "hidden";
 }
 
 function cerrarModalCert() {
+  // Pausar iframe al cerrar
+  const pdfArea = document.getElementById("cmodal-pdf-area");
+  if (pdfArea) pdfArea.innerHTML = '';
   document.getElementById("cmodal-overlay").classList.remove("open");
   document.body.style.overflow = "";
 }
@@ -328,7 +366,7 @@ const reparaciones = {
     videosAfter: [
       { src: `${MEDIA_PREMIER}/02_Videos%20de%20equipo%20funcionando%20y%20reparado/Video_equipo_funcionando.mp4`, title: "Grabadora Funcionando" }
     ],
-    pdf:null
+    pdf: null
   },
   "cargador-radio": {
     title: "Adaptación de Cargador Móvil a Radio",
@@ -344,30 +382,33 @@ const reparaciones = {
       "Verificación de polaridad y niveles de tensión",
       "Prueba de funcionamiento completo post-adaptación"
     ],
-    imagesBefore: [{src: "https://raw.githubusercontent.com/JosueDavid777/Reparaciones-de-equipos-electr-nicos./refs/heads/main/REPARACIONES_ELECTRONICAS/2026%20-%2005%20-ADAPTACION_RADIO/ANTES/01_RADIO_CON_CARGADOR_PARA_ADAPTAR.jpg", title: "Radio con cargador de telefono a adaptar"},
-                   {src: "https://raw.githubusercontent.com/JosueDavid777/Reparaciones-de-equipos-electr-nicos./refs/heads/main/REPARACIONES_ELECTRONICAS/2026%20-%2005%20-ADAPTACION_RADIO/ANTES/02_CARGADOR_CON_PUNTAS_EXPUESTAS.jpg", title: "Cargador con puntas expuestas"},
-                   {src: "https://raw.githubusercontent.com/JosueDavid777/Reparaciones-de-equipos-electr-nicos./refs/heads/main/REPARACIONES_ELECTRONICAS/2026%20-%2005%20-ADAPTACION_RADIO/ANTES/03_ENTRADA_A_ADAPTAR.jpg", title: "Radio con entrada a adaptar"}
-                  ],
-    videosAfter: [{ src: "https://raw.githubusercontent.com/JosueDavid777/Reparaciones-de-equipos-electr-nicos./refs/heads/main/REPARACIONES_ELECTRONICAS/2026%20-%2005%20-ADAPTACION_RADIO/DESPUES/01_RADIO_CON_CARGADOR_SONANDO.mp4", title: "Radio Funcionando" },
-                  { src: "https://raw.githubusercontent.com/JosueDavid777/Reparaciones-de-equipos-electr-nicos./refs/heads/main/REPARACIONES_ELECTRONICAS/2026%20-%2005%20-ADAPTACION_RADIO/DESPUES/02_RADIO_CERRADO_SONANO.mp4", title: "Radio sellado Funcionando" }],
+    imagesBefore: [
+      {src: "https://raw.githubusercontent.com/JosueDavid777/Reparaciones-de-equipos-electr-nicos./refs/heads/main/REPARACIONES_ELECTRONICAS/2026%20-%2005%20-ADAPTACION_RADIO/ANTES/01_RADIO_CON_CARGADOR_PARA_ADAPTAR.jpg", title: "Radio con cargador de telefono a adaptar"},
+      {src: "https://raw.githubusercontent.com/JosueDavid777/Reparaciones-de-equipos-electr-nicos./refs/heads/main/REPARACIONES_ELECTRONICAS/2026%20-%2005%20-ADAPTACION_RADIO/ANTES/02_CARGADOR_CON_PUNTAS_EXPUESTAS.jpg", title: "Cargador con puntas expuestas"},
+      {src: "https://raw.githubusercontent.com/JosueDavid777/Reparaciones-de-equipos-electr-nicos./refs/heads/main/REPARACIONES_ELECTRONICAS/2026%20-%2005%20-ADAPTACION_RADIO/ANTES/03_ENTRADA_A_ADAPTAR.jpg", title: "Radio con entrada a adaptar"}
+    ],
+    videosAfter: [
+      { src: "https://raw.githubusercontent.com/JosueDavid777/Reparaciones-de-equipos-electr-nicos./refs/heads/main/REPARACIONES_ELECTRONICAS/2026%20-%2005%20-ADAPTACION_RADIO/DESPUES/01_RADIO_CON_CARGADOR_SONANDO.mp4", title: "Radio Funcionando" },
+      { src: "https://raw.githubusercontent.com/JosueDavid777/Reparaciones-de-equipos-electr-nicos./refs/heads/main/REPARACIONES_ELECTRONICAS/2026%20-%2005%20-ADAPTACION_RADIO/DESPUES/02_RADIO_CERRADO_SONANO.mp4", title: "Radio sellado Funcionando" }
+    ],
     pdf: null
   },
   "lg32cs410": {
-     title: "Diagnostico TV LG32CS410",
-     model: "TV  ·  Reporte ST-0006  ·  2026",
-     mediaType: "mixed",
-     fault: "El televisor no enciende. El cliente reporta que la falla se presentó después de una descarga eléctrica (rayo). Durante la inspección inicial se detecta ausencia de voltajes principales en la mainboard, especialmente en la línea de 3.3V, lo que impide el arranque del sistema. Se sospecha daño en el circuito de alimentación o en el SoC principal.",
-     solution: "Se realizó un análisis detallado de la mainboard con el objetivo de restablecer la línea de alimentación principal de 3.3V, la cual no presentaba el voltaje requerido. A partir de las mediciones y pruebas realizadas, se identificó una falla crítica asociada al SoC (chip principal), posiblemente ocasionada por una sobretensión derivada de una descarga eléctrica (rayo), según lo reportado por el cliente.Se intentó la recuperación de la línea de 3.3V mediante la intervención sobre los componentes asociados, incluyendo el reemplazo del transistor Q710 y la sustitución de los capacitores de filtrado en la etapa. Sin embargo, tras múltiples pruebas, el voltaje máximo alcanzado fue de aproximadamente 2.2V, valor insuficiente para el correcto funcionamiento del sistema.Debido a la incapacidad de restablecer los niveles de tensión adecuados y considerando que el SoC no responde, se concluye que la mainboard presenta un daño severo no recuperable a nivel práctico, recomendando su reemplazo completo como solución definitiva.",
-     components: [
-       "Inspección inicial y verificación de ausencia de encendido",
-       "Medición de líneas de alimentación en la mainboard (énfasis en 3.3V)",
-       "Diagnóstico de posible daño por sobretensión (descarga eléctrica)",
-       "Identificación de la etapa reguladora de 3.3V",
-       "Reemplazo del transistor Q710 en la línea de regulación",
-       "Sustitución de capacitores de filtrado asociados",
-       "Monitoreo de voltaje tras intervención (máximo ~2.2V)",
-       "Evaluación del estado del SoC (sin respuesta)",
-       "Determinación de falla crítica en mainboard no reparable"
+    title: "Diagnostico TV LG32CS410",
+    model: "TV  ·  Reporte ST-0006  ·  2026",
+    mediaType: "mixed",
+    fault: "El televisor no enciende. El cliente reporta que la falla se presentó después de una descarga eléctrica (rayo). Durante la inspección inicial se detecta ausencia de voltajes principales en la mainboard, especialmente en la línea de 3.3V, lo que impide el arranque del sistema. Se sospecha daño en el circuito de alimentación o en el SoC principal.",
+    solution: "Se realizó un análisis detallado de la mainboard con el objetivo de restablecer la línea de alimentación principal de 3.3V, la cual no presentaba el voltaje requerido. A partir de las mediciones y pruebas realizadas, se identificó una falla crítica asociada al SoC (chip principal), posiblemente ocasionada por una sobretensión derivada de una descarga eléctrica (rayo), según lo reportado por el cliente. Se intentó la recuperación de la línea de 3.3V mediante la intervención sobre los componentes asociados, incluyendo el reemplazo del transistor Q710 y la sustitución de los capacitores de filtrado en la etapa. Sin embargo, tras múltiples pruebas, el voltaje máximo alcanzado fue de aproximadamente 2.2V, valor insuficiente para el correcto funcionamiento del sistema. Debido a la incapacidad de restablecer los niveles de tensión adecuados y considerando que el SoC no responde, se concluye que la mainboard presenta un daño severo no recuperable a nivel práctico, recomendando su reemplazo completo como solución definitiva.",
+    components: [
+      "Inspección inicial y verificación de ausencia de encendido",
+      "Medición de líneas de alimentación en la mainboard (énfasis en 3.3V)",
+      "Diagnóstico de posible daño por sobretensión (descarga eléctrica)",
+      "Identificación de la etapa reguladora de 3.3V",
+      "Reemplazo del transistor Q710 en la línea de regulación",
+      "Sustitución de capacitores de filtrado asociados",
+      "Monitoreo de voltaje tras intervención (máximo ~2.2V)",
+      "Evaluación del estado del SoC (sin respuesta)",
+      "Determinación de falla crítica en mainboard no reparable"
     ],
     imagesBefore: [
       { src: `${MEDIA_PREMIER}/01_Imagenes%20y%20videos%20de%20fallas%20en%20el%20equipo/01_SULFATACION_EN_EQUIPO.jpg`, title: "Falla 1 — Sulfatación en el equipo" },
@@ -378,7 +419,7 @@ const reparaciones = {
       { src: `${MEDIA_PREMIER}/02_Videos%20de%20equipo%20funcionando%20y%20reparado/Video_equipo_funcionando.mp4`, title: "Grabadora Funcionando" }
     ],
     pdf: `https://drive.google.com/file/d/1vO1wtC-THLGQUQsPzKwq1HE_L40Ql6hR/preview`
-}
+  }
 };
 
 
@@ -667,11 +708,11 @@ function abrirModal(id) {
 
   } else {
     const defaultsMap = {
-      'tv-challenger':   { b: [{ src: null, title: 'Placas antes de limpieza' }, { src: null, title: 'Interior con polvo' }],                a: [{ src: null, title: 'Placas limpias' }, { src: null, title: 'Equipo en funcionamiento' }] },
-      'portatil-ram':    { b: [{ src: null, title: 'Interior antes del mantenimiento' }, { src: null, title: 'Disipador con pasta vieja' }],  a: [{ src: null, title: 'RAM instalada' }, { src: null, title: 'Pasta térmica aplicada' }] },
-      'grabadora-premier':{ b: [{ src: null, title: 'Placa con capacitor explotado' }, { src: null, title: 'Pistas corroídas y sulfatadas' }],a: [{ src: null, title: 'Reparación completada' }, { src: null, title: 'Grabadora funcionando' }] },
-      'cargador-radio':  { b: [{ src:null, title: 'Radio antes de la adaptación' }, { src: null, title: 'Circuito interno analizado' }],    a: [{ src: null, title: 'Adaptación completada' }, { src: null, title: 'Radio con alimentación permanente' }] },
-      'lg32cs410':  { b: [{ src: null, title: 'Radio antes de la adaptación' }, { src: null, title: 'Circuito interno analizado' }],    a: [{ src: null, title: 'Adaptación completada' }, { src: null, title: 'Radio con alimentación permanente' }] },
+      'tv-challenger':    { b: [{ src: null, title: 'Placas antes de limpieza' }, { src: null, title: 'Interior con polvo' }], a: [{ src: null, title: 'Placas limpias' }, { src: null, title: 'Equipo en funcionamiento' }] },
+      'portatil-ram':     { b: [{ src: null, title: 'Interior antes del mantenimiento' }, { src: null, title: 'Disipador con pasta vieja' }], a: [{ src: null, title: 'RAM instalada' }, { src: null, title: 'Pasta térmica aplicada' }] },
+      'grabadora-premier':{ b: [{ src: null, title: 'Placa con capacitor explotado' }, { src: null, title: 'Pistas corroídas y sulfatadas' }], a: [{ src: null, title: 'Reparación completada' }, { src: null, title: 'Grabadora funcionando' }] },
+      'cargador-radio':   { b: [{ src: null, title: 'Radio antes de la adaptación' }, { src: null, title: 'Circuito interno analizado' }], a: [{ src: null, title: 'Adaptación completada' }, { src: null, title: 'Radio con alimentación permanente' }] },
+      'lg32cs410':        { b: [{ src: null, title: 'Estado inicial del televisor' }, { src: null, title: 'Mainboard inspeccionada' }], a: [{ src: null, title: 'Intervención realizada' }, { src: null, title: 'Diagnóstico final' }] },
     };
     const defs = defaultsMap[id] || { b: [{ src: null, title: 'Imagen pendiente' }], a: [{ src: null, title: 'Imagen pendiente' }] };
     const bFinal = d.imagesBefore.length ? d.imagesBefore : defs.b;
@@ -726,7 +767,6 @@ function abrirModalProyecto(id) {
 
   document.getElementById("pmodal-title").textContent = d.title;
   document.getElementById("pmodal-tag").textContent = d.tag;
-
   document.getElementById("pmodal-objetivo").textContent = d.objetivo;
   document.getElementById("pmodal-descripcion").textContent = d.descripcion;
 
@@ -768,7 +808,7 @@ function abrirModalProyecto(id) {
   }
 
   if (d.video) {
-    mediaHTML += `<p class="vid-section-label after" style="margin-top:${d.images && d.images.length > 0 ? '0' : '0'};">● VIDEO DEL PROYECTO</p>
+    mediaHTML += `<p class="vid-section-label after" style="margin-top:0;">● VIDEO DEL PROYECTO</p>
       <div class="videos-tab-grid">${mkProyVideo(d.video)}</div>`;
   }
 
