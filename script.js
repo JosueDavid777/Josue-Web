@@ -142,8 +142,8 @@ const reparaciones = {
       "Limpieza de carcasa exterior e interior"
     ],
     videosBefore: [
-      { src: `${MEDIA}/01_Imagenes%20y%20videos%20de%20fallas%20en%20el%20equipo/01_PRIMER_VIDEO_TV_LG_FALLA.mp4`, title: "Falla 1 — apagado espontáneo" },
-      { src: `${MEDIA}/01_Imagenes%20y%20videos%20de%20fallas%20en%20el%20equipo/02_SEGUNDO_VIDEO_TV_LG_FALLA.mp4`, title: "Falla 2 — sin audio / botones" },
+      { src: `${MEDIA}/01_Imagenes%20y%20videos%20de%20fallas%20en%20el%20equipo/01_PRIMER_VIDEO_TV_LG_FALLA.mp4`, title: "Falla 1 — sin audio / botones" },
+      { src: `${MEDIA}/01_Imagenes%20y%20videos%20de%20fallas%20en%20el%20equipo/02_SEGUNDO_VIDEO_TV_LG_FALLA.mp4`, title: "Falla 2 — apagado espontáneo" },
       { src: `${MEDIA}/01_Imagenes%20y%20videos%20de%20fallas%20en%20el%20equipo/03_TERCER_VIDEO_TV_LG_FALLA.mp4`, title: "Falla 3 — comportamiento intermitente" }
     ],
     videosAfter: [
