@@ -121,6 +121,120 @@ function mostrarError(msg) {
 
 
 /* ═══════════════════════════════════════════
+   DATOS DE CERTIFICACIONES SENA
+═══════════════════════════════════════════ */
+const certificaciones = {
+  "plc-i": {
+    codigo: "9213003320163CC1053324547C",
+    titulo: "Controladores Lógicos Programables — PLC I",
+    entidad: "SENA · Centro de Tecnologías del Transporte · Regional Distrito Capital",
+    duracion: "40 horas",
+    fecha: "03 de octubre de 2025",
+    tag: "CERT_01 · OCT 2025",
+    icono: "⚙️",
+    descripcion: "Formación en el manejo, programación y configuración de Controladores Lógicos Programables (PLC). El curso abarca fundamentos de la lógica de control industrial, lenguajes de programación estándar IEC 61131-3 (Ladder, FBD, SFC), diseño de circuitos de automatización, diagnóstico de fallas en sistemas automatizados y aplicaciones prácticas en entornos industriales. Complementa directamente las habilidades en electrónica e ingeniería de control.",
+    temas: [
+      "Fundamentos de automatización industrial y PLCs",
+      "Arquitectura interna y módulos de un PLC",
+      "Lenguaje Ladder (KOP) y FBD",
+      "Programación de entradas/salidas digitales y analógicas",
+      "Temporizadores, contadores y secuenciadores",
+      "Diagnóstico y resolución de fallas en sistemas PLC",
+      "Aplicaciones prácticas de control industrial"
+    ],
+    pdfDrive: "https://drive.google.com/file/d/1ULbNVEuaLuLtNPVKwpTHNXbR0MKlCj_c/view?usp=sharing"
+  },
+  "python-eda": {
+    codigo: "9533003353340CC1053324547C",
+    titulo: "Análisis Exploratorio de Datos en Python",
+    entidad: "SENA · Centro de Desarrollo Agroindustrial, Turístico y Tecnológico del Guaviare · Regional Guaviare",
+    duracion: "48 horas",
+    fecha: "11 de noviembre de 2025",
+    tag: "CERT_02 · NOV 2025",
+    icono: "🐍",
+    descripcion: "Formación en análisis y exploración de conjuntos de datos utilizando Python como lenguaje principal. El curso cubre el uso de librerías fundamentales para ciencia de datos como Pandas, NumPy y Matplotlib/Seaborn, aplicando técnicas de limpieza, transformación, visualización e interpretación de datos. Fortalece las habilidades de programación en Python y abre la puerta al mundo del Data Science y la inteligencia artificial aplicada.",
+    temas: [
+      "Fundamentos de Python para ciencia de datos",
+      "Manipulación de datos con Pandas y NumPy",
+      "Limpieza y preprocesamiento de datasets",
+      "Estadística descriptiva y análisis univariable/multivariable",
+      "Visualización de datos con Matplotlib y Seaborn",
+      "Detección de valores atípicos (outliers)",
+      "Interpretación de resultados y generación de insights"
+    ],
+    pdfDrive: "https://drive.google.com/file/d/1c6QZJOfTGJHJjxqAjDi8xHCfqBH9x1kX/view?usp=sharing"
+  }
+};
+
+const SENA_CONSULTA_URL = "https://certificados.sena.edu.co/CertificadoDigital/com.sena.consultacer";
+const CC_JOSUE = "1053324547";
+
+
+/* ═══════════════════════════════════════════
+   MODAL DE CERTIFICACIONES
+═══════════════════════════════════════════ */
+function abrirModalCert(id) {
+  const d = certificaciones[id];
+  if (!d) return;
+
+  document.getElementById("cmodal-titulo").textContent = d.titulo;
+  document.getElementById("cmodal-entidad").textContent = d.entidad;
+  document.getElementById("cmodal-tag").textContent = d.tag;
+  document.getElementById("cmodal-duracion").textContent = d.duracion;
+  document.getElementById("cmodal-fecha").textContent = d.fecha;
+  document.getElementById("cmodal-codigo").textContent = d.codigo;
+  document.getElementById("cmodal-descripcion").textContent = d.descripcion;
+
+  const ul = document.getElementById("cmodal-temas");
+  ul.innerHTML = "";
+  d.temas.forEach(t => {
+    const li = document.createElement("li");
+    li.textContent = t;
+    ul.appendChild(li);
+  });
+
+  // Botón consultar en SENA
+  const btnConsultar = document.getElementById("cmodal-btn-consultar");
+  btnConsultar.href = SENA_CONSULTA_URL;
+  btnConsultar.target = "_blank";
+
+  // Botón ver PDF
+  const btnPdf = document.getElementById("cmodal-btn-pdf");
+  if (d.pdfDrive) {
+    btnPdf.href = d.pdfDrive;
+    btnPdf.style.display = "inline-flex";
+  } else {
+    btnPdf.style.display = "none";
+  }
+
+  // Resetear tabs
+  document.querySelectorAll(".cmodal-tab-content").forEach(c => c.classList.remove("active"));
+  document.querySelectorAll(".cmodal-tab").forEach(t => t.classList.remove("active"));
+  document.getElementById("cmodal-tab-info").classList.add("active");
+  document.querySelector(".cmodal-tab[data-tab='cmodal-tab-info']").classList.add("active");
+
+  document.getElementById("cmodal-overlay").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function cerrarModalCert() {
+  document.getElementById("cmodal-overlay").classList.remove("open");
+  document.body.style.overflow = "";
+}
+
+function cerrarModalCertFuera(e) {
+  if (e.target === document.getElementById("cmodal-overlay")) cerrarModalCert();
+}
+
+function cambiarTabCert(btn, tabId) {
+  document.querySelectorAll(".cmodal-tab").forEach(t => t.classList.remove("active"));
+  document.querySelectorAll(".cmodal-tab-content").forEach(c => c.classList.remove("active"));
+  btn.classList.add("active");
+  document.getElementById(tabId).classList.add("active");
+}
+
+
+/* ═══════════════════════════════════════════
    DATOS DE REPARACIONES
 ═══════════════════════════════════════════ */
 const GH    = "https://raw.githubusercontent.com/JosueDavid777/Reparaciones-de-equipos-electr-nicos./refs/heads/main";
@@ -295,8 +409,6 @@ const proyectos = {
       "Configurar variables de entorno y desplegar en Railway con auto-restart",
       "Pruebas de respuesta, latencia y manejo de errores en producción"
     ],
-    // ── MEDIA: 2 imágenes + 1 video ──
-    // Reemplaza estas URLs con tus archivos reales
     images: [
       { src: null, title: "Interfaz del bot en WhatsApp" },
       { src: null, title: "Código del servidor en Railway" }
@@ -330,7 +442,6 @@ const proyectos = {
       "Agregar módulo de IA para comandos no estructurados o preguntas",
       "Empaquetar y documentar el proyecto para publicación en GitHub"
     ],
-    // ── MEDIA: 1 imagen + 1 video ──
     images: [
       { src: null, title: "Código del asistente virtual" }
     ],
@@ -364,7 +475,6 @@ const proyectos = {
       "Pruebas de precisión, tiempo de respuesta y manejo de errores biométricos",
       "Documentar el proyecto y publicar en GitHub con guía de instalación"
     ],
-    // ── MEDIA: 1 imagen + 1 video ──
     images: [
       { src: null, title: "Hardware — Arduino y sensor de huella" }
     ],
@@ -617,7 +727,6 @@ function abrirModalProyecto(id) {
   document.getElementById("pmodal-title").textContent = d.title;
   document.getElementById("pmodal-tag").textContent = d.tag;
 
-  // Tab: Descripción
   document.getElementById("pmodal-objetivo").textContent = d.objetivo;
   document.getElementById("pmodal-descripcion").textContent = d.descripcion;
 
@@ -637,7 +746,6 @@ function abrirModalProyecto(id) {
     ulPasos.appendChild(li);
   });
 
-  // Botón link
   const linkBtn = document.getElementById("pmodal-link");
   if (d.link) {
     linkBtn.href = d.link;
@@ -647,7 +755,6 @@ function abrirModalProyecto(id) {
     linkBtn.style.display = 'none';
   }
 
-  // Tab: Media
   const mediaDiv = document.getElementById("pmodal-tab-media");
   let mediaHTML = '';
 
@@ -671,7 +778,6 @@ function abrirModalProyecto(id) {
 
   mediaDiv.innerHTML = mediaHTML;
 
-  // Activar primera tab
   document.querySelectorAll(".pmodal-tab-content").forEach(c => c.classList.remove("active"));
   document.querySelectorAll(".pmodal-tab").forEach(t => t.classList.remove("active"));
   document.getElementById("pmodal-tab-desc").classList.add("active");
@@ -706,6 +812,7 @@ document.addEventListener("keydown", e => {
   if (e.key === "Escape") {
     cerrarModal();
     cerrarModalProyecto();
+    cerrarModalCert();
     cerrarLightbox();
   }
 });
