@@ -212,7 +212,6 @@
     }
     .hnav-btn.pulse-icon .hnav-icon { animation: iconPulse 2.4s 1.6s infinite; }
 
-    /* Scan solo para botones de proyectos/contacto — REPARACIONES no lo tiene */
     @keyframes hnavScanProj {
       0%   { transform: translateX(-110%); }
       100% { transform: translateX(210%); }
@@ -225,6 +224,7 @@
     .hnav-btn.btn-scan:nth-child(1) .hnav-scan { animation: hnavScanProj 3s 2s infinite; }
     .hnav-btn.btn-scan:nth-child(2) .hnav-scan { animation: hnavScanProj 3.4s 0.8s infinite; }
     .hnav-btn.btn-scan:nth-child(3) .hnav-scan { animation: hnavScanProj 2.8s 1.5s infinite; }
+    .hnav-btn.btn-scan:nth-child(4) .hnav-scan { animation: hnavScanProj 3.2s 1.1s infinite; }
 
     /* ════ SECTION WRAP ════ */
     .section-wrap { padding: 60px 40px; max-width: 1100px; margin: 0 auto; }
@@ -274,24 +274,10 @@
     .lang-name { font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; color: #fff; letter-spacing: 1px; }
     .lang-level { font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; color: var(--muted); margin-left: 4px; }
 
-    /* ════ CERTIFICACIONES ════ */
-    .certs-block {
-      margin-top: 60px; padding-top: 40px;
-      border-top: 1px solid rgba(0,255,65,0.1);
-      opacity: 0; animation: fadeUp 0.6s 1.6s forwards;
-    }
-    .certs-block-title { font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; color: var(--green); letter-spacing: 4px; margin-bottom: 8px; }
-    .certs-block-heading { font-size: 2rem; font-weight: 700; color: #fff; margin-bottom: 8px; padding-bottom: 14px; border-bottom: 1px solid rgba(0,255,65,0.15); }
-    .certs-block-sub {
-      font-family: 'Share Tech Mono', monospace; font-size: 0.72rem; color: var(--muted);
-      margin-bottom: 28px; line-height: 1.7;
-    }
-    .certs-block-sub a {
-      color: var(--green); text-decoration: none;
-      border-bottom: 1px solid rgba(0,255,65,0.3);
-      transition: border-color 0.2s, text-shadow 0.2s;
-    }
-    .certs-block-sub a:hover { border-color: var(--green); text-shadow: 0 0 8px rgba(0,255,65,0.4); }
+    /* ════ CERTIFICACIONES (SECCIÓN INDEPENDIENTE) ════ */
+    .certs-section-intro { font-family: 'Share Tech Mono', monospace; font-size: 0.72rem; color: var(--muted); margin-bottom: 28px; line-height: 1.7; }
+    .certs-section-intro a { color: var(--green); text-decoration: none; border-bottom: 1px solid rgba(0,255,65,0.3); transition: border-color 0.2s, text-shadow 0.2s; }
+    .certs-section-intro a:hover { border-color: var(--green); text-shadow: 0 0 8px rgba(0,255,65,0.4); }
     .certs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap: 18px; }
 
     .cert-card {
@@ -567,7 +553,6 @@
     .cmodal-tab-content { display: none; }
     .cmodal-tab-content.active { display: block; }
 
-    /* Info tab del modal cert */
     .cmodal-meta-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap: 12px; margin-bottom: 24px; }
     .cmodal-meta-item { background: rgba(0,255,65,0.03); border: 1px solid rgba(0,255,65,0.12); border-radius: 6px; padding: 12px 16px; }
     .cmodal-meta-label { font-family: 'Share Tech Mono', monospace; font-size: 0.62rem; color: var(--muted); letter-spacing: 2px; margin-bottom: 4px; }
@@ -591,13 +576,10 @@
     }
     .cmodal-btn-primary { background: rgba(0,255,65,0.08); border-color: var(--green); color: var(--green); }
     .cmodal-btn-primary:hover { background: rgba(0,255,65,0.18); box-shadow: 0 0 16px rgba(0,255,65,0.2); transform: translateY(-1px); }
-    .cmodal-btn-secondary { background: rgba(0,255,65,0.03); border-color: rgba(0,255,65,0.25); color: var(--muted); }
-    .cmodal-btn-secondary:hover { background: rgba(0,255,65,0.08); border-color: var(--green); color: var(--green); transform: translateY(-1px); }
 
-    /* PDF tab del modal cert */
+    /* PDF tab del modal cert — iframe directo */
     .cmodal-pdf-note { font-family: 'Share Tech Mono', monospace; font-size: 0.72rem; color: var(--muted); margin-bottom: 18px; line-height: 1.7; }
-    .cmodal-pdf-note a { color: var(--green); text-decoration: none; border-bottom: 1px solid rgba(0,255,65,0.3); transition: border-color 0.2s; }
-    .cmodal-pdf-note a:hover { border-color: var(--green); }
+    .cmodal-pdf-area { border: 1px solid rgba(0,255,65,0.15); border-radius: 8px; overflow: hidden; background: #000; }
 
     #page-flash { position: fixed; inset: 0; z-index: 300; pointer-events: none; background: rgba(0,255,65,0.04); opacity: 0; }
     #page-flash.flash-in { animation: pageFlash 0.35s ease forwards; }
@@ -626,7 +608,6 @@
       .cmodal-header { padding: 16px 20px; }
       .cmodal-titulo { font-size: 1.2rem; }
       .skills-block { margin-top: 40px; padding-top: 30px; }
-      .certs-block { margin-top: 40px; padding-top: 30px; }
     }
   </style>
 </head>
@@ -661,6 +642,7 @@
         <button class="nav-btn activo" onclick="mostrar('sobre-mi')" id="nav-sobre-mi"><span class="nb-tl"></span><span class="nb-br"></span>Sobre mí</button>
         <button class="nav-btn" onclick="mostrar('proyectos')" id="nav-proyectos"><span class="nb-tl"></span><span class="nb-br"></span>Proyectos</button>
         <button class="nav-btn" onclick="mostrar('reparaciones')" id="nav-reparaciones"><span class="nb-tl"></span><span class="nb-br"></span>Reparaciones</button>
+        <button class="nav-btn" onclick="mostrar('certificaciones')" id="nav-certificaciones"><span class="nb-tl"></span><span class="nb-br"></span>Certificaciones</button>
         <button class="nav-btn" onclick="mostrar('contacto')" id="nav-contacto"><span class="nb-tl"></span><span class="nb-br"></span>Contacto</button>
       </nav>
     </div>
@@ -684,7 +666,6 @@
             <div class="stat"><span class="stat-num">∞</span><span class="stat-label">APRENDIZAJE</span></div>
           </div>
           <div class="hero-nav">
-            <!-- Proyectos: con scan -->
             <div class="hnav-btn btn-scan" onclick="mostrar('proyectos')">
               <div class="hnav-scan"></div>
               <span class="hc hc-tl"></span><span class="hc hc-tr"></span><span class="hc hc-bl"></span><span class="hc hc-br"></span>
@@ -692,14 +673,20 @@
               <div class="hnav-text"><p class="hnav-label">// EXPLORAR</p><p class="hnav-title">Proyectos</p></div>
               <span class="hnav-arrow">→</span>
             </div>
-            <!-- Reparaciones: SIN scan, solo reflejo/hover normal -->
             <div class="hnav-btn pulse-icon" onclick="mostrar('reparaciones')">
               <span class="hc hc-tl"></span><span class="hc hc-tr"></span><span class="hc hc-bl"></span><span class="hc hc-br"></span>
               <div class="hnav-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
               <div class="hnav-text"><p class="hnav-label">// TÉCNICO</p><p class="hnav-title">Reparaciones</p></div>
               <span class="hnav-arrow">→</span>
             </div>
-            <!-- Contacto: con scan -->
+            <!-- Botón Certificaciones -->
+            <div class="hnav-btn btn-scan" onclick="mostrar('certificaciones')">
+              <div class="hnav-scan"></div>
+              <span class="hc hc-tl"></span><span class="hc hc-tr"></span><span class="hc hc-bl"></span><span class="hc hc-br"></span>
+              <div class="hnav-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M8 14l-2 6 6-2 6 2-2-6"/></svg></div>
+              <div class="hnav-text"><p class="hnav-label">// SENA</p><p class="hnav-title">Certificaciones</p></div>
+              <span class="hnav-arrow">→</span>
+            </div>
             <div class="hnav-btn btn-scan" onclick="mostrar('contacto')">
               <div class="hnav-scan"></div>
               <span class="hc hc-tl"></span><span class="hc hc-tr"></span><span class="hc hc-bl"></span><span class="hc hc-br"></span>
@@ -806,62 +793,6 @@
               </div>
             </div>
           </div><!-- /skills-block -->
-
-          <!-- ════ CERTIFICACIONES BLOCK ════ -->
-          <div class="certs-block">
-            <p class="certs-block-title">// FORMACIÓN CERTIFICADA</p>
-            <h2 class="certs-block-heading">Certificaciones</h2>
-            <p class="certs-block-sub">
-              Certificados emitidos por el <strong style="color:var(--green-dim);">Servicio Nacional de Aprendizaje — SENA</strong>.<br>
-              Puedes verificar la autenticidad de cada certificado en el portal oficial:
-              <a href="https://certificados.sena.edu.co/CertificadoDigital/com.sena.consultacer" target="_blank">certificados.sena.edu.co</a>
-              &nbsp;·&nbsp; C.C. <span style="color:var(--green);">1053324547</span>
-            </p>
-            <div class="certs-grid">
-
-              <!-- CERT 1: PLC -->
-              <div class="cert-card" onclick="abrirModalCert('plc-i')">
-                <div class="cert-card-header">
-                  <div class="cert-icon-wrap">⚙️</div>
-                  <div class="cert-header-text">
-                    <p class="cert-tag-mono">CERT_01 · OCT 2025 · SENA</p>
-                    <h3 class="cert-name">Controladores Lógicos Programables — PLC I</h3>
-                  </div>
-                </div>
-                <div class="cert-card-body">
-                  <p class="cert-entidad">Centro de Tecnologías del Transporte · Regional Distrito Capital</p>
-                  <div class="cert-meta-row">
-                    <span class="cert-chip green">✓ VERIFICADO</span>
-                    <span class="cert-chip">⏱ 40 horas</span>
-                    <span class="cert-chip">📅 03/10/2025</span>
-                  </div>
-                  <div class="cert-cta">VER DETALLES Y CERTIFICADO <span class="cert-cta-arrow">→</span></div>
-                </div>
-              </div>
-
-              <!-- CERT 2: Python EDA -->
-              <div class="cert-card" onclick="abrirModalCert('python-eda')">
-                <div class="cert-card-header">
-                  <div class="cert-icon-wrap">🐍</div>
-                  <div class="cert-header-text">
-                    <p class="cert-tag-mono">CERT_02 · NOV 2025 · SENA</p>
-                    <h3 class="cert-name">Análisis Exploratorio de Datos en Python</h3>
-                  </div>
-                </div>
-                <div class="cert-card-body">
-                  <p class="cert-entidad">Centro de Desarrollo Agroindustrial, Turístico y Tecnológico del Guaviare · Regional Guaviare</p>
-                  <div class="cert-meta-row">
-                    <span class="cert-chip green">✓ VERIFICADO</span>
-                    <span class="cert-chip">⏱ 48 horas</span>
-                    <span class="cert-chip">📅 11/11/2025</span>
-                  </div>
-                  <div class="cert-cta">VER DETALLES Y CERTIFICADO <span class="cert-cta-arrow">→</span></div>
-                </div>
-              </div>
-
-            </div><!-- /certs-grid -->
-          </div><!-- /certs-block -->
-
         </div>
       </div>
     </div>
@@ -995,7 +926,7 @@
     <div class="contenedor-principal">
       <div class="section-wrap">
         <p class="section-title anim-el">// HISTORIAL TÉCNICO</p>
-        <h2 class="section-heading anim-el">Reparaciones , Diagnostico y Mantenimiento</h2>
+        <h2 class="section-heading anim-el">Reparaciones, Diagnóstico y Mantenimiento</h2>
         <div class="repairs-grid anim-grid anim-el">
 
           <div class="repair-card" onclick="abrirModal('lg32lf15r')">
@@ -1116,6 +1047,65 @@
     </div>
   </section>
 
+  <!-- ════ CERTIFICACIONES (SECCIÓN PROPIA) ════ -->
+  <section id="certificaciones">
+    <div class="contenedor-principal">
+      <div class="section-wrap">
+        <p class="section-title anim-el">// FORMACIÓN CERTIFICADA</p>
+        <h2 class="section-heading anim-el">Certificaciones</h2>
+        <p class="certs-section-intro anim-el">
+          Certificados emitidos por el <strong style="color:var(--green-dim);">Servicio Nacional de Aprendizaje — SENA</strong>.<br>
+          Puedes verificar la autenticidad de cada certificado en el portal oficial:
+          <a href="https://certificados.sena.edu.co/CertificadoDigital/com.sena.consultacer" target="_blank">certificados.sena.edu.co</a>
+          &nbsp;·&nbsp; C.C. <span style="color:var(--green);">1053324547</span>
+        </p>
+        <div class="certs-grid anim-grid anim-el">
+
+          <!-- CERT 1: PLC -->
+          <div class="cert-card" onclick="abrirModalCert('plc-i')">
+            <div class="cert-card-header">
+              <div class="cert-icon-wrap">⚙️</div>
+              <div class="cert-header-text">
+                <p class="cert-tag-mono">CERT_01 · OCT 2025 · SENA</p>
+                <h3 class="cert-name">Controladores Lógicos Programables — PLC I</h3>
+              </div>
+            </div>
+            <div class="cert-card-body">
+              <p class="cert-entidad">Centro de Tecnologías del Transporte · Regional Distrito Capital</p>
+              <div class="cert-meta-row">
+                <span class="cert-chip green">✓ VERIFICADO</span>
+                <span class="cert-chip">⏱ 40 horas</span>
+                <span class="cert-chip">📅 03/10/2025</span>
+              </div>
+              <div class="cert-cta">VER DETALLES Y CERTIFICADO <span class="cert-cta-arrow">→</span></div>
+            </div>
+          </div>
+
+          <!-- CERT 2: Python EDA -->
+          <div class="cert-card" onclick="abrirModalCert('python-eda')">
+            <div class="cert-card-header">
+              <div class="cert-icon-wrap">🐍</div>
+              <div class="cert-header-text">
+                <p class="cert-tag-mono">CERT_02 · NOV 2025 · SENA</p>
+                <h3 class="cert-name">Análisis Exploratorio de Datos en Python</h3>
+              </div>
+            </div>
+            <div class="cert-card-body">
+              <p class="cert-entidad">Centro de Desarrollo Agroindustrial, Turístico y Tecnológico del Guaviare · Regional Guaviare</p>
+              <div class="cert-meta-row">
+                <span class="cert-chip green">✓ VERIFICADO</span>
+                <span class="cert-chip">⏱ 48 horas</span>
+                <span class="cert-chip">📅 11/11/2025</span>
+              </div>
+              <div class="cert-cta">VER DETALLES Y CERTIFICADO <span class="cert-cta-arrow">→</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ════ CONTACTO ════ -->
   <section id="contacto">
     <div class="contenedor-principal">
@@ -1178,7 +1168,7 @@
     <div class="modal" id="modal-box">
       <div class="modal-header">
         <div class="modal-header-left">
-          <p class="modal-breadcrumb">REPARACIONES, DIAGNOSTICO Y MANTENIMIENTO// DETALLE TÉCNICO</p>
+          <p class="modal-breadcrumb">REPARACIONES, DIAGNOSTICO Y MANTENIMIENTO // DETALLE TÉCNICO</p>
           <h2 class="modal-title" id="modal-title">—</h2>
           <p class="modal-model" id="modal-model">—</p>
         </div>
@@ -1293,48 +1283,22 @@
             <a class="cmodal-btn cmodal-btn-primary" id="cmodal-btn-consultar" href="#" target="_blank">
               🔍 VERIFICAR EN SENA →
             </a>
-            <a class="cmodal-btn cmodal-btn-secondary" id="cmodal-btn-pdf" href="#" target="_blank">
-              📄 VER CERTIFICADO PDF →
-            </a>
           </div>
         </div>
 
-        <!-- Tab: PDF -->
+        <!-- Tab: PDF — iframe embebido -->
         <div id="cmodal-tab-pdf" class="cmodal-tab-content">
           <p class="cmodal-pdf-note">
-            El certificado está disponible en Google Drive para su descarga y verificación.<br>
-            También puedes consultar su autenticidad en el portal oficial del SENA:<br>
+            Certificado emitido por el SENA. También puedes consultar su autenticidad en el portal oficial:<br>
             <a href="https://certificados.sena.edu.co/CertificadoDigital/com.sena.consultacer" target="_blank">certificados.sena.edu.co</a>
             &nbsp;·&nbsp; C.C. <strong style="color:var(--green)">1053324547</strong>
           </p>
-          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px;">
-            <a class="cmodal-btn cmodal-btn-primary" id="cmodal-btn-pdf2" href="#" target="_blank">
-              📄 ABRIR CERTIFICADO EN DRIVE →
-            </a>
-            <a class="cmodal-btn cmodal-btn-secondary" href="https://certificados.sena.edu.co/CertificadoDigital/com.sena.consultacer" target="_blank">
-              🔍 VERIFICAR EN SENA →
-            </a>
-          </div>
+          <div class="cmodal-pdf-area" id="cmodal-pdf-area"></div>
         </div>
       </div>
     </div>
   </div>
 
   <script src="script.js"></script>
-  <script>
-    // Sincronizar btn-pdf del tab PDF con el enlace del certificado activo
-    const _origAbrirModalCert = abrirModalCert;
-    // Parchamos para que el btn2 del tab PDF también apunte al drive correcto
-    window.abrirModalCert = function(id) {
-      _origAbrirModalCert(id);
-      const d = certificaciones[id];
-      if (d && d.pdfDrive) {
-        document.getElementById('cmodal-btn-pdf2').href = d.pdfDrive;
-        document.getElementById('cmodal-btn-pdf2').style.display = 'inline-flex';
-      } else {
-        document.getElementById('cmodal-btn-pdf2').style.display = 'none';
-      }
-    };
-  </script>
 </body>
 </html>
