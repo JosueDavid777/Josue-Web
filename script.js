@@ -230,8 +230,9 @@ const reparaciones = {
       "Verificación de polaridad y niveles de tensión",
       "Prueba de funcionamiento completo post-adaptación"
     ],
-    imagesBefore: [{src: `https://github.com/JosueDavid777/Reparaciones-de-equipos-electr-nicos./blob/main/REPARACIONES_ELECTRONICAS/2026%20-%2005%20-ADAPTACION_RADIO/ANTES/01_RADIO_CON_CARGADOR_PARA_ADAPTAR.jpg`, title: "Radio con cargador de telefono a adaptar"},
-                   {src: `${MEDIA_PREMIER}/01_Imagenes%20y%20videos%20de%20fallas%20en%20el%20equipo/01_SULFATACION_EN_EQUIPO.jpg`, title: "Falla 1 — Sulfatación en el equipo"}
+    imagesBefore: [{src: `https://raw.githubusercontent.com/JosueDavid777/Reparaciones-de-equipos-electr-nicos./refs/heads/main/REPARACIONES_ELECTRONICAS/2026%20-%2005%20-ADAPTACION_RADIO/ANTES/01_RADIO_CON_CARGADOR_PARA_ADAPTAR.jpg`, title: "Radio con cargador de telefono a adaptar"},
+                   {src: `https://raw.githubusercontent.com/JosueDavid777/Reparaciones-de-equipos-electr-nicos./refs/heads/main/REPARACIONES_ELECTRONICAS/2026%20-%2005%20-ADAPTACION_RADIO/ANTES/02_CARGADOR_CON_PUNTAS_EXPUESTAS.jpg`, title: "Cargador con puntas expuestas"},
+                   {src: `https://raw.githubusercontent.com/JosueDavid777/Reparaciones-de-equipos-electr-nicos./refs/heads/main/REPARACIONES_ELECTRONICAS/2026%20-%2005%20-ADAPTACION_RADIO/ANTES/03_ENTRADA_A_ADAPTAR.jpg`, title: "Radio con entrada a adaptar"}
                   ],
     videosAfter: [{ src: `${MEDIA_PREMIER}/02_Videos%20de%20equipo%20funcionando%20y%20reparado/Video_equipo_funcionando.mp4`, title: "Grabadora Funcionando" }],
     pdf: null
