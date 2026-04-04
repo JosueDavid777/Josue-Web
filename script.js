@@ -234,8 +234,8 @@ const reparaciones = {
                    {src: "https://raw.githubusercontent.com/JosueDavid777/Reparaciones-de-equipos-electr-nicos./refs/heads/main/REPARACIONES_ELECTRONICAS/2026%20-%2005%20-ADAPTACION_RADIO/ANTES/02_CARGADOR_CON_PUNTAS_EXPUESTAS.jpg", title: "Cargador con puntas expuestas"},
                    {src: "https://raw.githubusercontent.com/JosueDavid777/Reparaciones-de-equipos-electr-nicos./refs/heads/main/REPARACIONES_ELECTRONICAS/2026%20-%2005%20-ADAPTACION_RADIO/ANTES/03_ENTRADA_A_ADAPTAR.jpg", title: "Radio con entrada a adaptar"}
                   ],
-    videosAfter: [{ src: "https://github.com/JosueDavid777/Reparaciones-de-equipos-electr-nicos./raw/refs/heads/main/REPARACIONES_ELECTRONICAS/2026%20-%2005%20-ADAPTACION_RADIO/DESPUES/01_RADIO_CON_CARGADOR_SONANDO.mp4", title: "Radio Funcionando" },
-                 { src: "https://github.com/JosueDavid777/Reparaciones-de-equipos-electr-nicos./raw/refs/heads/main/REPARACIONES_ELECTRONICAS/2026%20-%2005%20-ADAPTACION_RADIO/DESPUES/02_RADIO_CERRADO_SONANO.mp4", title: "Radio sellado Funcionando" }],
+    videosAfter: [{ src: "https://raw.githubusercontent.com/JosueDavid777/Reparaciones-de-equipos-electr-nicos./refs/heads/main/REPARACIONES_ELECTRONICAS/2026%20-%2005%20-ADAPTACION_RADIO/DESPUES/01_RADIO_CON_CARGADOR_SONANDO.mp4", title: "Radio Funcionando" },
+                 { src: "https://raw.githubusercontent.com/JosueDavid777/Reparaciones-de-equipos-electr-nicos./refs/heads/main/REPARACIONES_ELECTRONICAS/2026%20-%2005%20-ADAPTACION_RADIO/DESPUES/02_RADIO_CERRADO_SONANO.mp4", title: "Radio sellado Funcionando" }],
     pdf: null
   },
   "lg32cs410": {
