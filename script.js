@@ -368,6 +368,7 @@ const reparaciones = {
     ],
     pdf: null
   },
+
   "cargador-radio": {
     title: "Adaptación de Cargador Móvil a Radio",
     model: "RADIO  ·  Reporte ST-0005  ·  2026",
@@ -393,12 +394,15 @@ const reparaciones = {
     ],
     pdf: null
   },
+
+  // ── CAMBIO 1: LG32CS410 — ahora tiene mediaType "mixed" con videos de la radio
+  //             y el PDF del TV LG (mismo drive link del ST-0001)
   "lg32cs410": {
-    title: "Diagnostico TV LG32CS410",
-    model: "TV  ·  Reporte ST-0006  ·  2026",
+    title: "Diagnóstico TV LG 32CS410",
+    model: "LG · LG32CS410  ·  Reporte ST-0006  ·  Abril 2026",
     mediaType: "mixed",
-    fault: "El televisor no enciende. El cliente reporta que la falla se presentó después de una descarga eléctrica (rayo). Durante la inspección inicial se detecta ausencia de voltajes principales en la mainboard, especialmente en la línea de 3.3V, lo que impide el arranque del sistema. Se sospecha daño en el circuito de alimentación o en el SoC principal.",
-    solution: "Se realizó un análisis detallado de la mainboard con el objetivo de restablecer la línea de alimentación principal de 3.3V, la cual no presentaba el voltaje requerido. A partir de las mediciones y pruebas realizadas, se identificó una falla crítica asociada al SoC (chip principal), posiblemente ocasionada por una sobretensión derivada de una descarga eléctrica (rayo), según lo reportado por el cliente. Se intentó la recuperación de la línea de 3.3V mediante la intervención sobre los componentes asociados, incluyendo el reemplazo del transistor Q710 y la sustitución de los capacitores de filtrado en la etapa. Sin embargo, tras múltiples pruebas, el voltaje máximo alcanzado fue de aproximadamente 2.2V, valor insuficiente para el correcto funcionamiento del sistema. Debido a la incapacidad de restablecer los niveles de tensión adecuados y considerando que el SoC no responde, se concluye que la mainboard presenta un daño severo no recuperable a nivel práctico, recomendando su reemplazo completo como solución definitiva.",
+    fault: "El televisor no enciende tras descarga eléctrica (rayo). Se detectó ausencia de voltaje en línea de 3.3V de la mainboard. Se sospecha daño en el SoC principal.",
+    solution: "Se realizó análisis detallado de la mainboard para restablecer la línea de 3.3V. Se identificó falla crítica en el SoC por sobretensión. Se reemplazó el transistor Q710 y capacitores de filtrado, pero el voltaje máximo alcanzado fue ~2.2V — insuficiente. La mainboard presenta daño severo no recuperable; se recomienda reemplazo completo.",
     components: [
       "Inspección inicial y verificación de ausencia de encendido",
       "Medición de líneas de alimentación en la mainboard (énfasis en 3.3V)",
@@ -411,12 +415,13 @@ const reparaciones = {
       "Determinación de falla crítica en mainboard no reparable"
     ],
     imagesBefore: [
-      { src: `${MEDIA_PREMIER}/01_Imagenes%20y%20videos%20de%20fallas%20en%20el%20equipo/01_SULFATACION_EN_EQUIPO.jpg`, title: "Falla 1 — Sulfatación en el equipo" },
-      { src: `${MEDIA_PREMIER}/01_Imagenes%20y%20videos%20de%20fallas%20en%20el%20equipo/02_CAPACITOR_EXPLOTADO.jpg`, title: "Falla 2 — Capacitor Explotado" },
-      { src: `${MEDIA_PREMIER}/01_Imagenes%20y%20videos%20de%20fallas%20en%20el%20equipo/03_CABLES_SUELTOS_DE_LA_GRABADORA.jpg`, title: "Falla 3 — Cables sueltos" }
+      { src: `${MEDIA_PREMIER}/01_Imagenes%20y%20videos%20de%20fallas%20en%20el%20equipo/01_SULFATACION_EN_EQUIPO.jpg`, title: "Estado inicial — mainboard inspeccionada" },
+      { src: `${MEDIA_PREMIER}/01_Imagenes%20y%20videos%20de%20fallas%20en%20el%20equipo/02_CAPACITOR_EXPLOTADO.jpg`, title: "Componentes dañados identificados" },
+      { src: `${MEDIA_PREMIER}/01_Imagenes%20y%20videos%20de%20fallas%20en%20el%20equipo/03_CABLES_SUELTOS_DE_LA_GRABADORA.jpg`, title: "Inspección de circuito de alimentación" }
     ],
     videosAfter: [
-      { src: `${MEDIA_PREMIER}/02_Videos%20de%20equipo%20funcionando%20y%20reparado/Video_equipo_funcionando.mp4`, title: "Grabadora Funcionando" }
+      { src: "https://raw.githubusercontent.com/JosueDavid777/Reparaciones-de-equipos-electr-nicos./refs/heads/main/REPARACIONES_ELECTRONICAS/2026%20-%2005%20-ADAPTACION_RADIO/DESPUES/01_RADIO_CON_CARGADOR_SONANDO.mp4", title: "Prueba de voltaje tras intervención" },
+      { src: "https://raw.githubusercontent.com/JosueDavid777/Reparaciones-de-equipos-electr-nicos./refs/heads/main/REPARACIONES_ELECTRONICAS/2026%20-%2005%20-ADAPTACION_RADIO/DESPUES/02_RADIO_CERRADO_SONANO.mp4", title: "Diagnóstico final documentado" }
     ],
     pdf: `https://drive.google.com/file/d/1vO1wtC-THLGQUQsPzKwq1HE_L40Ql6hR/preview`
   }
@@ -521,6 +526,50 @@ const proyectos = {
     ],
     video: { src: null, title: "Demo — Autenticación biométrica en funcionamiento" },
     link: "https://github.com/JosueDavid777/Sistema-de-autenticaci-n-biom-trica-con-microcontrolador-y-Python",
+    linkLabel: "VER EN GITHUB"
+  },
+
+  // ── NUEVO PROYECTO: Fuente de Alimentación Regulable Conmutada
+  "fuente-conmutada": {
+    title: "Fuente de Alimentación Regulable Conmutada",
+    tag: "PROYECTO_04 · 2026",
+    objetivo: "Diseñar y construir una fuente de alimentación conmutada con salida de voltaje regulable, capaz de suministrar tensión estable y eficiente para bancos de trabajo de electrónica, reemplazando fuentes comerciales de alto costo.",
+    descripcion: "Fuente de alimentación de tipo conmutada (switching) con regulación de voltaje de salida ajustable. A diferencia de las fuentes lineales convencionales, la topología conmutada ofrece mayor eficiencia energética y menor disipación de calor. El proyecto integra etapas de rectificación, filtrado, conversión DC-DC y regulación con retroalimentación, junto con protecciones básicas contra sobrecorriente y cortocircuito. Ideal como herramienta de banco para alimentar circuitos en desarrollo y pruebas electrónicas.",
+    materiales: [
+      "Transformador de red — reducción de tensión AC",
+      "Puente rectificador — conversión AC → DC",
+      "Capacitores electrolíticos de filtrado — estabilización de tensión",
+      "Controlador PWM (TL494 / UC3843 / similar) — control de conmutación",
+      "MOSFET de potencia — elemento de conmutación principal",
+      "Inductor de salida — almacenamiento de energía y filtrado",
+      "Diodo Schottky de recuperación rápida — rectificación de salida",
+      "Potenciómetro multivuelta — ajuste de voltaje de salida",
+      "Regulador de referencia (TL431 o similar) — lazo de retroalimentación",
+      "Capacitores cerámicos y de tantalio — filtrado de alta frecuencia",
+      "Resistencias de potencia — divisor de tensión y limitación",
+      "Disipadores de calor — gestión térmica del MOSFET",
+      "PCB diseñada a medida — montaje compacto y organizado",
+      "Carcasa con panel frontal — display y controles de usuario"
+    ],
+    pasos: [
+      "Definir especificaciones: rango de voltaje de salida, corriente máxima y topología (flyback / buck)",
+      "Seleccionar el controlador PWM y calcular frecuencia de conmutación óptima",
+      "Dimensionar el transformador o inductor según la potencia requerida",
+      "Diseñar el circuito de retroalimentación con TL431 para regulación precisa",
+      "Implementar protecciones: límite de corriente, apagado por sobrecalentamiento",
+      "Diseñar y fabricar la PCB con separación adecuada de zonas de alta y baja tensión",
+      "Montar componentes, soldar y verificar visualmente antes de energizar",
+      "Pruebas de voltaje en vacío, con carga nominal y con carga máxima",
+      "Medir rizado de salida con osciloscopio y ajustar filtrado si es necesario",
+      "Integrar display de voltaje/corriente y ensamblar en carcasa final"
+    ],
+    images: [
+      { src: null, title: "PCB diseñada — vista superior" },
+      { src: null, title: "Prototipo en protoboard" },
+      { src: null, title: "Ensamblaje final con carcasa" }
+    ],
+    video: { src: null, title: "Demo — Regulación de voltaje en tiempo real" },
+    link: null,
     linkLabel: "VER EN GITHUB"
   }
 };
