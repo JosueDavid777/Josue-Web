@@ -170,6 +170,7 @@
     .stat-label { font-size: 0.85rem; color: var(--muted); letter-spacing: 1px; }
     .hero-nav { display: flex; gap: 16px; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.6s 1.2s forwards; }
 
+    /* ════ HERO NAV BUTTONS ════ */
     .hnav-btn {
       position: relative; display: flex; align-items: center; gap: 14px;
       padding: 16px 22px; background: rgba(0,255,65,0.03);
@@ -210,18 +211,20 @@
       50%       { box-shadow: 0 0 0 4px rgba(0,255,65,0.15); }
     }
     .hnav-btn.pulse-icon .hnav-icon { animation: iconPulse 2.4s 1.6s infinite; }
+
+    /* Scan solo para botones de proyectos/contacto — REPARACIONES no lo tiene */
     @keyframes hnavScanProj {
       0%   { transform: translateX(-110%); }
       100% { transform: translateX(210%); }
     }
-    .hnav-btn.btn-proyectos .hnav-scan {
+    .hnav-btn.btn-scan .hnav-scan {
       position: absolute; top: 0; left: 0; bottom: 0; width: 35%;
       background: linear-gradient(90deg,transparent,rgba(0,255,65,0.07),transparent);
       pointer-events: none; z-index: 0;
     }
-    .hnav-btn.btn-proyectos:nth-child(1) .hnav-scan { animation: hnavScanProj 3s 2s infinite; }
-    .hnav-btn.btn-proyectos:nth-child(2) .hnav-scan { animation: hnavScanProj 3.4s 0.8s infinite; }
-    .hnav-btn.btn-proyectos:nth-child(3) .hnav-scan { animation: hnavScanProj 2.8s 1.5s infinite; }
+    .hnav-btn.btn-scan:nth-child(1) .hnav-scan { animation: hnavScanProj 3s 2s infinite; }
+    .hnav-btn.btn-scan:nth-child(2) .hnav-scan { animation: hnavScanProj 3.4s 0.8s infinite; }
+    .hnav-btn.btn-scan:nth-child(3) .hnav-scan { animation: hnavScanProj 2.8s 1.5s infinite; }
 
     /* ════ SECTION WRAP ════ */
     .section-wrap { padding: 60px 40px; max-width: 1100px; margin: 0 auto; }
@@ -270,6 +273,68 @@
     .lang-dot { width: 8px; height: 8px; border-radius: 50%; }
     .lang-name { font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; color: #fff; letter-spacing: 1px; }
     .lang-level { font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; color: var(--muted); margin-left: 4px; }
+
+    /* ════ CERTIFICACIONES ════ */
+    .certs-block {
+      margin-top: 60px; padding-top: 40px;
+      border-top: 1px solid rgba(0,255,65,0.1);
+      opacity: 0; animation: fadeUp 0.6s 1.6s forwards;
+    }
+    .certs-block-title { font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; color: var(--green); letter-spacing: 4px; margin-bottom: 8px; }
+    .certs-block-heading { font-size: 2rem; font-weight: 700; color: #fff; margin-bottom: 8px; padding-bottom: 14px; border-bottom: 1px solid rgba(0,255,65,0.15); }
+    .certs-block-sub {
+      font-family: 'Share Tech Mono', monospace; font-size: 0.72rem; color: var(--muted);
+      margin-bottom: 28px; line-height: 1.7;
+    }
+    .certs-block-sub a {
+      color: var(--green); text-decoration: none;
+      border-bottom: 1px solid rgba(0,255,65,0.3);
+      transition: border-color 0.2s, text-shadow 0.2s;
+    }
+    .certs-block-sub a:hover { border-color: var(--green); text-shadow: 0 0 8px rgba(0,255,65,0.4); }
+    .certs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap: 18px; }
+
+    .cert-card {
+      background: rgba(0,255,65,0.03); border: 1px solid rgba(0,255,65,0.15);
+      border-radius: 10px; overflow: hidden; cursor: pointer;
+      transition: all 0.3s; display: flex; flex-direction: column;
+    }
+    .cert-card:hover {
+      border-color: rgba(0,255,65,0.5); background: rgba(0,255,65,0.07);
+      transform: translateY(-4px); box-shadow: 0 10px 36px rgba(0,255,65,0.1);
+    }
+    .cert-card-header {
+      padding: 20px 22px 14px; display: flex; align-items: flex-start; gap: 14px;
+      border-bottom: 1px solid rgba(0,255,65,0.08);
+    }
+    .cert-icon-wrap {
+      width: 48px; height: 48px; flex-shrink: 0;
+      background: rgba(0,255,65,0.07); border: 1px solid rgba(0,255,65,0.25);
+      border-radius: 8px; display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; transition: background 0.2s, border-color 0.2s;
+    }
+    .cert-card:hover .cert-icon-wrap { background: rgba(0,255,65,0.14); border-color: var(--green); }
+    .cert-header-text { flex: 1; }
+    .cert-tag-mono { font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; color: var(--green); letter-spacing: 2px; margin-bottom: 4px; }
+    .cert-name { font-size: 1.05rem; font-weight: 700; color: #fff; line-height: 1.3; }
+    .cert-card-body { padding: 14px 22px 20px; flex: 1; display: flex; flex-direction: column; gap: 8px; }
+    .cert-entidad { font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; color: var(--muted); line-height: 1.5; }
+    .cert-meta-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
+    .cert-chip {
+      font-family: 'Share Tech Mono', monospace; font-size: 0.62rem; color: var(--muted);
+      padding: 3px 9px; border: 1px solid rgba(0,255,65,0.12); border-radius: 4px;
+      background: rgba(0,255,65,0.03);
+    }
+    .cert-chip.green { color: var(--green); border-color: rgba(0,255,65,0.3); background: rgba(0,255,65,0.06); }
+    .cert-cta {
+      margin-top: auto; padding-top: 12px;
+      display: flex; align-items: center; gap: 8px;
+      font-family: 'Share Tech Mono', monospace; font-size: 0.75rem;
+      color: var(--green); transition: gap 0.2s;
+    }
+    .cert-card:hover .cert-cta { gap: 14px; }
+    .cert-cta-arrow { transition: transform 0.2s; }
+    .cert-card:hover .cert-cta-arrow { transform: translateX(4px); }
 
     /* ════ PROYECTOS ════ */
     .projects-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(320px,1fr)); gap: 24px; }
@@ -464,28 +529,75 @@
     .pmodal-tab-content { display: none; }
     .pmodal-tab-content.active { display: block; }
 
-    /* Bloques de contenido del modal proyecto */
     .pblock { background: rgba(0,255,65,0.03); border: 1px solid rgba(0,255,65,0.15); border-left: 3px solid var(--green); border-radius: 6px; padding: 20px 24px; margin-bottom: 20px; }
     .pblock-muted { border-left-color: var(--muted); }
     .pblock-label { font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; color: var(--green); letter-spacing: 2px; margin-bottom: 8px; }
     .pblock-label-muted { color: var(--muted); }
     .pblock-text { color: var(--text); font-size: 1rem; line-height: 1.75; }
 
-    /* Lista de materiales */
     .pmat-label { font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; color: var(--green); letter-spacing: 2px; margin-bottom: 12px; }
     .pmat-list { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 28px; }
     .pmat-list li { display: flex; align-items: flex-start; gap: 10px; font-family: 'Share Tech Mono', monospace; font-size: 0.82rem; color: var(--text); padding: 10px 16px; background: rgba(0,255,65,0.03); border: 1px solid rgba(0,255,65,0.1); border-radius: 6px; line-height: 1.4; }
     .pmat-list li::before { content: '▸'; color: var(--green); font-size: 0.8rem; flex-shrink: 0; margin-top: 1px; }
 
-    /* Lista de pasos */
     .ppaso-label { font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; color: var(--green); letter-spacing: 2px; margin-bottom: 12px; }
     .ppaso-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
     .ppaso-list li { display: flex; align-items: flex-start; gap: 14px; color: var(--text); padding: 12px 16px; background: rgba(0,255,65,0.02); border: 1px solid rgba(0,255,65,0.08); border-radius: 6px; line-height: 1.5; font-size: 0.95rem; }
     .paso-num { font-family: 'Share Tech Mono', monospace; font-size: 0.75rem; color: var(--green); opacity: 0.7; flex-shrink: 0; margin-top: 2px; min-width: 24px; }
 
-    /* Botón link del proyecto */
     .pmodal-link-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; background: rgba(0,255,65,0.08); border: 1px solid var(--green); border-radius: 4px; color: var(--green); font-family: 'Share Tech Mono', monospace; font-size: 0.82rem; letter-spacing: 2px; text-decoration: none; transition: background 0.25s, box-shadow 0.25s, transform 0.15s; margin-top: 4px; }
     .pmodal-link-btn:hover { background: rgba(0,255,65,0.14); box-shadow: 0 0 18px rgba(0,255,65,0.2); transform: translateY(-1px); }
+
+    /* ════ MODAL CERTIFICACIONES ════ */
+    .cmodal-overlay { display: none; position: fixed; inset: 0; z-index: 500; background: rgba(0,0,0,0.9); backdrop-filter: blur(8px); padding: 20px; overflow-y: auto; }
+    .cmodal-overlay.open { display: flex; align-items: flex-start; justify-content: center; animation: fadeOverlay 0.25s ease; }
+    .cmodal { background: #040e04; border: 1px solid rgba(0,255,65,0.3); border-radius: 12px; width: 100%; max-width: 860px; margin: auto; animation: slideUp 0.3s ease; overflow: hidden; }
+    .cmodal-header { padding: 24px 32px; border-bottom: 1px solid rgba(0,255,65,0.12); display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; background: rgba(0,255,65,0.04); }
+    .cmodal-header-left { flex: 1; }
+    .cmodal-breadcrumb { font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; color: var(--muted); letter-spacing: 2px; margin-bottom: 8px; }
+    .cmodal-titulo { font-size: 1.6rem; font-weight: 700; color: #fff; margin-bottom: 4px; line-height: 1.2; }
+    .cmodal-entidad-tag { font-family: 'Share Tech Mono', monospace; font-size: 0.78rem; color: var(--green); opacity: 0.85; }
+    .cmodal-close { background: none; border: 1px solid rgba(0,255,65,0.2); color: var(--muted); font-size: 1.1rem; width: 36px; height: 36px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; flex-shrink: 0; font-family: monospace; }
+    .cmodal-close:hover { color: var(--green); border-color: var(--green); background: rgba(0,255,65,0.08); }
+    .cmodal-body { padding: 32px; }
+    .cmodal-tabs { display: flex; gap: 4px; margin-bottom: 28px; border-bottom: 1px solid rgba(0,255,65,0.1); overflow-x: auto; }
+    .cmodal-tab { font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; color: var(--muted); padding: 10px 18px; cursor: pointer; border: none; background: none; letter-spacing: 1px; white-space: nowrap; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all 0.2s; }
+    .cmodal-tab:hover { color: var(--text); }
+    .cmodal-tab.active { color: var(--green); border-bottom-color: var(--green); text-shadow: 0 0 6px rgba(0,255,65,0.4); }
+    .cmodal-tab-content { display: none; }
+    .cmodal-tab-content.active { display: block; }
+
+    /* Info tab del modal cert */
+    .cmodal-meta-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap: 12px; margin-bottom: 24px; }
+    .cmodal-meta-item { background: rgba(0,255,65,0.03); border: 1px solid rgba(0,255,65,0.12); border-radius: 6px; padding: 12px 16px; }
+    .cmodal-meta-label { font-family: 'Share Tech Mono', monospace; font-size: 0.62rem; color: var(--muted); letter-spacing: 2px; margin-bottom: 4px; }
+    .cmodal-meta-val { font-family: 'Share Tech Mono', monospace; font-size: 0.88rem; color: var(--green); font-weight: bold; }
+    .cmodal-desc-block { background: rgba(0,255,65,0.03); border: 1px solid rgba(0,255,65,0.15); border-left: 3px solid var(--green); border-radius: 6px; padding: 20px 24px; margin-bottom: 22px; }
+    .cmodal-desc-label { font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; color: var(--green); letter-spacing: 2px; margin-bottom: 10px; }
+    .cmodal-desc-text { color: var(--text); font-size: 0.98rem; line-height: 1.8; }
+    .cmodal-temas-label { font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; color: var(--green); letter-spacing: 2px; margin-bottom: 12px; }
+    .cmodal-temas-list { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 28px; }
+    .cmodal-temas-list li { display: flex; align-items: flex-start; gap: 10px; font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; color: var(--text); padding: 10px 16px; background: rgba(0,255,65,0.03); border: 1px solid rgba(0,255,65,0.1); border-radius: 6px; line-height: 1.4; }
+    .cmodal-temas-list li::before { content: '▸'; color: var(--green); font-size: 0.8rem; flex-shrink: 0; margin-top: 1px; }
+    .cmodal-codigo-block { background: rgba(0,0,0,0.4); border: 1px solid rgba(0,255,65,0.12); border-radius: 6px; padding: 14px 18px; margin-bottom: 22px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .cmodal-codigo-label { font-family: 'Share Tech Mono', monospace; font-size: 0.62rem; color: var(--muted); letter-spacing: 2px; flex-shrink: 0; }
+    .cmodal-codigo-val { font-family: 'Share Tech Mono', monospace; font-size: 0.78rem; color: var(--green-dim); word-break: break-all; }
+    .cmodal-btns-row { display: flex; gap: 12px; flex-wrap: wrap; }
+    .cmodal-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 20px; border-radius: 4px;
+      font-family: 'Share Tech Mono', monospace; font-size: 0.78rem; letter-spacing: 2px;
+      text-decoration: none; transition: all 0.25s; cursor: pointer; border: 1px solid;
+    }
+    .cmodal-btn-primary { background: rgba(0,255,65,0.08); border-color: var(--green); color: var(--green); }
+    .cmodal-btn-primary:hover { background: rgba(0,255,65,0.18); box-shadow: 0 0 16px rgba(0,255,65,0.2); transform: translateY(-1px); }
+    .cmodal-btn-secondary { background: rgba(0,255,65,0.03); border-color: rgba(0,255,65,0.25); color: var(--muted); }
+    .cmodal-btn-secondary:hover { background: rgba(0,255,65,0.08); border-color: var(--green); color: var(--green); transform: translateY(-1px); }
+
+    /* PDF tab del modal cert */
+    .cmodal-pdf-note { font-family: 'Share Tech Mono', monospace; font-size: 0.72rem; color: var(--muted); margin-bottom: 18px; line-height: 1.7; }
+    .cmodal-pdf-note a { color: var(--green); text-decoration: none; border-bottom: 1px solid rgba(0,255,65,0.3); transition: border-color 0.2s; }
+    .cmodal-pdf-note a:hover { border-color: var(--green); }
 
     #page-flash { position: fixed; inset: 0; z-index: 300; pointer-events: none; background: rgba(0,255,65,0.04); opacity: 0; }
     #page-flash.flash-in { animation: pageFlash 0.35s ease forwards; }
@@ -510,7 +622,11 @@
       .pmodal-body { padding: 16px; }
       .pmodal-header { padding: 16px 20px; }
       .pmodal-title { font-size: 1.35rem; }
+      .cmodal-body { padding: 16px; }
+      .cmodal-header { padding: 16px 20px; }
+      .cmodal-titulo { font-size: 1.2rem; }
       .skills-block { margin-top: 40px; padding-top: 30px; }
+      .certs-block { margin-top: 40px; padding-top: 30px; }
     }
   </style>
 </head>
@@ -568,21 +684,23 @@
             <div class="stat"><span class="stat-num">∞</span><span class="stat-label">APRENDIZAJE</span></div>
           </div>
           <div class="hero-nav">
-            <div class="hnav-btn btn-proyectos" onclick="mostrar('proyectos')">
+            <!-- Proyectos: con scan -->
+            <div class="hnav-btn btn-scan" onclick="mostrar('proyectos')">
               <div class="hnav-scan"></div>
               <span class="hc hc-tl"></span><span class="hc hc-tr"></span><span class="hc hc-bl"></span><span class="hc hc-br"></span>
               <div class="hnav-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/></svg></div>
               <div class="hnav-text"><p class="hnav-label">// EXPLORAR</p><p class="hnav-title">Proyectos</p></div>
               <span class="hnav-arrow">→</span>
             </div>
-            <div class="hnav-btn btn-proyectos pulse-icon" onclick="mostrar('reparaciones')">
-              <div class="hnav-scan"></div>
+            <!-- Reparaciones: SIN scan, solo reflejo/hover normal -->
+            <div class="hnav-btn pulse-icon" onclick="mostrar('reparaciones')">
               <span class="hc hc-tl"></span><span class="hc hc-tr"></span><span class="hc hc-bl"></span><span class="hc hc-br"></span>
               <div class="hnav-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
               <div class="hnav-text"><p class="hnav-label">// TÉCNICO</p><p class="hnav-title">Reparaciones</p></div>
               <span class="hnav-arrow">→</span>
             </div>
-            <div class="hnav-btn btn-proyectos" onclick="mostrar('contacto')">
+            <!-- Contacto: con scan -->
+            <div class="hnav-btn btn-scan" onclick="mostrar('contacto')">
               <div class="hnav-scan"></div>
               <span class="hc hc-tl"></span><span class="hc hc-tr"></span><span class="hc hc-bl"></span><span class="hc hc-br"></span>
               <div class="hnav-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
@@ -688,6 +806,62 @@
               </div>
             </div>
           </div><!-- /skills-block -->
+
+          <!-- ════ CERTIFICACIONES BLOCK ════ -->
+          <div class="certs-block">
+            <p class="certs-block-title">// FORMACIÓN CERTIFICADA</p>
+            <h2 class="certs-block-heading">Certificaciones</h2>
+            <p class="certs-block-sub">
+              Certificados emitidos por el <strong style="color:var(--green-dim);">Servicio Nacional de Aprendizaje — SENA</strong>.<br>
+              Puedes verificar la autenticidad de cada certificado en el portal oficial:
+              <a href="https://certificados.sena.edu.co/CertificadoDigital/com.sena.consultacer" target="_blank">certificados.sena.edu.co</a>
+              &nbsp;·&nbsp; C.C. <span style="color:var(--green);">1053324547</span>
+            </p>
+            <div class="certs-grid">
+
+              <!-- CERT 1: PLC -->
+              <div class="cert-card" onclick="abrirModalCert('plc-i')">
+                <div class="cert-card-header">
+                  <div class="cert-icon-wrap">⚙️</div>
+                  <div class="cert-header-text">
+                    <p class="cert-tag-mono">CERT_01 · OCT 2025 · SENA</p>
+                    <h3 class="cert-name">Controladores Lógicos Programables — PLC I</h3>
+                  </div>
+                </div>
+                <div class="cert-card-body">
+                  <p class="cert-entidad">Centro de Tecnologías del Transporte · Regional Distrito Capital</p>
+                  <div class="cert-meta-row">
+                    <span class="cert-chip green">✓ VERIFICADO</span>
+                    <span class="cert-chip">⏱ 40 horas</span>
+                    <span class="cert-chip">📅 03/10/2025</span>
+                  </div>
+                  <div class="cert-cta">VER DETALLES Y CERTIFICADO <span class="cert-cta-arrow">→</span></div>
+                </div>
+              </div>
+
+              <!-- CERT 2: Python EDA -->
+              <div class="cert-card" onclick="abrirModalCert('python-eda')">
+                <div class="cert-card-header">
+                  <div class="cert-icon-wrap">🐍</div>
+                  <div class="cert-header-text">
+                    <p class="cert-tag-mono">CERT_02 · NOV 2025 · SENA</p>
+                    <h3 class="cert-name">Análisis Exploratorio de Datos en Python</h3>
+                  </div>
+                </div>
+                <div class="cert-card-body">
+                  <p class="cert-entidad">Centro de Desarrollo Agroindustrial, Turístico y Tecnológico del Guaviare · Regional Guaviare</p>
+                  <div class="cert-meta-row">
+                    <span class="cert-chip green">✓ VERIFICADO</span>
+                    <span class="cert-chip">⏱ 48 horas</span>
+                    <span class="cert-chip">📅 11/11/2025</span>
+                  </div>
+                  <div class="cert-cta">VER DETALLES Y CERTIFICADO <span class="cert-cta-arrow">→</span></div>
+                </div>
+              </div>
+
+            </div><!-- /certs-grid -->
+          </div><!-- /certs-block -->
+
         </div>
       </div>
     </div>
@@ -701,7 +875,6 @@
         <h2 class="section-heading anim-el">Proyectos</h2>
         <div class="projects-grid anim-grid anim-el">
 
-          <!-- PROYECTO 1: Bot WhatsApp -->
           <div class="project-card-full" onclick="abrirModalProyecto('bot-whatsapp')">
             <div class="project-card-thumb">
               <span class="project-status-badge live">✓ LIVE</span>
@@ -746,7 +919,6 @@
             </div>
           </div>
 
-          <!-- PROYECTO 2: Asistente Python -->
           <div class="project-card-full" onclick="abrirModalProyecto('asistente-python')">
             <div class="project-card-thumb">
               <span class="project-status-badge live">✓ LIVE</span>
@@ -777,7 +949,6 @@
             </div>
           </div>
 
-          <!-- PROYECTO 3: Biométrico -->
           <div class="project-card-full" onclick="abrirModalProyecto('biometrico')">
             <div class="project-card-thumb">
               <span class="project-status-badge live">✓ COMPLETO</span>
@@ -844,6 +1015,7 @@
               <div class="repair-cta">VER DOCUMENTACIÓN COMPLETA <span class="repair-cta-arrow">→</span></div>
             </div>
           </div>
+
           <div class="repair-card" onclick="abrirModal('tv-challenger')">
             <div class="repair-card-thumb">
               <span class="repair-status-badge ok">✓ MANTENIMIENTO EXITOSO</span>
@@ -915,6 +1087,7 @@
               <div class="repair-cta">VER DOCUMENTACIÓN COMPLETA <span class="repair-cta-arrow">→</span></div>
             </div>
           </div>
+
           <div class="repair-card" onclick="abrirModal('lg32cs410')">
             <div class="repair-card-thumb">
               <span class="repair-status-badge ok">✓ DIAGNOSTICADO</span>
@@ -922,12 +1095,12 @@
             </div>
             <div class="repair-card-body">
               <p class="repair-model">LG · LG32CS410 &nbsp;·&nbsp; REPORTE ST-0006 &nbsp;·&nbsp; ABRIL 2026</p>
-              <h3 class="repair-name">Televisor LG 32LF15R</h3>
-              <p class="repair-fault">El televisor no enciende. El cliente reporta que la falla se presentó después de una descarga eléctrica (rayo). Durante la inspección inicial se detecta ausencia de voltajes principales en la mainboard, especialmente en la línea de 3.3V, lo que impide el arranque del sistema. Se sospecha daño en el circuito de alimentación o en el SoC principal.</p>
+              <h3 class="repair-name">Televisor LG 32CS410</h3>
+              <p class="repair-fault">El televisor no enciende tras descarga eléctrica (rayo). Se detectó ausencia de voltaje en línea de 3.3V de la mainboard. Se sospecha daño en el SoC principal.</p>
               <div class="repair-meta">
                 <span class="repair-chip"><svg viewBox="0 0 12 12"><rect x="1" y="2" width="10" height="7" rx="1"/><line x1="6" y1="9" x2="6" y2="11"/><line x1="3" y1="11" x2="9" y2="11"/></svg>TV / DISPLAY</span>
                 <span class="repair-chip"><svg viewBox="0 0 12 12"><rect x="2" y="2" width="8" height="8" rx="1"/><circle cx="6" cy="6" r="1.5"/></svg>PLACA PRINCIPAL</span>
-                <span class="repair-chip"><svg viewBox="0 0 12 12"><path d="M6 1v10M1 6h10"/></svg>TRANSISTOR Q710 Y LINEA DE 3.3V</span>
+                <span class="repair-chip"><svg viewBox="0 0 12 12"><path d="M6 1v10M1 6h10"/></svg>TRANSISTOR Q710</span>
               </div>
               <div class="repair-cta">VER DOCUMENTACIÓN COMPLETA <span class="repair-cta-arrow">→</span></div>
             </div>
@@ -1049,8 +1222,6 @@
           <button class="pmodal-tab active" data-tab="pmodal-tab-desc" onclick="cambiarTabProyecto(this,'pmodal-tab-desc')">DESCRIPCIÓN DEL PROYECTO</button>
           <button class="pmodal-tab" data-tab="pmodal-tab-media" onclick="cambiarTabProyecto(this,'pmodal-tab-media')">IMÁGENES & VIDEO</button>
         </div>
-
-        <!-- Tab: Descripción -->
         <div id="pmodal-tab-desc" class="pmodal-tab-content active">
           <div class="pblock">
             <p class="pblock-label">// OBJETIVO</p>
@@ -1060,22 +1231,110 @@
             <p class="pblock-label pblock-label-muted">// DESCRIPCIÓN GENERAL</p>
             <p class="pblock-text" id="pmodal-descripcion">—</p>
           </div>
-
           <p class="pmat-label">// MATERIALES Y TECNOLOGÍAS UTILIZADAS</p>
           <ul class="pmat-list" id="pmodal-materiales"></ul>
-
           <p class="ppaso-label">// ¿QUÉ HACE ESTE PROYECTO? — PASO A PASO</p>
           <ul class="ppaso-list" id="pmodal-pasos"></ul>
-
           <a class="pmodal-link-btn" id="pmodal-link" href="#" target="_blank">&gt; VER PROYECTO →</a>
         </div>
-
-        <!-- Tab: Media -->
         <div id="pmodal-tab-media" class="pmodal-tab-content"></div>
       </div>
     </div>
   </div>
 
+  <!-- ════ MODAL CERTIFICACIONES ════ -->
+  <div class="cmodal-overlay" id="cmodal-overlay" onclick="cerrarModalCertFuera(event)">
+    <div class="cmodal">
+      <div class="cmodal-header">
+        <div class="cmodal-header-left">
+          <p class="cmodal-breadcrumb">SENA // CERTIFICACIÓN OFICIAL</p>
+          <h2 class="cmodal-titulo" id="cmodal-titulo">—</h2>
+          <p class="cmodal-entidad-tag" id="cmodal-entidad">—</p>
+        </div>
+        <button class="cmodal-close" onclick="cerrarModalCert()">✕</button>
+      </div>
+      <div class="cmodal-body">
+        <div class="cmodal-tabs">
+          <button class="cmodal-tab active" data-tab="cmodal-tab-info" onclick="cambiarTabCert(this,'cmodal-tab-info')">INFORMACIÓN DEL CURSO</button>
+          <button class="cmodal-tab" data-tab="cmodal-tab-pdf" onclick="cambiarTabCert(this,'cmodal-tab-pdf')">CERTIFICADO PDF</button>
+        </div>
+
+        <!-- Tab: Info -->
+        <div id="cmodal-tab-info" class="cmodal-tab-content active">
+          <div class="cmodal-meta-grid">
+            <div class="cmodal-meta-item">
+              <p class="cmodal-meta-label">// PERÍODO</p>
+              <p class="cmodal-meta-val" id="cmodal-tag">—</p>
+            </div>
+            <div class="cmodal-meta-item">
+              <p class="cmodal-meta-label">// DURACIÓN</p>
+              <p class="cmodal-meta-val" id="cmodal-duracion">—</p>
+            </div>
+            <div class="cmodal-meta-item">
+              <p class="cmodal-meta-label">// FECHA DE EMISIÓN</p>
+              <p class="cmodal-meta-val" id="cmodal-fecha">—</p>
+            </div>
+          </div>
+
+          <div class="cmodal-desc-block">
+            <p class="cmodal-desc-label">// DESCRIPCIÓN DEL PROGRAMA</p>
+            <p class="cmodal-desc-text" id="cmodal-descripcion">—</p>
+          </div>
+
+          <p class="cmodal-temas-label">// TEMAS Y CONTENIDOS ABORDADOS</p>
+          <ul class="cmodal-temas-list" id="cmodal-temas"></ul>
+
+          <div class="cmodal-codigo-block">
+            <span class="cmodal-codigo-label">// CÓDIGO DE VERIFICACIÓN:</span>
+            <span class="cmodal-codigo-val" id="cmodal-codigo">—</span>
+          </div>
+
+          <div class="cmodal-btns-row">
+            <a class="cmodal-btn cmodal-btn-primary" id="cmodal-btn-consultar" href="#" target="_blank">
+              🔍 VERIFICAR EN SENA →
+            </a>
+            <a class="cmodal-btn cmodal-btn-secondary" id="cmodal-btn-pdf" href="#" target="_blank">
+              📄 VER CERTIFICADO PDF →
+            </a>
+          </div>
+        </div>
+
+        <!-- Tab: PDF -->
+        <div id="cmodal-tab-pdf" class="cmodal-tab-content">
+          <p class="cmodal-pdf-note">
+            El certificado está disponible en Google Drive para su descarga y verificación.<br>
+            También puedes consultar su autenticidad en el portal oficial del SENA:<br>
+            <a href="https://certificados.sena.edu.co/CertificadoDigital/com.sena.consultacer" target="_blank">certificados.sena.edu.co</a>
+            &nbsp;·&nbsp; C.C. <strong style="color:var(--green)">1053324547</strong>
+          </p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px;">
+            <a class="cmodal-btn cmodal-btn-primary" id="cmodal-btn-pdf2" href="#" target="_blank">
+              📄 ABRIR CERTIFICADO EN DRIVE →
+            </a>
+            <a class="cmodal-btn cmodal-btn-secondary" href="https://certificados.sena.edu.co/CertificadoDigital/com.sena.consultacer" target="_blank">
+              🔍 VERIFICAR EN SENA →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="script.js"></script>
+  <script>
+    // Sincronizar btn-pdf del tab PDF con el enlace del certificado activo
+    const _origAbrirModalCert = abrirModalCert;
+    // Parchamos para que el btn2 del tab PDF también apunte al drive correcto
+    window.abrirModalCert = function(id) {
+      _origAbrirModalCert(id);
+      const d = certificaciones[id];
+      if (d && d.pdfDrive) {
+        document.getElementById('cmodal-btn-pdf2').href = d.pdfDrive;
+        document.getElementById('cmodal-btn-pdf2').style.display = 'inline-flex';
+      } else {
+        document.getElementById('cmodal-btn-pdf2').style.display = 'none';
+      }
+    };
+  </script>
 </body>
 </html>
