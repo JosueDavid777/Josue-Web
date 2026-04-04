@@ -142,7 +142,7 @@ const certificaciones = {
       "Diagnóstico y resolución de fallas en sistemas PLC",
       "Aplicaciones prácticas de control industrial"
     ],
-    pdfDrive: "https://drive.google.com/file/d/1ULbNVEuaLuLtNPVKwpTHNXbR0MKlCj_c/view?usp=sharing"
+    pdfDrive: "https://drive.google.com/file/d/1A6Sbjcgmp-ukS-uhOify15dyynPn6K4F/view?usp=sharing"
   },
   "python-eda": {
     codigo: "9533003353340CC1053324547C",
@@ -162,7 +162,7 @@ const certificaciones = {
       "Detección de valores atípicos (outliers)",
       "Interpretación de resultados y generación de insights"
     ],
-    pdfDrive: "https://drive.google.com/file/d/1c6QZJOfTGJHJjxqAjDi8xHCfqBH9x1kX/view?usp=sharing"
+    pdfDrive: "https://drive.google.com/file/d/1FmVGe1TztEkMKOcVW8Ff0i4-p51emYdy/view?usp=sharing"
   }
 };
 
