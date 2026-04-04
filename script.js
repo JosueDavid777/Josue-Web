@@ -219,7 +219,7 @@ const reparaciones = {
   "cargador-radio": {
     title: "Adaptación de Cargador Móvil a Radio",
     model: "RADIO  ·  Reporte ST-0005  ·  2026",
-    mediaType: "images",
+    mediaType: "mixed",
     fault: "El radio no contaba con fuente de alimentación propia y dependía de pilas para funcionar. El cliente necesitaba una solución permanente de energía sin modificar la experiencia de uso del equipo.",
     solution: "Se analizó el circuito interno del radio para identificar el punto exacto de alimentación de voltaje. Una vez localizado el nodo de entrada, se adaptó un cargador de celular como fuente de poder, conectándolo de forma limpia al circuito interno. El radio quedó operativo con alimentación continua sin alterar su funcionamiento original.",
     components: [
@@ -230,7 +230,10 @@ const reparaciones = {
       "Verificación de polaridad y niveles de tensión",
       "Prueba de funcionamiento completo post-adaptación"
     ],
-    imagesBefore: [],
+    imagesBefore: [{src: `https://github.com/JosueDavid777/Reparaciones-de-equipos-electr-nicos./blob/main/REPARACIONES_ELECTRONICAS/2026%20-%2005%20-ADAPTACION_RADIO/ANTES/01_RADIO_CON_CARGADOR_PARA_ADAPTAR.jpg`, title: "Radio con cargador de telefono a adaptar"},
+                   {src: `${MEDIA_PREMIER}/01_Imagenes%20y%20videos%20de%20fallas%20en%20el%20equipo/01_SULFATACION_EN_EQUIPO.jpg`, title: "Falla 1 — Sulfatación en el equipo"},
+                   {src: `${MEDIA_PREMIER}/01_Imagenes%20y%20videos%20de%20fallas%20en%20el%20equipo/01_SULFATACION_EN_EQUIPO.jpg`, title: "Falla 1 — Sulfatación en el equipo"}
+                  ],
     imagesAfter: [],
     pdf: null
   },
