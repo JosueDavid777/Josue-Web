@@ -204,15 +204,19 @@ const certificaciones = {
     fecha: "13 de abril de 2026",
     tag: "CERT_03 · ABR 2026",
     icono: "📟",
-    descripcion: "Formación en análisis y exploración de conjuntos de datos utilizando Python como lenguaje principal. El curso cubre el uso de librerías fundamentales para ciencia de datos como Pandas, NumPy y Matplotlib/Seaborn, aplicando técnicas de limpieza, transformación, visualización e interpretación de datos. Fortalece las habilidades de programación en Python y abre la puerta al mundo del Data Science y la inteligencia artificial aplicada.",
+    descripcion: "Formación en el diseño y elaboración de circuitos impresos (PCB), abarcando desde la fundamentación de circuitos eléctricos y electrónicos, el uso de componentes pasivos y activos, hasta el diseño esquemático mediante software CAD (Proteus), la creación de la board y los procesos de fabricación y ensamble de tarjetas de circuito impreso de manera convencional e industrial.",
     temas: [
-      "Fundamentos de Python para ciencia de datos",
-      "Manipulación de datos con Pandas y NumPy",
-      "Limpieza y preprocesamiento de datasets",
-      "Estadística descriptiva y análisis univariable/multivariable",
-      "Visualización de datos con Matplotlib y Seaborn",
-      "Detección de valores atípicos (outliers)",
-      "Interpretación de resultados y generación de insights"
+      "Fundamentación de circuitos eléctricos y electrónicos",
+      "Circuitos en paralelo, en serie y mixtos",
+      "Leyes de corriente, tensiones y otras",
+      "Componentes pasivos",
+      "Componentes activos",
+      "Diseño del circuito esquemático mediante CAD",
+      "CAD para PCB — Software EAGLE",
+      "Diseño de la Board",
+      "Fabricación y ensamble de la Board",
+      "Transferencia del diseño a la Baquelita "
+       
     ],
     pdfEmbed: "https://drive.google.com/file/d/1J_on2QNny9zy4vyCOm9DjEgfKDeMlZfm/preview"
   }
