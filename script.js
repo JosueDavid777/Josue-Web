@@ -195,7 +195,28 @@ const certificaciones = {
       "Interpretación de resultados y generación de insights"
     ],
     pdfEmbed: "https://drive.google.com/file/d/1FmVGe1TztEkMKOcVW8Ff0i4-p51emYdy/preview"
+  },
+    "pcb": {
+    codigo: "9222003445302CC1053324547C",
+    titulo: "Diseño y elaboracion de circuitos impresos ",
+    entidad: "SENA · Centro Industrial Y de energias alternativas · Regional Guajira ",
+    duracion: "40 horas",
+    fecha: "13 de abril de 2026",
+    tag: "CERT_03 · ABR 2026",
+    icono: "📟",
+    descripcion: "Formación en análisis y exploración de conjuntos de datos utilizando Python como lenguaje principal. El curso cubre el uso de librerías fundamentales para ciencia de datos como Pandas, NumPy y Matplotlib/Seaborn, aplicando técnicas de limpieza, transformación, visualización e interpretación de datos. Fortalece las habilidades de programación en Python y abre la puerta al mundo del Data Science y la inteligencia artificial aplicada.",
+    temas: [
+      "Fundamentos de Python para ciencia de datos",
+      "Manipulación de datos con Pandas y NumPy",
+      "Limpieza y preprocesamiento de datasets",
+      "Estadística descriptiva y análisis univariable/multivariable",
+      "Visualización de datos con Matplotlib y Seaborn",
+      "Detección de valores atípicos (outliers)",
+      "Interpretación de resultados y generación de insights"
+    ],
+    pdfEmbed: "https://drive.google.com/file/d/1J_on2QNny9zy4vyCOm9DjEgfKDeMlZfm/preview"
   }
+  
 };
 
 const SENA_CONSULTA_URL = "https://certificados.sena.edu.co/CertificadoDigital/com.sena.consultacer";
